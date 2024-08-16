@@ -1,9 +1,11 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu } from "electron";
 import path from "path";
 
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
+
+Menu.setApplicationMenu(null);
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
