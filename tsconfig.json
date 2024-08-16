@@ -13,11 +13,11 @@
     "resolveJsonModule": true,
     "jsx": "react",
     "paths": {
-      "@app": ["src/ui/app"],
-      "@web": ["src/ui/web"],
-      "@lib": ["src/ui/lib"],
-      "@styles": ["src/ui/styles"],
-      "@components": ["src/ui/components"],
+      "@app/*": ["./src/ui/app/*"],
+      "@web/*": ["./src/ui/web/*"],
+      "@lib/*": ["./src/ui/lib/*"],
+      "@styles/*": ["./src/ui/styles/*"],
+      "@components/*": ["./src/ui/components/*"],
     }
   }
 }
