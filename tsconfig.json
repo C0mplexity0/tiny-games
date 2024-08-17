@@ -19,5 +19,6 @@
       "@styles/*": ["./src/ui/styles/*"],
       "@components/*": ["./src/ui/components/*"],
     }
-  }
+  },
+  "include": ["**/*"]
 }
