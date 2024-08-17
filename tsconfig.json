@@ -18,6 +18,7 @@
       "@lib/*": ["./src/ui/lib/*"],
       "@styles/*": ["./src/ui/styles/*"],
       "@components/*": ["./src/ui/components/*"],
+      "@/*": ["./src/*"],
     }
   },
   "include": ["**/*"]
