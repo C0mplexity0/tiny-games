@@ -1,5 +1,8 @@
 import React from "react";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/home";
+
+import "@styles/globals.css";
 
 function Layout() {
   return (
@@ -14,6 +17,7 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
         </Route>
       </Routes>
     </HashRouter>
