@@ -1,3 +1,4 @@
+import React from "react";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/home";
 

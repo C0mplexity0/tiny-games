@@ -11,7 +11,7 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "paths": {
       "@app/*": ["./src/ui/app/*"],
       "@web/*": ["./src/ui/web/*"],
