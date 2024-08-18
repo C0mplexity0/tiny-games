@@ -5,6 +5,7 @@ import { Device } from "@/devices/devices";
 
 import "@styles/globals.css";
 import AddDevicesPage from "./pages/devices/add-devices";
+import ConnectDevicePage from "./pages/devices/connect-device";
 
 export let devices: Device[];
 let setDevices: (arg0: Device[]) => void;
@@ -48,6 +49,7 @@ export default function App() {
           <Route index element={<HomePage />} />
           <Route path="devices">
             <Route path="add-devices" element={<AddDevicesPage />} />
+            <Route path="connect-device" element={<ConnectDevicePage />} />
           </Route>
         </Route>
       </Routes>
