@@ -14,7 +14,7 @@ export default defineConfig((env) => {
     mode,
     base: "./",
     build: {
-      outDir: `.vite/renderer/${name}`,
+      outDir: `../../../.vite/renderer/${name}`,
     },
     plugins: [
       pluginExposeRenderer(name)
@@ -27,6 +27,7 @@ export default defineConfig((env) => {
         "@lib": path.resolve(__dirname, "src/ui/lib"),
         "@styles": path.resolve(__dirname, "src/ui/styles"),
         "@components": path.resolve(__dirname, "src/ui/components"),
+        "@": path.resolve(__dirname, "src"),
       },
     },
     optimizeDeps: {
