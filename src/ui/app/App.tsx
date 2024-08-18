@@ -4,6 +4,7 @@ import HomePage from "./pages/home";
 import { Device } from "@/devices/devices";
 
 import "@styles/globals.css";
+import AddDevicesPage from "./pages/devices/add-devices";
 
 export let devices: Device[];
 let setDevices: (arg0: Device[]) => void;
@@ -45,6 +46,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="devices">
+            <Route path="add-devices" element={<AddDevicesPage />} />
+          </Route>
         </Route>
       </Routes>
     </HashRouter>
