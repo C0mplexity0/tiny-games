@@ -7,6 +7,7 @@ import { ip } from "address";
 import path from "path";
 
 const port = 8976;
+const socketIoPort = 9976;
 let currentPort: number | undefined;
 
 let expressApp: express.Application;
@@ -18,24 +19,13 @@ function startProductionServer() {
   const staticHandler = express.static(root);
 
   expressApp.use(staticHandler);
-
-  io = new Server(httpServer, {
-    serveClient: false ,
-    connectionStateRecovery: {
-      maxDisconnectionDuration: 2 * 60 * 1000,
-    }
-  });
   
   httpServer.listen(port);
   currentPort = port;
-
-  setupIo(io);
 }
 
-function startDevelopmentServer() {
-  // Vite hosts its own development server when the app isn't packaged
-
-  io = new Server(httpServer, { 
+function startIoServer() {
+  io = new Server({ 
     serveClient: false, 
     cors: {
       origin: `http://${ip()}:${port}`,
@@ -46,8 +36,7 @@ function startDevelopmentServer() {
     }
   });
 
-  httpServer.listen(port);
-  currentPort = port;
+  io.listen(socketIoPort);
 
   setupIo(io);
 }
@@ -56,11 +45,13 @@ export function startWebServer() {
   expressApp = express();
   httpServer = new http.Server(expressApp);
 
-  if (isDev()) {
-    startDevelopmentServer();
-  } else {
+  if (!isDev()) {
     startProductionServer();
+  } else {
+    currentPort = port;
   }
+
+  startIoServer();
 }
 
 export function getWebServerPort() {
