@@ -9,7 +9,7 @@
 
     width: 60%;
     aspect-ratio: 2;
-    --_g: no-repeat radial-gradient(circle closest-side, var(--color-foreground-secondary) 80%,#ffffff00);
+    --_g: no-repeat radial-gradient(circle closest-side, hsl(var(--secondary-foreground)) 80%,#ffffff00);
     background: 
       var(--_g) 0%   50%,
       var(--_g) 50%  50%,
