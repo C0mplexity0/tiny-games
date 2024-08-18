@@ -38,6 +38,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@radix-ui/react-dropdown-menu": "^2.1.1",
+    "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@types/express": "^4.17.21",
     "@types/node": "*",

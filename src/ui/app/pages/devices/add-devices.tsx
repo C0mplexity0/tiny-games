@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function DeviceDisplay({ device, newButton }: { device?: Device, newButton?: boolean }) {
   return (
-    <div className="w-32 h-32">
+    <div className="w-32 h-36">
       <div className="w-24 h-24 relative left-1/2 -translate-x-1/2">
         {
           newButton ? 
@@ -21,7 +21,7 @@ function DeviceDisplay({ device, newButton }: { device?: Device, newButton?: boo
           "Error"
         }
       </div>
-      <span className="inline-block w-full h-3 text-md align-bottom text-center">
+      <span className="inline-block mt-2 w-full h-6 text-md align-bottom text-center text-nowrap text-ellipsis overflow-hidden">
         {
           newButton ? 
           "Add Device"

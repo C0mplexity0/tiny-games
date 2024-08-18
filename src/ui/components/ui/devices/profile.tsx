@@ -10,7 +10,7 @@ function ReconnectingAnimation() {
 
 export default function DeviceProfile({ device, className }: { device: Device, className?: string }) {
   return (
-    <div title={device.username} className={`${className} ` + (device.connected ? "" : "bg-secondary")}>
+    <div title={device.username} className={`${className} bg-accent rounded-[37.5%] ` + (device.connected ? "" : "bg-secondary")}>
       {
         device.connected ?
         ""
