@@ -36,7 +36,11 @@ const createWindow = () => {
   }
 };
 
-app.on("ready", createWindow);
+app.on("ready", () => {
+  initIpc();
+  startWebServer();
+  createWindow();
+});
 
 // Don't quit the app if on macOS, since usually you would manually click the Quit button on there
 app.on("window-all-closed", () => {
@@ -46,9 +50,6 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", () => {
-  initIpc();
-  startWebServer();
-
   // Open a new window on macOS if the app icon has been clicked and the app hasn't been quit
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
