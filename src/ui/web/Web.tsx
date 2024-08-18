@@ -1,5 +1,6 @@
 import React from "react";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
+import { initSocket } from "./device/connection/in";
 
 function Layout() {
   return (
@@ -9,7 +10,7 @@ function Layout() {
   )
 }
 
-export default function App() {
+export default function Web() {
   return (
     <HashRouter>
       <Routes>
@@ -19,3 +20,5 @@ export default function App() {
     </HashRouter>
   )
 }
+
+initSocket();

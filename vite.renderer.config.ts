@@ -36,5 +36,9 @@ export default defineConfig((env) => {
       force: true
     },
     clearScreen: false,
+    server: {
+      host: "0.0.0.0",
+      port: name == "web" ? 8976 : 8977
+    }
   } as UserConfig;
 });

@@ -33,14 +33,12 @@ function startProductionServer() {
 }
 
 function startDevelopmentServer() {
-  expressApp.use((_req, res) => {
-    res.redirect(WEB_VITE_DEV_SERVER_URL); // When in development, vite hosts a webserver
-  });
+  // Vite hosts its own development server when the app isn't packaged
 
   io = new Server(httpServer, { 
     serveClient: false, 
     cors: {
-      origin: `http://${ip()}:5174`,
+      origin: `http://${ip()}:${port}`,
       credentials: true
     },
     connectionStateRecovery: {
@@ -49,7 +47,7 @@ function startDevelopmentServer() {
   });
 
   httpServer.listen(port);
-  currentPort = 5174;
+  currentPort = port;
 
   setupIo(io);
 }
