@@ -16,7 +16,7 @@ function Sidebar() {
   )
 }
 
-export default function HomePage() {
+export default function AppHomePage() {
   return (
     <div className="size-full flex flex-row">
       <Sidebar />

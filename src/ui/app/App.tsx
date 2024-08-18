@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HashRouter, Outlet, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/home";
+import AppHomePage from "./pages/home";
 import { Device } from "@/devices/devices";
 
 import "@styles/globals.css";
@@ -46,7 +46,7 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
+          <Route index element={<AppHomePage />} />
           <Route path="devices">
             <Route path="add-devices" element={<AddDevicesPage />} />
             <Route path="connect-device" element={<ConnectDevicePage />} />
