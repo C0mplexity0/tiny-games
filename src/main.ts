@@ -4,7 +4,8 @@ import { initIpc } from "./ipc/in";
 import { startWebServer } from "./web";
 
 export function isDev() {
-  return process.env.NODE_ENV === "development";
+  return process.env.NODE_ENV === "development" ||
+    process.env.DEBUG_PROD === "true";
 }
 
 export let mainWindow: BrowserWindow;
@@ -20,6 +21,8 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    minWidth: 700,
+    minHeight: 480,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
