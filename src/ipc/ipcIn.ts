@@ -5,11 +5,16 @@ import { devices, getDeviceById, removeDevice } from "@/devices/devices";
 import { games, playGame } from "@/games/games";
 import openUrl from "openurl";
 import { currentGame, endGame } from "@/games/player";
+import { getConnectLink } from "@/web";
 
 export function initIpc() {
   ipcMain.on("getConnectQrCode", async (event) => {
-    const code = await generateDeviceQrCode();
+    const code = await generateDeviceQrCode(getConnectLink());
     event.reply("getConnectQrCode", code);
+  });
+
+  ipcMain.on("getConnectLink", () => {
+    ipcOut.emitSetConnectLink(getConnectLink());
   });
 
   ipcMain.on("getDevices", () => {

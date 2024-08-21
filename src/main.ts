@@ -46,12 +46,12 @@ const createWindow = () => {
 };
 
 app.on("ready", () => {
+  createWindow();
+
   initIpc();
   startWebServer();
 
   getGames();
-  
-  createWindow();
 });
 
 // Don't quit the app if on macOS, since usually you would manually click the Quit button on there

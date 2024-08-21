@@ -1,6 +1,4 @@
 import QRCode from "qrcode";
-import { getWebServerPort } from "@/web";
-import { ip } from "address"; // For getting the local IP address (e.g. 192.168.0.1)
 
 
 function generateQrCode(string: string) {
@@ -17,8 +15,7 @@ function generateQrCode(string: string) {
   });
 }
 
-export async function generateDeviceQrCode() {
-  const url = `http://${ip()}:${getWebServerPort()}/web`;
+export async function generateDeviceQrCode(url: string) {
   const code = await generateQrCode(url);
 
   return code;

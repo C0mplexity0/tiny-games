@@ -18,6 +18,9 @@ let setGames: (games: Game[]) => void;
 export let currentGame: Game | null;
 let setCurrentGame: (game: Game) => void;
 
+export let connectLink: string;
+let setConnectLink: (connectLink: string) => void;
+
 function Layout() {
   return (
     <>
@@ -31,6 +34,7 @@ export default function App() {
   [devices, setDevices] = useState([]);
   [games, setGames] = useState([]);
   [currentGame, setCurrentGame] = useState(null);
+  [connectLink, setConnectLink] = useState("");
 
   useEffect(() => {
     if (!initialisedIpcEvents) {
@@ -57,7 +61,14 @@ export default function App() {
 
       window.electron.ipcRenderer.on("setCurrentGame", (game: Game) => {
         setCurrentGame(game);
-      })
+      });
+
+
+      window.electron.ipcRenderer.sendMessage("getConnectLink");
+
+      window.electron.ipcRenderer.on("setConnectLink", (link: string) => {
+        setConnectLink(link);
+      });
 
 
       window.electron.ipcRenderer.on("launchGame", (game: Game) => {

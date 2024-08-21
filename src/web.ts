@@ -5,6 +5,7 @@ import { isDev } from "./main";
 import { setupIo } from "./devices/connection/socketIn";
 import { ip } from "address";
 import path from "path";
+import ipcOut from "./ipc/ipcOut";
 
 const port = 8976;
 const socketIoPort = 9976;
@@ -52,8 +53,14 @@ export function startWebServer() {
   }
 
   startIoServer();
+
+  ipcOut.emitSetConnectLink(getConnectLink());
 }
 
 export function getWebServerPort() {
   return currentPort;
+}
+
+export function getConnectLink() {
+  return `http://${ip()}:${getWebServerPort()}`;
 }

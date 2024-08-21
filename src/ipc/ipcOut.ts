@@ -2,6 +2,10 @@ import { mainWindow } from "@/main";
 import { Device } from "@/devices/devices";
 import { Game } from "@/games/games";
 
+function emitSetConnectLink(link: string, webContents=mainWindow.webContents) {
+  webContents.send("setConnectLink", link);
+}
+
 function emitSetDevices(devices: Device[], webContents=mainWindow.webContents) {
   let modifiedDevices = [];
     
@@ -35,6 +39,7 @@ function emitGameEnd(webContents=mainWindow.webContents) {
 }
 
 export default {
+  emitSetConnectLink,
   emitSetDevices,
   emitSetGames,
   emitLaunchGame,

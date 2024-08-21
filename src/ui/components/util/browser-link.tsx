@@ -6,7 +6,7 @@ interface BrowserLinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
 
 export default function BrowserLink({ to, ...props }: BrowserLinkProps) {
   return (
-    <a onClick={() => {
+    <a className="cursor-pointer" onClick={() => {
       window.electron.ipcRenderer.sendMessage("openLinkInBrowser", to);
     }} {...props} />
   )
