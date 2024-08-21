@@ -6,9 +6,17 @@ import { Device } from "@/devices/devices";
 import "@styles/globals.css";
 import AddDevicesPage from "./pages/devices/add-devices";
 import ConnectDevicePage from "./pages/devices/connect-device";
+import { Game } from "@/games/games";
+import PlayerPage from "./pages/game/player";
 
 export let devices: Device[];
-let setDevices: (arg0: Device[]) => void;
+let setDevices: (devices: Device[]) => void;
+
+export let games: Game[];
+let setGames: (games: Game[]) => void;
+
+export let currentGame: Game | null;
+let setCurrentGame: (game: Game) => void;
 
 function Layout() {
   return (
@@ -19,28 +27,55 @@ function Layout() {
 }
 
 export default function App() {
-  let [createdSetDevicesListener, setCreatedSetDevicesListener] = useState(false);
-  let [fetchedDevices, setFetchedDevices] = useState(false);
+  let [initialisedIpcEvents, setInitialisedIpcEvents] = useState(false);
   [devices, setDevices] = useState([]);
+  [games, setGames] = useState([]);
+  [currentGame, setCurrentGame] = useState(null);
 
   useEffect(() => {
-    if (!createdSetDevicesListener) {
+    if (!initialisedIpcEvents) {
+      window.electron.ipcRenderer.sendMessage("getDevices");
+
       window.electron.ipcRenderer.on("setDevices", (devices: Device[]) => {
-        setFetchedDevices(true);
         setDevices(devices);
 
         if (devices.length == 0) {
+          window.electron.ipcRenderer.sendMessage("exitGame");
           window.location.hash = "/devices/add-devices";
         }
       });
 
-      setCreatedSetDevicesListener(true);
-    }
 
-    if (!fetchedDevices) {
-      window.electron.ipcRenderer.sendMessage("getDevices");
+      window.electron.ipcRenderer.sendMessage("getGames");
+
+      window.electron.ipcRenderer.on("setGames", (games: Game[]) => {
+        setGames(games);
+      });
+
+
+      window.electron.ipcRenderer.sendMessage("getCurrentGame");
+
+      window.electron.ipcRenderer.on("setCurrentGame", (game: Game) => {
+        setCurrentGame(game);
+      })
+
+
+      window.electron.ipcRenderer.on("launchGame", (game: Game) => {
+        setCurrentGame(game);
+        window.location.hash = "/game/player";
+      });
+
+      
+      window.electron.ipcRenderer.on("gameEnd", () => {
+        if (window.location.hash == "#/game/player")
+          window.location.hash = "";
+        setCurrentGame(null);
+      });
+
+
+      setInitialisedIpcEvents(true);
     }
-  }, [devices, fetchedDevices, createdSetDevicesListener]);
+  }, [devices, games]);
 
   return (
     <HashRouter>
@@ -50,6 +85,9 @@ export default function App() {
           <Route path="devices">
             <Route path="add-devices" element={<AddDevicesPage />} />
             <Route path="connect-device" element={<ConnectDevicePage />} />
+          </Route>
+          <Route path="game">
+            <Route path="player" element={<PlayerPage />} />
           </Route>
         </Route>
       </Routes>
