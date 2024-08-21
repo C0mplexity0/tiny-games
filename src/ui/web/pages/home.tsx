@@ -1,8 +1,8 @@
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import socketOut from "@web/device/connection/socketOut";
-//import { enterFullscreen } from "@web/Web";
-import React, { useEffect, useRef, useState } from "react";
+import { device } from "@web/Web";
+import React, { useRef, useState } from "react";
 
 let usernameInputRef: React.MutableRefObject<HTMLInputElement>;
 
@@ -30,7 +30,6 @@ function ConnectPrompt() {
               const usernameElem = usernameInputRef.current;
               if (usernameElem && inputHasText) {
                 socketOut.emitJoin(usernameElem.value);
-                //enterFullscreen();
               }
             }
           } 
@@ -41,17 +40,25 @@ function ConnectPrompt() {
   );
 }
 
-export default function WebHomePage() {
-  let [pageContent, setPageContent] = useState(<></>);
-  usernameInputRef = useRef();
+function ConnectedPage() {
+  return (
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+      <h2 className="text-2xl font-bold">Connected!</h2>
+      <span className="text-secondary-foreground">Continue through your computer.</span>
+    </div>
+  )
+}
 
-  useEffect(() => {
-    setPageContent(<ConnectPrompt />);
-  }, [setPageContent]);
+export default function WebHomePage() {
+  usernameInputRef = useRef();
 
   return (
     <div className="size-full">
-      {pageContent}
+      {
+        device ?
+        <ConnectedPage /> :
+        <ConnectPrompt />
+      }
     </div>
   );
 }
