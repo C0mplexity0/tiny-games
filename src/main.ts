@@ -1,12 +1,16 @@
 import { app, BrowserWindow, Menu } from "electron";
 import path from "path";
-import { initIpc } from "./ipc/in";
+import { initIpc } from "./ipc/ipcIn";
 import { startWebServer } from "./web";
+import { getGames } from "./games/games";
+import MenuBuilder from "./menu";
 
 export function isDev() {
   return process.env.NODE_ENV === "development" ||
     process.env.DEBUG_PROD === "true";
 }
+
+export const appDataDir = path.resolve(app.getPath("appData"), "tiny-games/data");
 
 export let mainWindow: BrowserWindow;
 
@@ -15,18 +19,20 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-Menu.setApplicationMenu(null);
-
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     minWidth: 700,
     minHeight: 480,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
   });
+
+  const menu = new MenuBuilder(mainWindow).buildMenu();
+  Menu.setApplicationMenu(menu);
 
   if (APP_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(APP_VITE_DEV_SERVER_URL);
@@ -42,6 +48,9 @@ const createWindow = () => {
 app.on("ready", () => {
   initIpc();
   startWebServer();
+
+  getGames();
+  
   createWindow();
 });
 
