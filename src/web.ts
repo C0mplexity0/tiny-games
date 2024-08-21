@@ -2,7 +2,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import { isDev } from "./main";
-import { setupIo } from "./devices/connection/in";
+import { setupIo } from "./devices/connection/socketIn";
 import { ip } from "address";
 import path from "path";
 

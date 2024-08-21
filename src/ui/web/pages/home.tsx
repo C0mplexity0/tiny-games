@@ -1,7 +1,7 @@
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
-import { emitJoin } from "@web/device/connection/out";
-import { enterFullscreen } from "@web/Web";
+import socketOut from "@web/device/connection/socketOut";
+//import { enterFullscreen } from "@web/Web";
 import React, { useEffect, useRef, useState } from "react";
 
 let usernameInputRef: React.MutableRefObject<HTMLInputElement>;
@@ -29,8 +29,8 @@ function ConnectPrompt() {
             () => {
               const usernameElem = usernameInputRef.current;
               if (usernameElem && inputHasText) {
-                emitJoin(usernameElem.value);
-                enterFullscreen();
+                socketOut.emitJoin(usernameElem.value);
+                //enterFullscreen();
               }
             }
           } 

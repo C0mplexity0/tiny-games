@@ -1,4 +1,4 @@
-import { emitSetDevices } from "@/ipc/out";
+import ipcOut from "@/ipc/ipcOut";
 import { Socket } from "socket.io";
 
 export interface Device {
@@ -37,7 +37,7 @@ export function getDeviceById(id: string) {
 export function addDevice(device: Device) {
   if (!getDeviceBySocket(device.socket)) {
     devices.push(device);
-    emitSetDevices(devices);
+    ipcOut.emitSetDevices(devices);
     return true; // The device was added
   }
   
@@ -52,5 +52,5 @@ export function removeDevice(device: Device) {
     devices.splice(index, 1);
   }
 
-  emitSetDevices(devices);
+  ipcOut.emitSetDevices(devices);
 }
