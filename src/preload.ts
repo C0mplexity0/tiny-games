@@ -1,6 +1,20 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 
-export type Channels = "getConnectQrCode" | "getDevices" | "removeDevice";
+export type Channels = 
+  "getConnectQrCode" | 
+  "getDevices" | 
+  "setDevices" | 
+  "removeDevice" | 
+  "getGames" | 
+  "setGames" | 
+  "openLinkInBrowser" | 
+  "playGame" | 
+  "launchGame" |
+  "getCurrentGame" |
+  "setCurrentGame" |
+  "endGame" |
+  "gameEnd"
+;
 
 const electronHandler = {
   ipcRenderer: {
