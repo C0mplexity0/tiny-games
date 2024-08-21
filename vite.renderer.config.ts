@@ -38,7 +38,10 @@ export default defineConfig((env) => {
     clearScreen: false,
     server: {
       host: "0.0.0.0",
-      port: name == "web" ? 8976 : 8977
+      port: name == "web" ? 8976 : 8977,
+      watch: {
+        ignored: "src/ui"
+      }
     }
   } as UserConfig;
 });
