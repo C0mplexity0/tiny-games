@@ -2,7 +2,6 @@ import ipcOut from "@/ipc/ipcOut";
 import { Socket } from "socket.io";
 
 export interface Device {
-  isKeyboard: Boolean,
   username: string,
   socket?: Socket,
   id: string,
