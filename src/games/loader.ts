@@ -36,7 +36,7 @@ function removePathPrefix(rootPath: string) {
 export function loadGame(file: string) {
   const gameDir = path.resolve(gamesDir, file);
 
-  const config: GameConfig = require(path.resolve(gameDir, "game.json"));
+  const config: GameConfig = JSON.parse(fs.readFileSync(path.resolve(gameDir, "game.json"), "utf8"));
 
   let icon: string | undefined;
   let thumbnail: string | undefined;

@@ -2,10 +2,11 @@ import { generateDeviceQrCode } from "@/devices/qr-generator";
 import { ipcMain } from "electron";
 import ipcOut from "./ipcOut";
 import { devices, getDeviceById, removeDevice } from "@/devices/devices";
-import { games, playGame } from "@/games/games";
+import { games, gamesDir, getGames, playGame } from "@/games/games";
 import openUrl from "openurl";
 import { currentGame, endGame } from "@/games/player";
 import { getConnectLink } from "@/web";
+import openExplorer from "open-file-explorer";
 
 export function initIpc() {
   ipcMain.on("getConnectQrCode", async (event) => {
@@ -36,7 +37,7 @@ export function initIpc() {
     ipcOut.emitSetGames(games);
   });
 
-  ipcMain.on("openLinkInBrowser", (event, link) => {
+  ipcMain.on("openLinkInBrowser", (_event, link) => {
     openUrl.open(link);
   });
 
@@ -50,5 +51,17 @@ export function initIpc() {
 
   ipcMain.on("exitGame", () => {
     endGame();
+  });
+
+  ipcMain.on("reloadGames", () => {
+    getGames();
+  });
+
+  ipcMain.on("openGamesDir", () => {
+    openExplorer(gamesDir, err => {
+      if (err) {
+        console.error(err);
+      }
+    });
   });
 }

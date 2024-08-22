@@ -13,7 +13,9 @@ export type Channels =
   "getCurrentGame" |
   "setCurrentGame" |
   "endGame" |
-  "gameEnd"
+  "gameEnd" |
+  "reloadGames" |
+  "openGamesDir"
 ;
 
 const electronHandler = {

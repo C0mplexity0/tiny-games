@@ -4,7 +4,7 @@ import { Button } from "@components/ui/button";
 import DeviceButton from "@components/ui/devices/device-button";
 import BrowserLink from "@components/util/browser-link";
 import { SiFacebook, SiGithub, SiPatreon, SiReddit, SiReplit, SiTumblr, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
-import { Gamepad2, Link, Play } from "lucide-react";
+import { Folder, Gamepad2, Link, Play, RefreshCcw } from "lucide-react";
 import React, { ReactNode, useEffect, useState } from "react";
 
 
@@ -48,7 +48,8 @@ function GameButton({ game }: { game: Game }) {
       onClick={() => {
         setCurrentGame(game);
       }}
-      className="bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full justify-start h-12 p-2 flex flex-row space-x-3"
+      variant="outline"
+      className={`${game == currentGame ? "bg-secondary" : ""} hover:bg-secondary/90 text-secondary-foreground w-full justify-start h-12 p-2 flex flex-row space-x-3`}
     >
       {
         game.icon ?
@@ -62,10 +63,31 @@ function GameButton({ game }: { game: Game }) {
 
 function GamesList() {
   return (
-    <div className="p-2 w-56 md:w-72 lg:w-96 h-full border-r">
-      {
-        games.map((game, i) => <GameButton game={game} key={i} />)
-      }
+    <div className="w-56 md:w-72 lg:w-96 h-full border-r flex flex-col">
+      <div className="w-full h-fit border-b p-1 flex flex-row">
+        <span className="text-secondary-foreground font-bold flex-1 pl-2 h-6 leading-6 block">Games</span>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="size-6 rounded-sm"
+          onClick={() => {
+            window.electron.ipcRenderer.sendMessage("openGamesDir");
+          }}
+        ><Folder className="size-4 text-secondary-foreground" /></Button>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="size-6 rounded-sm"
+          onClick={() => {
+            window.electron.ipcRenderer.sendMessage("reloadGames");
+          }}
+        ><RefreshCcw className="size-4 text-secondary-foreground" /></Button>
+      </div>
+      <div className="p-2 w-full flex-1 flex flex-col gap-2">
+        {
+          games.map((game, i) => <GameButton game={game} key={i} />)
+        }
+      </div>
     </div>
   )
 }

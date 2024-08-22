@@ -1440,6 +1440,11 @@
   dependencies:
     undici-types "~5.26.4"
 
+"@types/open-file-explorer@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/open-file-explorer/-/open-file-explorer-1.0.2.tgz#d21c5057dd477f39f852e66b99e2b65330ee0adc"
+  integrity sha512-IATHLeKlpwAMEEezP6OhrcIFRCl/2dTv8ZR45X3NV7h+UR1D05jMGGJKoatHnShfH2u2VL5DA2KNg30rpXVB4Q==
+
 "@types/openurl@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@types/openurl/-/openurl-1.0.3.tgz#17c196bae7d091037ebb36578b833c1289a64e52"
@@ -4862,6 +4867,11 @@ onetime@^5.1.0:
   integrity sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==
   dependencies:
     mimic-fn "^2.1.0"
+
+open-file-explorer@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/open-file-explorer/-/open-file-explorer-1.0.2.tgz#4083716ec6fb3de7812adcf5d8ac5f76e9316037"
+  integrity sha512-U4p+VW5uhtgK5W7qSsRhKioYAHCiTX9PiqV4ZtAFLMGfQ3QhppaEevk8k8+DSjM6rgc1yNIR2nttDuWfdNnnJQ==
 
 openurl@^1.1.1:
   version "1.1.1"
