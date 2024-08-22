@@ -6,8 +6,18 @@ import React, { useRef, useState } from "react";
 
 let usernameInputRef: React.MutableRefObject<HTMLInputElement>;
 
+let inputHasText: boolean;
+let setInputHasText: (inputHasText: boolean) => void;
+
+function submitUsername() {
+  const usernameElem = usernameInputRef.current;
+  if (usernameElem && inputHasText) {
+    socketOut.emitJoin(usernameElem.value);
+  }
+}
+
 function ConnectPrompt() {
-  let [inputHasText, setInputHasText] = useState(false);
+  [inputHasText, setInputHasText] = useState(false);
 
   return (
     <div>
@@ -23,18 +33,15 @@ function ConnectPrompt() {
               setInputHasText(usernameElem && usernameElem.value.length >= 1);
             }
           }
-        />
-        <Button
-          onClick={
-            () => {
-              const usernameElem = usernameInputRef.current;
-              if (usernameElem && inputHasText) {
-                socketOut.emitJoin(usernameElem.value);
+          onKeyDown={
+            (event) => {
+              if (event.key === "Enter") {
+                submitUsername();
               }
             }
-          } 
-          disabled={!inputHasText}
-        >Connect</Button>
+          }
+        />
+        <Button onClick={submitUsername} disabled={!inputHasText} >Connect</Button>
       </div>
     </div>
   );
