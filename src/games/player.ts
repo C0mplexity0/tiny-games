@@ -5,6 +5,7 @@ import http from "http";
 import path from "path";
 import socketOut from "@/devices/connection/socketOut";
 import { io } from "@/web";
+import { getResourcesFolder } from "@/main";
 
 const port = 9977;
 
@@ -28,6 +29,12 @@ export function startGame(game: Game) {
 
   expressApp.use("/" + game.appRoot, appStaticHandler);
   expressApp.use("/" + game.webRoot, webStaticHandler);
+  expressApp.use("/api/tiny-games.app.mjs", (req, res) => {
+    res.sendFile(path.join(getResourcesFolder(), "scripts/games/tiny-games.app.mjs"));
+  });
+  expressApp.use("/api/tiny-games.web.mjs", (req, res) => {
+    res.sendFile(path.join(getResourcesFolder(), "scripts/games/tiny-games.web.mjs"));
+  });
   
   httpServer.listen(port);
 
