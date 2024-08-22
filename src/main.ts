@@ -10,6 +10,14 @@ export function isDev() {
     process.env.DEBUG_PROD === "true";
 }
 
+export function getResourcesFolder() {
+  if (isDev()) {
+    return path.resolve(__dirname, "../../resources");
+  } else {
+    return path.resolve(process.resourcesPath, "resources");
+  }
+}
+
 export const appDataDir = path.resolve(app.getPath("appData"), "tiny-games/data");
 
 export let mainWindow: BrowserWindow;
