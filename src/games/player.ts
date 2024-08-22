@@ -24,16 +24,16 @@ export function startGame(game: Game) {
   expressApp = express();
   httpServer = new http.Server(expressApp);
 
-  const appStaticHandler = express.static(path.resolve(game.gameDir, game.appRoot));
-  const webStaticHandler = express.static(path.resolve(game.gameDir, game.webRoot));
+  const staticHandler = express.static(game.gameDir);
 
-  expressApp.use("/" + game.appRoot, appStaticHandler);
-  expressApp.use("/" + game.webRoot, webStaticHandler);
-  expressApp.use("/api/tiny-games.app.mjs", (req, res) => {
-    res.sendFile(path.join(getResourcesFolder(), "scripts/games/tiny-games.app.mjs"));
-  });
-  expressApp.use("/api/tiny-games.web.mjs", (req, res) => {
-    res.sendFile(path.join(getResourcesFolder(), "scripts/games/tiny-games.web.mjs"));
+  expressApp.use("/", (req, res, next) => {
+    if (!req.path.startsWith("/tiny-games")) {
+      staticHandler(req, res, next);
+    } else if (req.path.startsWith("/tiny-games/tiny-games.app.mjs")) {
+      res.sendFile(path.join(getResourcesFolder(), "scripts/games/tiny-games.app.mjs"));
+    } else if (req.path.startsWith("/tiny-games/tiny-games.web.mjs")) {
+      res.sendFile(path.join(getResourcesFolder(), "scripts/games/tiny-games.web.mjs"));
+    }
   });
   
   httpServer.listen(port);
