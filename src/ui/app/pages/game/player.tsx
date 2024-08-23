@@ -3,24 +3,72 @@ import { Button } from "@components/ui/button";
 import DeviceButton from "@components/ui/devices/device-button";
 import { ScrollArea, ScrollBar } from "@components/ui/scroll-area";
 import { Menu, X } from "lucide-react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-let menuOpen: boolean;
-let setMenuOpen: (menuOpen: boolean) => void;
+let iframeRef: React.MutableRefObject<any>;
+
+
+function postMessage(type: string, data?: string) {
+  if (iframeRef.current)
+    iframeRef.current.contentWindow.postMessage(`${type}${data ? ":" + data : ""}`, "http://localhost:9977");
+}
+
+function getMessageParts(msg: string) {
+  let split = msg.split(":");
+
+  const type = split.shift();
+
+  return [type, split.join(":")];
+}
+
+
+function handleMessage(event: MessageEvent<any>) {
+  const [messageType, messageData] = getMessageParts(event.data);
+
+  switch (messageType) {
+    case "getDevices":
+      postMessage("setDevices", JSON.stringify(devices));
+      break;
+    case "emitToDevice": {
+      const info = JSON.parse(messageData);
+
+      window.electron.ipcRenderer.sendMessage("games:emitToDevice", info.deviceId, info.event, info.data);
+      break;
+    }
+  }
+}
+
+function setupMessageListener() {
+  window.addEventListener("message", handleMessage);
+}
+
+function removeMessageListener() {
+  window.removeEventListener("message", handleMessage);
+}
+
 
 export default function PlayerPage() {
+  let [menuOpen, setMenuOpen] = useState(false);
+
+  let menuBackgroundRef = useRef();
+  iframeRef = useRef();
+
+  useEffect(() => {
+    setupMessageListener();
+
+    return () => {
+      removeMessageListener();
+    }
+  });
+
   if (!currentGame) {
     return;
   }
 
-  [menuOpen, setMenuOpen] = useState(false);
-
-  let menuBackgroundRef = useRef();
-
   return (
     <div className="size-full">
       <div className="size-full absolute top-0 left-0">
-        <iframe className="size-full bg-white" src={`http://localhost:9977/${currentGame.appRoot}`} />
+        <iframe ref={iframeRef} className="size-full bg-white" src={`http://localhost:9977/${currentGame.appRoot}`} />
       </div>
 
       <Button 

@@ -50,4 +50,12 @@ export function initSocket() {
       window.location.hash = "/";
     setCurrentGame(null);
   });
+
+
+  // Games
+
+  socket.on("gameEmitToDevice", (event: string, ...data: any[]) => {
+    console.log(event);
+    console.log(data);
+  });
 }

@@ -7,6 +7,7 @@ import openUrl from "openurl";
 import { currentGame, endGame } from "@/games/player";
 import { getConnectLink } from "@/web";
 import openExplorer from "open-file-explorer";
+import socketOut from "@/devices/connection/socketOut";
 
 export function initIpc() {
   ipcMain.on("getConnectQrCode", async (event) => {
@@ -63,5 +64,18 @@ export function initIpc() {
         console.error(err);
       }
     });
+  });
+
+
+  // Games
+
+  ipcMain.on("games:emitToDevice", (_event, deviceId, event, data) => {
+    const device = getDeviceById(deviceId);
+
+    if (!device) {
+      return;
+    }
+
+    socketOut.gameEmitToDevice(device.socket, event, data);
   });
 }

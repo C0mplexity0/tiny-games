@@ -15,7 +15,8 @@ export type Channels =
   "endGame" |
   "gameEnd" |
   "reloadGames" |
-  "openGamesDir"
+  "openGamesDir" |
+  "games:emitToDevice"
 ;
 
 const electronHandler = {
