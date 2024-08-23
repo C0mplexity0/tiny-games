@@ -47,7 +47,6 @@ export function setupIo(io: Server) {
       }
 
       let device: Device = {
-        isKeyboard: false,
         username,
         socket,
         connected: true,
