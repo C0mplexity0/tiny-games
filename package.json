@@ -24,7 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "electron": "32.0.1",
-    "eslint": "^9.9.0",
+    "eslint": "^9.9.1",
     "eslint-plugin-import": "^2.25.0",
     "tailwindcss-image-rendering": "^1.0.2",
     "typescript": "5.5.4",
