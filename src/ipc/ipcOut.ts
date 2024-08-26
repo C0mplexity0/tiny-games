@@ -11,7 +11,6 @@ function emitSetDevices(devices: Device[], webContents=mainWindow.webContents) {
     
   for (let i=0;i<devices.length;i++) {
     modifiedDevices.push({
-      isKeyboard: devices[i].isKeyboard,
       username: devices[i].username,
       connected: devices[i].connected,
       id: devices[i].id,
