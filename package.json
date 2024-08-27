@@ -26,7 +26,6 @@
     "electron": "31.4.0",
     "eslint": "^9.9.0",
     "eslint-plugin-import": "^2.25.0",
-    "tailwindcss-image-rendering": "^1.0.2",
     "typescript": "5.5.4",
     "vite": "^5.0.12"
   },

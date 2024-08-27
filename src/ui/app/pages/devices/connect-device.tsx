@@ -9,7 +9,7 @@ export default function ConnectDevicePage() {
   let [qrCode, setQrCode] = useState(<div />);
 
   window.electron.ipcRenderer.once("getConnectQrCode", (code: string) => {
-    setQrCode(<img className="w-48 h-48 rounded-md rendering-pixelated" src={code} />);
+    setQrCode(<img className="w-48 h-48 rounded-md" src={code} />);
   });
   window.electron.ipcRenderer.sendMessage("getConnectQrCode");
 
