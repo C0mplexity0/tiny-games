@@ -55,7 +55,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "electron-squirrel-startup": "^1.0.1",
-    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react": "^7.35.2",
     "express": "^4.19.2",
     "globals": "^15.9.0",
     "lucide-react": "^0.439.0",
