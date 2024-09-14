@@ -51,7 +51,7 @@ function ConnectedPage() {
   return (
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
       <h2 className="text-2xl font-bold">Connected!</h2>
-      <span className="text-secondary-foreground">Continue through your computer.</span>
+      <span className="text-secondary-foreground">Continue through the app.</span>
     </div>
   )
 }
