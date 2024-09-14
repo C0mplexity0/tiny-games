@@ -25,9 +25,9 @@
     "@typescript-eslint/parser": "^5.0.0",
     "electron": "32.0.1",
     "eslint": "^9.9.1",
-    "eslint-plugin-import": "^2.25.0",
+    "eslint-plugin-import": "^2.30.0",
     "typescript": "5.5.4",
-    "vite": "^5.4.2"
+    "vite": "^5.4.3"
   },
   "keywords": [],
   "author": {
@@ -47,7 +47,7 @@
     "@types/open-file-explorer": "^1.0.2",
     "@types/openurl": "^1.0.3",
     "@types/qrcode": "^1.5.5",
-    "@types/react": "^18.3.4",
+    "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "address": "^2.0.3",
@@ -55,16 +55,16 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "electron-squirrel-startup": "^1.0.1",
-    "eslint-plugin-react": "^7.35.0",
-    "express": "^4.19.2",
+    "eslint-plugin-react": "^7.35.2",
+    "express": "^4.20.0",
     "globals": "^15.9.0",
-    "lucide-react": "^0.428.0",
+    "lucide-react": "^0.439.0",
     "mime-types": "^2.1.35",
     "nosleep.js": "^0.12.0",
     "open-file-explorer": "^1.0.2",
     "openurl": "^1.1.1",
     "original-fs": "^1.2.0",
-    "postcss": "^8.1.0",
+    "postcss": "^8.4.44",
     "postcss-import": "^16.1.0",
     "qrcode": "^1.5.4",
     "react": "^18.3.1",
@@ -76,6 +76,6 @@
     "tailwindcss": "^3.4.10",
     "tailwindcss-animate": "^1.0.7",
     "ts-node": "^10.9.2",
-    "typescript-eslint": "^8.3.0"
+    "typescript-eslint": "^8.5.0"
   }
 }
