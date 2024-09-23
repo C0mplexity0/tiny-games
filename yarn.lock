@@ -224,6 +224,22 @@
     semver "^7.2.1"
     yarn-or-npm "^3.0.1"
 
+"@electron-forge/core-utils@7.5.0":
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/core-utils/-/core-utils-7.5.0.tgz#a90a1397cb1f1b6aaf342a68fac2c66db35cb09f"
+  integrity sha512-PtyQT6qeOEJsi4ltoB7Jb6YUUCwK3gDt5gVyAF2aJ8eZi9rJ0hasHc5vjcmBaz9FwDMjYZrBD8oRBhNgbhEakQ==
+  dependencies:
+    "@electron-forge/shared-types" "7.5.0"
+    "@electron/rebuild" "^3.2.10"
+    "@malept/cross-spawn-promise" "^2.0.0"
+    chalk "^4.0.0"
+    debug "^4.3.1"
+    find-up "^5.0.0"
+    fs-extra "^10.0.0"
+    log-symbols "^4.0.0"
+    semver "^7.2.1"
+    yarn-or-npm "^3.0.1"
+
 "@electron-forge/core@7.4.0":
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/@electron-forge/core/-/core-7.4.0.tgz#8d8bdbe2d0341fbb6c53a6481d188115594b31a5"
@@ -340,6 +356,13 @@
   dependencies:
     "@electron-forge/shared-types" "7.4.0"
 
+"@electron-forge/plugin-base@7.5.0":
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/plugin-base/-/plugin-base-7.5.0.tgz#f98bbe2d3d52c197fa7bf5c3fea0714776de4b0c"
+  integrity sha512-44AbXSb5lDY8uHIo0mJ91atOSWgxv3iuECk07/gDBiuMPX62dwHnLteEjQF4GBXJZTpnV7SxhD+d2AUBQmoojw==
+  dependencies:
+    "@electron-forge/shared-types" "7.5.0"
+
 "@electron-forge/plugin-fuses@^7.4.0":
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/@electron-forge/plugin-fuses/-/plugin-fuses-7.4.0.tgz#3a3b78bf3c5d2b2d445825b05bce145d116df792"
@@ -348,15 +371,15 @@
     "@electron-forge/plugin-base" "7.4.0"
     "@electron-forge/shared-types" "7.4.0"
 
-"@electron-forge/plugin-vite@^7.4.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@electron-forge/plugin-vite/-/plugin-vite-7.4.0.tgz#66b0154269205a0c4e70200b5f5f410833beea40"
-  integrity sha512-GZqBUsyNH0XCvQlBKMS0aOJM6PX80irijgPR9Lfl6ctYIuKTo+82td+nIK8Fef/qSDUEt/U1f4Qb9GfLfhRRig==
+"@electron-forge/plugin-vite@^7.5.0":
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/plugin-vite/-/plugin-vite-7.5.0.tgz#abfe72aa6718cbb9d7e57ee5df0dd4833f5fd22f"
+  integrity sha512-aJHJUL1vL6gtJlo3fyxPRqKe1X1zIVl//jPnrHFFQI5XyUQrOX58mHpZKpDws/b1bfGx68r6aaOaNhooXjwWAw==
   dependencies:
-    "@electron-forge/core-utils" "7.4.0"
-    "@electron-forge/plugin-base" "7.4.0"
-    "@electron-forge/shared-types" "7.4.0"
-    "@electron-forge/web-multi-logger" "7.4.0"
+    "@electron-forge/core-utils" "7.5.0"
+    "@electron-forge/plugin-base" "7.5.0"
+    "@electron-forge/shared-types" "7.5.0"
+    "@electron-forge/web-multi-logger" "7.5.0"
     chalk "^4.0.0"
     debug "^4.3.1"
     fs-extra "^10.0.0"
@@ -450,10 +473,10 @@
   dependencies:
     chrome-trace-event "^1.0.3"
 
-"@electron-forge/web-multi-logger@7.4.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@electron-forge/web-multi-logger/-/web-multi-logger-7.4.0.tgz#13df3a84827d07fc41f53e83b8af3a639be2a03d"
-  integrity sha512-XHKs37q4S8BzH1lTKhuOFO6k4R7XdrsZfox+qlp4HpiYKw8yq4rcasB0zUO5YKZ2aTJ1t79X1jxSJb5qhImdHA==
+"@electron-forge/web-multi-logger@7.5.0":
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/web-multi-logger/-/web-multi-logger-7.5.0.tgz#e573da8e79428b3d4d4dd5876deb3e5443bdac76"
+  integrity sha512-NE7Y9dPp67ipIbht8rCy10SeZweyw4GaQse0dykfxbTzcmPfnhvgDHPk4aqUW4S1249Chd6XI1PkLKnbTlTjxg==
   dependencies:
     express "^4.17.1"
     express-ws "^5.0.2"
