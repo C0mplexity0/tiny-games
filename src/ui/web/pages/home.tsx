@@ -1,7 +1,7 @@
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import socketOut from "@web/device/connection/socketOut";
-import { device } from "@web/Web";
+import { activateWakeLock, device } from "@web/Web";
 import React, { useRef, useState } from "react";
 
 let usernameInputRef: React.MutableRefObject<HTMLInputElement>;
@@ -12,6 +12,7 @@ let setInputHasText: (inputHasText: boolean) => void;
 function submitUsername() {
   const usernameElem = usernameInputRef.current;
   if (usernameElem && inputHasText) {
+    activateWakeLock();
     socketOut.emitJoin(usernameElem.value);
   }
 }
