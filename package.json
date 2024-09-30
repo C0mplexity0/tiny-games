@@ -41,7 +41,7 @@
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "@types/express": "^4.17.21",
+    "@types/express": "^5.0.0",
     "@types/mime-types": "^2.1.4",
     "@types/node": "*",
     "@types/open-file-explorer": "^1.0.2",
