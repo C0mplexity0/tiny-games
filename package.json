@@ -27,7 +27,7 @@
     "eslint": "^9.11.0",
     "eslint-plugin-import": "^2.30.0",
     "typescript": "5.5.4",
-    "vite": "^5.4.6"
+    "vite": "^5.4.8"
   },
   "keywords": [],
   "author": {
