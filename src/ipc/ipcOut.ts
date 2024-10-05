@@ -2,15 +2,31 @@ import { mainWindow } from "@/main";
 import { Device, getIpcReadyDeviceInfo } from "@/devices/devices";
 import { Game } from "@/games/games";
 
+function send(webContents: Electron.WebContents | null, channel: string, ...args: any[]) {
+  if (!webContents) {
+    return;
+  }
+
+  webContents.send(channel, ...args);
+}
+
 function emitQuitting(webContents=mainWindow.webContents) {
-  webContents.send("quitting");
+  send(webContents, "quitting");
 }
 
 function emitSetConnectLink(link: string, webContents=mainWindow.webContents) {
-  webContents.send("setConnectLink", link);
+  if (!webContents) {
+    return;
+  }
+
+  send(webContents, "setConnectLink", link);
 }
 
 function emitSetDevices(devices: Device[], webContents=mainWindow.webContents) {
+  if (!webContents) {
+    return;
+  }
+
   let modifiedDevices = [];
     
   for (let i=0;i<devices.length;i++) {
@@ -22,35 +38,59 @@ function emitSetDevices(devices: Device[], webContents=mainWindow.webContents) {
     });
   }
 
-  webContents.send("setDevices", modifiedDevices);
+  send(webContents, "setDevices", modifiedDevices);
 }
 
 function emitSetGames(games: Game[], webContents=mainWindow.webContents) {
-  webContents.send("setGames", games);
+  if (!webContents) {
+    return;
+  }
+
+  send(webContents, "setGames", games);
 }
 
 function emitLaunchGame(game: Game, webContents=mainWindow.webContents) {
-  webContents.send("launchGame", game);
+  if (!webContents) {
+    return;
+  }
+
+  send(webContents, "launchGame", game);
 }
 
 function emitSetCurrentGame(currentGame: Game, webContents=mainWindow.webContents) {
-  webContents.send("setCurrentGame", currentGame);
+  if (!webContents) {
+    return;
+  }
+
+  send(webContents, "setCurrentGame", currentGame);
 }
 
 function emitGameEnd(webContents=mainWindow.webContents) {
-  webContents.send("gameEnd");
+  if (!webContents) {
+    return;
+  }
+
+  send(webContents, "gameEnd");
 }
 
 
 // Games
 
 function gameEmitSetData(data: object, webContents=mainWindow.webContents) {
-  webContents.send("games:setData", data);
+  if (!webContents) {
+    return;
+  }
+
+  send(webContents, "games:setData", data);
 }
 
 function gameEmitToApp(event: string, device: Device, data: any[], webContents=mainWindow.webContents) {
+  if (!webContents) {
+    return;
+  }
+
   let filteredDevice: Device = getIpcReadyDeviceInfo(device);
-  webContents.send("games:emitToApp", event, filteredDevice, data);
+  send(webContents, "games:emitToApp", event, filteredDevice, data);
 }
 
 export default {
