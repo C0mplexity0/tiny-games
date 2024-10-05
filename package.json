@@ -1,8 +1,8 @@
 {
   "name": "tiny-games",
-  "productName": "tiny-games",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "productName": "Tiny Games",
+  "version": "0.0.1",
+  "description": "Games console with no games console.",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
