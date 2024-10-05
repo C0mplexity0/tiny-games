@@ -23,22 +23,13 @@ function emitSetConnectLink(link: string, webContents=mainWindow.webContents) {
 }
 
 function emitSetDevices(devices: Device[], webContents=mainWindow.webContents) {
-  if (!webContents) {
-    return;
-  }
+  let ipcReadyDevices = [];
 
-  let modifiedDevices = [];
-    
   for (let i=0;i<devices.length;i++) {
-    modifiedDevices.push({
-      username: devices[i].username,
-      connected: devices[i].connected,
-      id: devices[i].id,
-      latency: devices[i].latency
-    });
+    ipcReadyDevices.push(getIpcReadyDeviceInfo(devices[i]));
   }
 
-  send(webContents, "setDevices", modifiedDevices);
+  send(webContents, "setDevices", ipcReadyDevices);
 }
 
 function emitSetGames(games: Game[], webContents=mainWindow.webContents) {
