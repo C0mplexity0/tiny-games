@@ -128,7 +128,7 @@ function handleMessage(event) {
     }
     case "emitToApp": {
       const messageInfo = info.data;
-      window.dispatchEvent(new CustomEvent("deviceMessageRecieve", {
+      window.dispatchEvent(new CustomEvent("deviceMessageReceive", {
         detail: {
           event: messageInfo.event,
           device: getAppDeviceFromDevice(messageInfo.device),

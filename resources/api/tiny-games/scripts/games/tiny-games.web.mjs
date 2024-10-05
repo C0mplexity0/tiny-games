@@ -41,7 +41,7 @@ function handleMessage(event) {
       devices = info;
       break;
     case "emitToDevice": { 
-      window.dispatchEvent(new CustomEvent("appMessageRecieve", {
+      window.dispatchEvent(new CustomEvent("appMessageReceive", {
         detail: info.data
       }));
       break;
