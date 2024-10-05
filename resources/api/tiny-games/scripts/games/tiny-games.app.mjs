@@ -24,6 +24,23 @@ class AppDevice {
   }
 }
 
+function getAppDeviceFromDevice(device) {
+
+  if (!devices) {
+    return;
+  }
+
+  const id = device.id;
+
+  for (let i=0;i<devices.length;i++) {
+    if (devices[i].id === id) {
+      return devices[i];
+    }
+  }
+
+  return;
+}
+
 
 // Exported functions
 
@@ -95,7 +112,7 @@ function handleMessage(event) {
     case "setData":
       data = info.data;
       break;
-    case "setDevices":
+    case "setDevices": {
       devices = [];
       for (let i=0;i<info.data.length;i++) {
         devices.push(new AppDevice(info.data[i]));
@@ -108,12 +125,13 @@ function handleMessage(event) {
       }));
 
       break;
+    }
     case "emitToApp": {
       const messageInfo = info.data;
       window.dispatchEvent(new CustomEvent("deviceMessageRecieve", {
         detail: {
           event: messageInfo.event,
-          device: messageInfo.device,
+          device: getAppDeviceFromDevice(messageInfo.device),
           data: messageInfo.data
         }
       }));
