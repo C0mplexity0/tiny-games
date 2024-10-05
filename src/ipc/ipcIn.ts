@@ -89,7 +89,7 @@ export function initIpc() {
   let lastSaveTime = 0;
 
   ipcMain.on("games:saveData", (_event, data: object, time: number) => {
-    if (time < lastSaveTime) { // Prevents old data overriding new data
+    if (!data || time < lastSaveTime) { // Prevents old data overriding new data
       return;
     }
 
