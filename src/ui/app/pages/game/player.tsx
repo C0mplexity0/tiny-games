@@ -103,7 +103,17 @@ export default function PlayerPage() {
           src={`http://localhost:9977/${currentGame.appRoot}`}
           onLoad={() => {
             const url = new URL(window.location.href);
-            postMessage("setParentUrl", `http://${url.hostname}:${url.port}`);
+            let urlStr;
+
+            if (window.location.href.startsWith("http://")) {
+              urlStr = `http://${url.hostname}:${url.port}/`;
+            } else {
+              urlStr = "*";
+            }
+
+            console.log(urlStr);
+
+            postMessage("setParentUrl", urlStr);
           }}
         />
       </div>

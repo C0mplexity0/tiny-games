@@ -72,7 +72,15 @@ export default function PlayerPage() {
           src={`http://${url.hostname}:9977/${currentGame.webRoot}`} 
           className="size-full bg-white"
           onLoad={() => {
-            postMessage("setParentUrl", `http://${url.hostname}:${url.port}/`);
+            let urlStr;
+
+            if (window.location.href.startsWith("http://")) {
+              urlStr = `http://${url.hostname}:${url.port}/`;
+            } else {
+              urlStr = "*";
+            }
+
+            postMessage("setParentUrl", urlStr);
           }}
         />
       </div>
