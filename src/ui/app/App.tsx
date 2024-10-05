@@ -7,7 +7,7 @@ import "@styles/globals.css";
 import AddDevicesPage from "./pages/devices/add-devices";
 import ConnectDevicePage from "./pages/devices/connect-device";
 import { Game } from "@/games/games";
-import PlayerPage from "./pages/game/player";
+import PlayerPage, { postMessage } from "./pages/game/player";
 
 export let devices: Device[];
 let setDevices: (devices: Device[]) => void;
@@ -81,6 +81,19 @@ export default function App() {
         if (window.location.hash == "#/game/player")
           window.location.hash = "";
         setCurrentGame(null);
+      });
+
+
+      window.electron.ipcRenderer.on("games:setData", (data: object) => {
+        if (window.location.hash == "#/game/player") {
+          postMessage("setData", data);
+        }
+      });
+
+      window.electron.ipcRenderer.on("games:emitToApp", (event: string, device: Device, data: any[]) => {
+        if (window.location.hash == "#/game/player") {
+          postMessage("emitToApp", {event, device, data});
+        }
       });
 
 

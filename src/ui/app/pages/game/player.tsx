@@ -8,33 +8,44 @@ import React, { useEffect, useRef, useState } from "react";
 let iframeRef: React.MutableRefObject<any>;
 
 
-function postMessage(type: string, data?: string) {
+export function postMessage(event: string, data?: any) {
   if (iframeRef.current)
-    iframeRef.current.contentWindow.postMessage(`${type}${data ? ":" + data : ""}`, "http://localhost:9977");
+    iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, "http://localhost:9977");
 }
 
-function getMessageParts(msg: string) {
-  let split = msg.split(":");
 
-  const type = split.shift();
+let gameData: object;
 
-  return [type, split.join(":")];
+function saveData() {
+  window.electron.ipcRenderer.sendMessage("games:saveData", gameData);
 }
-
 
 function handleMessage(event: MessageEvent<any>) {
-  const [messageType, messageData] = getMessageParts(event.data);
+  if (!event.data || !event.data.fromTinyGames) {
+    return;
+  }
 
-  switch (messageType) {
+  const info = event.data;
+
+  switch (info.event) {
     case "getDevices":
-      postMessage("setDevices", JSON.stringify(devices));
+      postMessage("setDevices", devices);
       break;
     case "emitToDevice": {
-      const info = JSON.parse(messageData);
-
-      window.electron.ipcRenderer.sendMessage("games:emitToDevice", info.deviceId, info.event, info.data);
+      window.electron.ipcRenderer.sendMessage("games:emitToDevice", info.data.deviceId, info.data.event, info.data.data);
       break;
     }
+    case "removeDevice":
+      saveData(); // This is done in case the last device is removed and the game exits
+      window.electron.ipcRenderer.sendMessage("removeDevice", info.data);
+      break;
+    
+    case "getData":
+      window.electron.ipcRenderer.sendMessage("games:getData");
+      break;
+    case "setData":
+      gameData = info.data;
+      break;
   }
 }
 
@@ -56,8 +67,12 @@ export default function PlayerPage() {
   useEffect(() => {
     setupMessageListener();
 
+    let saveInterval = setInterval(saveData, 60000);
+
     return () => {
       removeMessageListener();
+
+      clearInterval(saveInterval);
     }
   });
 
@@ -68,7 +83,15 @@ export default function PlayerPage() {
   return (
     <div className="size-full">
       <div className="size-full absolute top-0 left-0">
-        <iframe ref={iframeRef} className="size-full bg-white" src={`http://localhost:9977/${currentGame.appRoot}`} />
+        <iframe 
+          ref={iframeRef} 
+          className="size-full bg-white"
+          src={`http://localhost:9977/${currentGame.appRoot}`}
+          onLoad={() => {
+            const url = new URL(window.location.href);
+            postMessage("setParentUrl", `http://${url.hostname}:${url.port}`);
+          }}
+        />
       </div>
 
       <Button 
@@ -111,6 +134,7 @@ export default function PlayerPage() {
             <Button 
               className="w-full"
               onClick={() => {
+                saveData();
                 window.electron.ipcRenderer.sendMessage("exitGame");
               }}
             >Exit Game</Button>

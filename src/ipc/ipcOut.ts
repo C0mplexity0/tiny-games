@@ -1,5 +1,5 @@
 import { mainWindow } from "@/main";
-import { Device } from "@/devices/devices";
+import { Device, getIpcReadyDeviceInfo } from "@/devices/devices";
 import { Game } from "@/games/games";
 
 function emitSetConnectLink(link: string, webContents=mainWindow.webContents) {
@@ -37,11 +37,26 @@ function emitGameEnd(webContents=mainWindow.webContents) {
   webContents.send("gameEnd");
 }
 
+
+// Games
+
+function gameEmitSetData(data: object, webContents=mainWindow.webContents) {
+  webContents.send("games:setData", data);
+}
+
+function gameEmitToApp(event: string, device: Device, data: any[], webContents=mainWindow.webContents) {
+  let filteredDevice: Device = getIpcReadyDeviceInfo(device);
+  webContents.send("games:emitToApp", event, filteredDevice, data);
+}
+
 export default {
   emitSetConnectLink,
   emitSetDevices,
   emitSetGames,
   emitLaunchGame,
   emitSetCurrentGame,
-  emitGameEnd
+  emitGameEnd,
+
+  gameEmitSetData,
+  gameEmitToApp
 };

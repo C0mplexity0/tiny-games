@@ -53,3 +53,16 @@ export function removeDevice(device: Device) {
 
   ipcOut.emitSetDevices(devices);
 }
+
+export function getIpcReadyDeviceInfo(device: Device) { // For filtering out socket from the device's information so that it can be sent through Socket.IO and IPC with no issues
+  let filteredDevice: Device = {
+    username: device.username,
+    id: device.id,
+  
+    connected: device.connected,
+    latency: device.latency,
+    lastPong: device.lastPong,
+  };
+
+  return filteredDevice;
+}

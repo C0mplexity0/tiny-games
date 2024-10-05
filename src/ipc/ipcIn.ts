@@ -8,6 +8,7 @@ import { currentGame, endGame } from "@/games/player";
 import { getConnectLink } from "@/web";
 import openExplorer from "open-file-explorer";
 import socketOut from "@/devices/connection/socketOut";
+import { getGameData, saveGameData } from "@/games/data";
 
 export function initIpc() {
   ipcMain.on("getConnectQrCode", async (event) => {
@@ -69,7 +70,7 @@ export function initIpc() {
 
   // Games
 
-  ipcMain.on("games:emitToDevice", (_event, deviceId, event, data) => {
+  ipcMain.on("games:emitToDevice", (_event, deviceId, event, data: any[]) => {
     const device = getDeviceById(deviceId);
 
     if (!device) {
@@ -77,5 +78,15 @@ export function initIpc() {
     }
 
     socketOut.gameEmitToDevice(device.socket, event, data);
+  });
+
+  ipcMain.on("games:getData", async () => {
+    const data = await getGameData(currentGame);
+
+    ipcOut.gameEmitSetData(data);
+  });
+
+  ipcMain.on("games:saveData", (_event, data: object) => {
+    saveGameData(currentGame, data);
   });
 }

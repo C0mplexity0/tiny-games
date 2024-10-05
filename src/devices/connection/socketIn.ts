@@ -64,6 +64,11 @@ export function setupIo(io: Server) {
       socketOut.emitSetCurrentGame(currentGame, socket);
     });
 
+
+    socket.on("emitToApp", (event: string, data: any[]) => {
+      ipcOut.gameEmitToApp(event, getDeviceBySocket(socket), data);
+    });
+
     socket.on("disconnect", (reason) => {
       switch(reason) {
         case "ping timeout":

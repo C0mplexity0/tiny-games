@@ -2,10 +2,10 @@ import ipcOut from "@/ipc/ipcOut";
 import { Game } from "./games";
 import express from "express";
 import http from "http";
-import path from "path";
 import socketOut from "@/devices/connection/socketOut";
 import { io } from "@/web";
 import { getResourcesFolder } from "@/main";
+import path from "path";
 
 const port = 9977;
 
@@ -25,14 +25,13 @@ export function startGame(game: Game) {
   httpServer = new http.Server(expressApp);
 
   const staticHandler = express.static(game.gameDir);
+  const tgStaticHandler = express.static(path.resolve(getResourcesFolder(), "api"));
 
   expressApp.use("/", (req, res, next) => {
-    if (!req.path.startsWith("/tiny-games")) {
+    if (!req.path.startsWith("/tiny-games/scripts/games")) {
       staticHandler(req, res, next);
-    } else if (req.path.startsWith("/tiny-games/tiny-games.app.mjs")) {
-      res.sendFile(path.join(getResourcesFolder(), "scripts/games/tiny-games.app.mjs"));
-    } else if (req.path.startsWith("/tiny-games/tiny-games.web.mjs")) {
-      res.sendFile(path.join(getResourcesFolder(), "scripts/games/tiny-games.web.mjs"));
+    } else {
+      tgStaticHandler(req, res, next);
     }
   });
   

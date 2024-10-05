@@ -21,7 +21,7 @@ function emitGameEnd(socket: Socket | Server) {
 }
 
 function gameEmitToDevice(socket: Socket, event: string, data: any[]) {
-  socket.emit("gameEmitToDevice", event, ...data);
+  socket.emit("gameEmitToDevice", event, data);
 }
 
 export default { emitJoined, emitSetCurrentGame, emitLaunchGame, emitGameEnd, gameEmitToDevice };
