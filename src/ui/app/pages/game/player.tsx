@@ -7,17 +7,27 @@ import React, { useEffect, useRef, useState } from "react";
 
 let iframeRef: React.MutableRefObject<any>;
 
+let gameData: object;
+let gameExiting = false;
+
 
 export function postMessage(event: string, data?: any) {
   if (iframeRef.current)
     iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, "http://localhost:9977");
 }
 
+export function exitGame() {
+  gameExiting = true;
 
-let gameData: object;
+  postMessage("gameExiting");
+
+  saveData();
+  window.electron.ipcRenderer.sendMessage("exitGame");
+}
+
 
 function saveData() {
-  window.electron.ipcRenderer.sendMessage("games:saveData", gameData);
+  window.electron.ipcRenderer.sendMessage("games:saveData", gameData, Date.now());
 }
 
 function handleMessage(event: MessageEvent<any>) {
@@ -45,6 +55,10 @@ function handleMessage(event: MessageEvent<any>) {
       break;
     case "setData":
       gameData = info.data;
+
+      if (gameExiting) {
+        saveData(); // The last save happens when the gameExiting event fires, so this ensures that if any data is set as the gameExiting event is fired it gets saved properly
+      }
       break;
   }
 }
@@ -133,10 +147,7 @@ export default function PlayerPage() {
 
             <Button 
               className="w-full"
-              onClick={() => {
-                saveData();
-                window.electron.ipcRenderer.sendMessage("exitGame");
-              }}
+              onClick={exitGame}
             >Exit Game</Button>
           </div>
         </div>

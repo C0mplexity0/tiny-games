@@ -7,7 +7,7 @@ import "@styles/globals.css";
 import AddDevicesPage from "./pages/devices/add-devices";
 import ConnectDevicePage from "./pages/devices/connect-device";
 import { Game } from "@/games/games";
-import PlayerPage, { postMessage } from "./pages/game/player";
+import PlayerPage, { exitGame, postMessage } from "./pages/game/player";
 
 export let devices: Device[];
 let setDevices: (devices: Device[]) => void;
@@ -43,8 +43,13 @@ export default function App() {
       window.electron.ipcRenderer.on("setDevices", (devices: Device[]) => {
         setDevices(devices);
 
-        if (devices.length == 0) {
-          window.electron.ipcRenderer.sendMessage("exitGame");
+        if (devices.length != 0) {
+          return;
+        }
+
+        if (window.location.hash == "#/game/player") {
+          exitGame();
+        } else {
           window.location.hash = "/devices/add-devices";
         }
       });

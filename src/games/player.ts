@@ -10,11 +10,13 @@ import path from "path";
 const port = 9977;
 
 export let currentGame: Game;
+export let currentGameActive = false;
 
 export let expressApp: express.Application;
 let httpServer: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 
 export function startGame(game: Game) {
+  currentGameActive = true;
   currentGame = game;
 
   if (httpServer) {
@@ -42,7 +44,7 @@ export function startGame(game: Game) {
 }
 
 export function endGame() {
-  currentGame = null;
+  currentGameActive = false;
   ipcOut.emitGameEnd();
   socketOut.emitGameEnd(io);
 }

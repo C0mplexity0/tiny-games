@@ -119,6 +119,8 @@ function handleMessage(event) {
       }));
       break; 
     }
+    case "gameExiting":
+      window.dispatchEvent(new CustomEvent("gameExiting"));
   }
 }
 

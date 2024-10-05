@@ -86,7 +86,15 @@ export function initIpc() {
     ipcOut.gameEmitSetData(data);
   });
 
-  ipcMain.on("games:saveData", (_event, data: object) => {
+  let lastSaveTime = 0;
+
+  ipcMain.on("games:saveData", (_event, data: object, time: number) => {
+    if (time < lastSaveTime) { // Prevents old data overriding new data
+      return;
+    }
+
+    lastSaveTime = time;
+
     saveGameData(currentGame, data);
   });
 }
