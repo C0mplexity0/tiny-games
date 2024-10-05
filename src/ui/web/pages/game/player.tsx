@@ -1,3 +1,4 @@
+import { Device } from "@/devices/devices";
 import { socket } from "@web/device/connection/socketIn";
 import { currentGame } from "@web/Web";
 import React, { useEffect, useRef } from "react";
@@ -21,6 +22,9 @@ function handleMessage(event: MessageEvent<any>) {
   const info = event.data;
 
   switch (info.event) {
+    case "getDevices":
+      socket.emit("getDevices");
+      break;
     case "emitToApp": {
       socket.emit("emitToApp", info.data.event, info.data.data);
       break;
@@ -37,6 +41,10 @@ function removeMessageListener() {
 }
 
 
+function handleSetDevices(devices: Device[]) {
+  postMessage("setDevices", devices);
+}
+
 function handleEmitToDevice(event: string, data: any[]) {
   postMessage("emitToDevice", {
     event,
@@ -49,10 +57,12 @@ export default function PlayerPage() {
   iframeRef = useRef();
 
   useEffect(() => {
+    socket.on("setDevices", handleSetDevices);
     socket.on("gameEmitToDevice", handleEmitToDevice);
     setupMessageListener();
 
     return () => {
+      socket.off("setDevices", handleSetDevices);
       socket.off("gameEmitToDevice", handleEmitToDevice);
       removeMessageListener();
     }

@@ -65,6 +65,10 @@ export function setupIo(io: Server) {
     });
 
 
+    socket.on("getDevices", () => {
+      socketOut.emitSetDevices(devices, socket);
+    });
+
     socket.on("emitToApp", (event: string, data: any[]) => {
       ipcOut.gameEmitToApp(event, getDeviceBySocket(socket), data);
     });

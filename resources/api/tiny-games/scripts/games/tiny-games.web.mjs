@@ -1,13 +1,19 @@
 import communication from "./communication.mjs";
 
+let devices;
+
 // Exported Functions
 
 function gameReady() {
-  if (communication.getParentUrl()) {
+  if (devices && communication.getParentUrl()) {
     return true;
   }
 
   return false;
+}
+
+function getDevices() {
+  return devices;
 }
 
 function emitToApp(event, ...data) {
@@ -31,6 +37,9 @@ function handleMessage(event) {
     case "setParentUrl":
       communication.setParentUrl(info.data);
       break;
+    case "setDevices":
+      devices = info;
+      break;
     case "emitToDevice": { 
       window.dispatchEvent(new CustomEvent("appMessageRecieve", {
         detail: info.data
@@ -48,8 +57,8 @@ function init() {
 
   const checkReadyInterval = setInterval(() => {
     if (communication.getParentUrl() && !fetchedInfo) {
+      communication.postMessage("getDevices");
       fetchedInfo = true;
-      // TODO: Need to add getDevices here
     }
 
     if (gameReady()) {
@@ -64,6 +73,8 @@ init();
 
 export default {
   gameReady,
+
+  getDevices,
 
   emitToApp
 };
