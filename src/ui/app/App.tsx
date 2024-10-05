@@ -49,6 +49,10 @@ export default function App() {
       window.electron.ipcRenderer.on("setDevices", (devices: Device[]) => {
         setDevices(devices);
 
+        if (window.location.hash == "#/game/player") {
+          postMessage("setDevices", devices);
+        }
+
         if (devices.length != 0) {
           return;
         }
