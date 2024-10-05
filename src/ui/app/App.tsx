@@ -94,7 +94,7 @@ export default function App() {
       
       window.electron.ipcRenderer.on("gameEnd", () => {
         if (window.location.hash == "#/game/player")
-          window.location.hash = "";
+          window.location.hash = devices.length == 0 ? window.location.hash = "/devices/add-devices" : "";
         setCurrentGame(null);
       });
 
