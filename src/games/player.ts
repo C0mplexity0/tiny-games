@@ -4,8 +4,9 @@ import express from "express";
 import http from "http";
 import socketOut from "@/devices/connection/socketOut";
 import { io } from "@/web";
-import { getResourcesFolder } from "@/main";
+import { getResourcesFolder, tryingToQuit } from "@/main";
 import path from "path";
+import { app } from "electron";
 
 const port = 9977;
 
@@ -47,4 +48,8 @@ export function endGame() {
   currentGameActive = false;
   ipcOut.emitGameEnd();
   socketOut.emitGameEnd(io);
+
+  if (tryingToQuit) {
+    app.quit();
+  }
 }

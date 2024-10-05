@@ -40,6 +40,12 @@ export default function App() {
     if (!initialisedIpcEvents) {
       window.electron.ipcRenderer.sendMessage("getDevices");
 
+      window.electron.ipcRenderer.on("quitting", () => {
+        if (window.location.hash == "#/game/player") {
+          exitGame();
+        }
+      });
+
       window.electron.ipcRenderer.on("setDevices", (devices: Device[]) => {
         setDevices(devices);
 

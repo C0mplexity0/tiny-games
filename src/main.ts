@@ -4,6 +4,10 @@ import { initIpc } from "./ipc/ipcIn";
 import { startWebServer } from "./web";
 import { getGames } from "./games/games";
 import MenuBuilder from "./menu";
+import ipcOut from "./ipc/ipcOut";
+import { currentGameActive } from "./games/player";
+
+export let tryingToQuit = false;
 
 export function isDev() {
   return process.env.NODE_ENV === "development" ||
@@ -27,6 +31,17 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
+function quitting(event: { preventDefault: () => void; }) {
+  if (!currentGameActive) {
+    return;
+  }
+
+  event.preventDefault(); // If a game is active, make sure it exits properly first
+  tryingToQuit = true;
+  ipcOut.emitQuitting();
+}
+
+
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
@@ -38,6 +53,8 @@ const createWindow = () => {
       preload: path.join(__dirname, "preload.js"),
     },
   });
+
+  mainWindow.on("close", quitting);
 
   const menu = new MenuBuilder(mainWindow).buildMenu();
   Menu.setApplicationMenu(menu);
@@ -75,3 +92,5 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+app.on("before-quit", quitting);

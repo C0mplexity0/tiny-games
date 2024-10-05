@@ -2,6 +2,10 @@ import { mainWindow } from "@/main";
 import { Device, getIpcReadyDeviceInfo } from "@/devices/devices";
 import { Game } from "@/games/games";
 
+function emitQuitting(webContents=mainWindow.webContents) {
+  webContents.send("quitting");
+}
+
 function emitSetConnectLink(link: string, webContents=mainWindow.webContents) {
   webContents.send("setConnectLink", link);
 }
@@ -50,8 +54,10 @@ function gameEmitToApp(event: string, device: Device, data: any[], webContents=m
 }
 
 export default {
+  emitQuitting,
   emitSetConnectLink,
   emitSetDevices,
+
   emitSetGames,
   emitLaunchGame,
   emitSetCurrentGame,
