@@ -31,8 +31,10 @@ export function setupIo(io: Server) {
   }, PING_INTERVAL);
 
   io.on("connection", (socket) => {
+    let device: Device;
+
     if (socket.recovered) {
-      const device = getDeviceBySocket(socket);
+      device = getDeviceBySocket(socket);
       if (device) {
         device.socket = socket;
         socketOut.emitJoined(socket, device);
@@ -46,7 +48,7 @@ export function setupIo(io: Server) {
         return;
       }
 
-      let device: Device = {
+      device = {
         username,
         socket,
         connected: true,
@@ -70,7 +72,11 @@ export function setupIo(io: Server) {
     });
 
     socket.on("emitToApp", (event: string, data: any[]) => {
-      ipcOut.gameEmitToApp(event, getDeviceBySocket(socket), data);
+      if (!device) {
+        return;
+      }
+
+      ipcOut.gameEmitToApp(event, device, data);
     });
 
     socket.on("disconnect", (reason) => {
