@@ -111,8 +111,6 @@ export default function PlayerPage() {
               urlStr = "*";
             }
 
-            console.log(urlStr);
-
             postMessage("setParentUrl", urlStr);
           }}
         />
