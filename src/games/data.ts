@@ -3,11 +3,20 @@ import fs from "fs";
 import fsPromises from "fs/promises";
 import { Game } from "./games";
 
+let currentAbortController: AbortController | undefined;
+
 export function saveGameData(game: Game, data: object) {
   const dir = game.gameDir;
 
-  fs.writeFile(path.join(dir, "data.json"), JSON.stringify(data), err => {
-    if (err) throw err;
+  if (currentAbortController) {
+    currentAbortController.abort();
+  }
+
+  currentAbortController = new AbortController();
+  const signal = currentAbortController.signal;
+
+  fs.writeFile(path.join(dir, "data.json"), JSON.stringify(data), { signal: signal }, (err) => {
+    if (err && !signal.aborted) console.error(err);
   });
 }
 
