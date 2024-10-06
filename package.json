@@ -3,6 +3,10 @@
   "productName": "Tiny Games",
   "version": "0.0.2",
   "description": "Play games with friends without needing extra controllers or hardware.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/C0mplexity0/tiny-games.git"
+  }
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
