@@ -2,7 +2,7 @@
   "name": "tiny-games",
   "productName": "Tiny Games",
   "version": "0.0.2",
-  "description": "Games console with no games console.",
+  "description": "Play games with friends without needing extra controllers or hardware.",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
