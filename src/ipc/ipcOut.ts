@@ -32,6 +32,10 @@ function emitSetDevices(devices: Device[], webContents=mainWindow.webContents) {
   send(webContents, "setDevices", ipcReadyDevices);
 }
 
+function emitDeviceConnected(device: Device, webContents=mainWindow.webContents) {
+  send(webContents, "deviceConnected", getIpcReadyDeviceInfo(device));
+}
+
 function emitSetGames(games: Game[], webContents=mainWindow.webContents) {
   if (!webContents) {
     return;
@@ -88,6 +92,7 @@ export default {
   emitQuitting,
   emitSetConnectLink,
   emitSetDevices,
+  emitDeviceConnected,
 
   emitSetGames,
   emitLaunchGame,

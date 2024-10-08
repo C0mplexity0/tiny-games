@@ -37,6 +37,7 @@ export function addDevice(device: Device) {
   if (!getDeviceBySocket(device.socket)) {
     devices.push(device);
     ipcOut.emitSetDevices(devices);
+    ipcOut.emitDeviceConnected(device);
     return true; // The device was added
   }
   

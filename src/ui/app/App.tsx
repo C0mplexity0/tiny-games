@@ -8,6 +8,8 @@ import AddDevicesPage from "./pages/devices/add-devices";
 import ConnectDevicePage from "./pages/devices/connect-device";
 import { Game } from "@/games/games";
 import PlayerPage, { exitGame, postMessage } from "./pages/game/player";
+import { Toast, useToast } from "../hooks/use-toast";
+import { Toaster } from "@components/ui/toaster";
 
 export let devices: Device[];
 let setDevices: (devices: Device[]) => void;
@@ -20,6 +22,8 @@ let setCurrentGame: (game: Game) => void;
 
 export let connectLink: string;
 let setConnectLink: (connectLink: string) => void;
+
+export let toast: ({ ...props }: Toast) => object;
 
 function Layout() {
   return (
@@ -35,6 +39,8 @@ export default function App() {
   [games, setGames] = useState([]);
   [currentGame, setCurrentGame] = useState(null);
   [connectLink, setConnectLink] = useState("");
+
+  toast = useToast().toast;
 
   useEffect(() => {
     if (!initialisedIpcEvents) {
@@ -62,6 +68,13 @@ export default function App() {
         } else {
           window.location.hash = "/devices/add-devices";
         }
+      });
+
+      window.electron.ipcRenderer.on("deviceConnected", (device: Device) => {
+        toast({
+          title: "Device Connected",
+          description: `${device.username} connected to Tiny Games!`
+        })
       });
 
 
@@ -117,19 +130,22 @@ export default function App() {
   }, [devices, games]);
 
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<AppHomePage />} />
-          <Route path="devices">
-            <Route path="add-devices" element={<AddDevicesPage />} />
-            <Route path="connect-device" element={<ConnectDevicePage />} />
+    <div className="size-full">
+      <Toaster />
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<AppHomePage />} />
+            <Route path="devices">
+              <Route path="add-devices" element={<AddDevicesPage />} />
+              <Route path="connect-device" element={<ConnectDevicePage />} />
+            </Route>
+            <Route path="game">
+              <Route path="player" element={<PlayerPage />} />
+            </Route>
           </Route>
-          <Route path="game">
-            <Route path="player" element={<PlayerPage />} />
-          </Route>
-        </Route>
-      </Routes>
-    </HashRouter>
+        </Routes>
+      </HashRouter>
+    </div>
   )
 }

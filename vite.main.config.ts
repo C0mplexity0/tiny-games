@@ -32,6 +32,7 @@ export default defineConfig((env) => {
         "@lib": path.resolve(__dirname, "src/ui/lib"),
         "@styles": path.resolve(__dirname, "src/ui/styles"),
         "@components": path.resolve(__dirname, "src/ui/components"),
+        "@hooks": path.resolve(__dirname, "src/ui/hooks"),
         "@": path.resolve(__dirname, "src"),
       },
     },
