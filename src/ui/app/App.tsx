@@ -74,7 +74,7 @@ export default function App() {
         toast({
           title: "Device Connected",
           description: `${device.username} connected to Tiny Games!`
-        })
+        });
       });
 
 
