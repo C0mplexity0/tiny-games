@@ -28,10 +28,6 @@ export function initSocket() {
     }
   });
 
-  socket.on("reload", () => {
-    window.location.reload();
-  });
-
   socket.on("setCurrentGame", (game: Game) => {
     setCurrentGame(game);
 

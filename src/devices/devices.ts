@@ -1,5 +1,6 @@
 import ipcOut from "@/ipc/ipcOut";
 import { Socket } from "socket.io";
+import socketOut from "./connection/socketOut";
 
 export interface Device {
   username: string,
@@ -45,13 +46,12 @@ export function addDevice(device: Device) {
 }
 
 export function removeDevice(device: Device) {
-  device.socket.emit("reload");
-
   const index = devices.indexOf(device);
   if (index > -1) {
     devices.splice(index, 1);
   }
 
+  socketOut.emitDeviceRemoved(device.socket);
   ipcOut.emitSetDevices(devices);
 }
 

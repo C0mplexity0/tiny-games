@@ -30,8 +30,12 @@ function emitSetDevices(devices: Device[], socket: Socket | Server) {
   socket.emit("setDevices", ipcReadyDevices);
 }
 
+function emitDeviceRemoved(socket: Socket) {
+  socket.emit("deviceRemoved");
+}
+
 function gameEmitToDevice(socket: Socket, event: string, data: any[]) {
   socket.emit("gameEmitToDevice", event, data);
 }
 
-export default { emitJoined, emitSetCurrentGame, emitLaunchGame, emitGameEnd, emitSetDevices, gameEmitToDevice };
+export default { emitJoined, emitSetCurrentGame, emitLaunchGame, emitGameEnd, emitSetDevices, emitDeviceRemoved, gameEmitToDevice };
