@@ -1,4 +1,5 @@
 import { currentGame, devices } from "@app/App";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@components/ui/alert-dialog";
 import { Button } from "@components/ui/button";
 import DeviceButton from "@components/ui/devices/device-button";
 import { ScrollArea, ScrollBar } from "@components/ui/scroll-area";
@@ -71,6 +72,30 @@ function removeMessageListener() {
   window.removeEventListener("message", handleMessage);
 }
 
+
+export function ExitGameButton() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button 
+          className="w-full"
+        >Exit Game</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Exit Game?</AlertDialogTitle>
+          <AlertDialogDescription>
+            All devices will be kicked from the game and the game will end.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={exitGame}>Exit</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
 
 export default function PlayerPage() {
   let [menuOpen, setMenuOpen] = useState(false);
@@ -153,10 +178,7 @@ export default function PlayerPage() {
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
 
-            <Button 
-              className="w-full"
-              onClick={exitGame}
-            >Exit Game</Button>
+            <ExitGameButton />
           </div>
         </div>
       </div>
