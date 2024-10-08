@@ -4,12 +4,13 @@ import { Button } from "@components/ui/button";
 import DeviceNewButton from "@components/ui/devices/new";
 import DeviceProfile from "@components/ui/devices/profile";
 import { PageHeader, PageSubtitle, PageTitle } from "@components/ui/text/page-header";
+import { X } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
 function DeviceDisplay({ device, newButton }: { device?: Device, newButton?: boolean }) {
   return (
-    <div className="w-32 h-36">
+    <div className="w-32 h-36 relative group">
       <div className="w-24 h-24 relative left-1/2 -translate-x-1/2">
         {
           newButton ? 
@@ -32,6 +33,21 @@ function DeviceDisplay({ device, newButton }: { device?: Device, newButton?: boo
           "Error"
         }
       </span>
+      {
+        newButton ?
+        null
+        :
+        <Button 
+          size="sm-icon" 
+          variant="outline" 
+          className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+          onClick={() => {
+            window.electron.ipcRenderer.sendMessage("removeDevice", device.id);
+          }}
+        >
+          <X className="size-6" />
+        </Button>
+      }
     </div>
   )
 }
