@@ -2,9 +2,11 @@ import { currentGame, devices } from "@app/App";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@components/ui/alert-dialog";
 import { Button } from "@components/ui/button";
 import DeviceButton from "@components/ui/devices/device-button";
+import { Dialog, DialogClose, DialogContent, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger } from "@components/ui/dialog";
 import { ScrollArea, ScrollBar } from "@components/ui/scroll-area";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Menu, X } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 let iframeRef: React.MutableRefObject<any>;
 
@@ -98,9 +100,6 @@ export function ExitGameButton() {
 }
 
 export default function PlayerPage() {
-  let [menuOpen, setMenuOpen] = useState(false);
-
-  let menuBackgroundRef = useRef();
   iframeRef = useRef();
 
   useEffect(() => {
@@ -141,34 +140,23 @@ export default function PlayerPage() {
         />
       </div>
 
-      <Button 
-        className={`absolute top-2 right-2 ${menuOpen ? "hidden" : ""}`} 
-        size="icon" 
-        variant="outline"
-        onClick={() => {
-          setMenuOpen(true);
-        }}
-      ><Menu /></Button>
-
-      <div className={`size-full absolute top-0 left-0 z-2 ${menuOpen ? "" : "hidden"}`}>
-        <div 
-          ref={menuBackgroundRef}
-          className="size-full relative bg-background/70"
-          onClick={(event) => {
-            if (event.target == menuBackgroundRef.current)
-              setMenuOpen(false);
-          }}
-        >
+      <Dialog>
+        <DialogTrigger asChild>
           <Button 
             className="absolute top-2 right-2" 
             size="icon" 
             variant="outline"
-            onClick={() => {
-              setMenuOpen(false);
-            }}
-          ><X /></Button>
-
-          <div className="border absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-xl p-4 flex flex-col gap-4">
+          ><Menu /></Button>
+        </DialogTrigger>
+        <DialogPortal>
+          <DialogOverlay />
+          <DialogContent aria-describedby={undefined}>
+            <DialogClose
+              className="h-8 w-8 absolute right-2 top-2 bg-transparent hover:bg-secondary rounded-md p-1 text-foreground/50 opacity-70 transition-opacity-colors hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600"
+            >
+              <X className="h-5 w-5" />
+            </DialogClose>
+            <VisuallyHidden><DialogTitle>Game Menu</DialogTitle></VisuallyHidden>
             <ScrollArea className="flex flex-row h-fit gap-2 w-64 overflow-x-auto overflow-y-visible">
               <div className="flex flex-row h-fit gap-2">
                 {
@@ -177,11 +165,10 @@ export default function PlayerPage() {
               </div>
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
-
             <ExitGameButton />
-          </div>
-        </div>
-      </div>
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>
     </div>
   )
 }
