@@ -6,6 +6,7 @@ import { getGames } from "./games/games";
 import MenuBuilder from "./menu";
 import ipcOut from "./ipc/ipcOut";
 import { currentGameActive } from "./games/player";
+import { updateElectronApp } from "update-electron-app";
 
 export let tryingToQuit = false;
 
@@ -30,6 +31,8 @@ export let mainWindow: BrowserWindow;
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
+
+updateElectronApp();
 
 function quitting(event: { preventDefault: () => void; }) {
   if (!currentGameActive) {
