@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 import { addDevice, Device, devices, getDeviceBySocket, removeDevice } from "../devices";
 import socketOut from "./socketOut";
 import ipcOut from "@/ipc/ipcOut";
-import { currentGame } from "@/games/player";
+import { currentGame, currentGameActive } from "@/games/player";
 
 const PING_INTERVAL = 5000;
 
@@ -63,7 +63,11 @@ export function setupIo(io: Server) {
     });
 
     socket.on("getCurrentGame", () => {
-      socketOut.emitSetCurrentGame(currentGame, socket);
+      if (currentGameActive) {
+        socketOut.emitSetCurrentGame(currentGame, socket);
+      } else {
+        socketOut.emitSetCurrentGame(undefined, socket);
+      }
     });
 
 
