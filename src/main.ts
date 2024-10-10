@@ -52,6 +52,8 @@ const createWindow = () => {
     minWidth: 700,
     minHeight: 480,
     autoHideMenuBar: true,
+    backgroundColor: "#0f0f10", // From globals.css
+    show: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -68,9 +70,13 @@ const createWindow = () => {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${APP_VITE_NAME}/index.html`));
   }
 
-  if (isDev()) {
-    mainWindow.webContents.openDevTools();
-  }
+  mainWindow.on("ready-to-show", () => {
+    mainWindow.show();
+
+    if (isDev()) {
+      mainWindow.webContents.openDevTools();
+    }
+  });
 };
 
 app.on("ready", () => {
