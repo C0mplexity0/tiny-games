@@ -7,7 +7,7 @@ import DeviceProfile from "@components/ui/devices/profile";
 import { Dialog, DialogClose, DialogContent, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger } from "@components/ui/dialog";
 import { ScrollArea, ScrollBar } from "@components/ui/scroll-area";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { Menu, SignalHigh, X } from "lucide-react";
+import { Menu, SignalHigh, SignalLow, SignalMedium, X } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 
 let iframeRef: React.MutableRefObject<any>;
@@ -85,7 +85,17 @@ function DeviceRow({ device }: { device: Device }) {
       </div>
       <span className="inline-block flex-1 h-10 leading-10">{device.username}</span>
       <div className="flex flex-row py-2.5">
-        <SignalHigh className="text-secondary-foreground" width="18" height="18" />
+        {
+          (() => {
+            if (device.latency > 200) {
+              return <SignalLow className="text-secondary-foreground" width="18" height="18" />
+            } else if (device.latency > 70) {
+              return <SignalMedium className="text-secondary-foreground" width="18" height="18" />
+            } else {
+              return <SignalHigh className="text-secondary-foreground" width="18" height="18" />
+            }
+          })()
+        }
         <span className="text-sm text-secondary-foreground">{device.latency}ms</span>
       </div>
       <Button variant="outline" size="icon">
