@@ -1,11 +1,13 @@
+import { Device } from "@/devices/devices";
 import { currentGame, devices } from "@app/App";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@components/ui/alert-dialog";
 import { Button } from "@components/ui/button";
-import DeviceButton from "@components/ui/devices/device-button";
+import { DeviceProfileOptions } from "@components/ui/devices/device-button";
+import DeviceProfile from "@components/ui/devices/profile";
 import { Dialog, DialogClose, DialogContent, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger } from "@components/ui/dialog";
 import { ScrollArea, ScrollBar } from "@components/ui/scroll-area";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { Menu, X } from "lucide-react";
+import { Menu, SignalHigh, X } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 
 let iframeRef: React.MutableRefObject<any>;
@@ -75,7 +77,25 @@ function removeMessageListener() {
 }
 
 
-export function ExitGameButton() {
+function DeviceRow({ device }: { device: Device }) {
+  return (
+    <div className="w-full h-14 border rounded-md p-2 flex flex-row gap-2">
+      <div className={"size-10 rounded-[37.5%] bg-accent hover:bg-accent/90 relative " + (device.connected ? "" : "bg-secondary hover:bg-secondary/90")}>
+        <DeviceProfile device={device} />
+      </div>
+      <span className="inline-block flex-1 h-10 leading-10">{device.username}</span>
+      <div className="flex flex-row py-2.5">
+        <SignalHigh className="text-secondary-foreground" width="18" height="18" />
+        <span className="text-sm text-secondary-foreground">{device.latency}ms</span>
+      </div>
+      <Button variant="outline" size="icon">
+        <DeviceProfileOptions device={device} />
+      </Button>
+    </div>
+  );
+}
+
+function ExitGameButton() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -150,20 +170,20 @@ export default function PlayerPage() {
         </DialogTrigger>
         <DialogPortal>
           <DialogOverlay />
-          <DialogContent aria-describedby={undefined}>
+          <DialogContent aria-describedby={undefined} className="pt-12">
             <DialogClose
               className="h-8 w-8 absolute right-2 top-2 bg-transparent hover:bg-secondary rounded-md p-1 text-foreground/50 opacity-70 transition-opacity-colors hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600"
             >
               <X className="h-5 w-5" />
             </DialogClose>
             <VisuallyHidden><DialogTitle>Game Menu</DialogTitle></VisuallyHidden>
-            <ScrollArea className="flex flex-row h-fit gap-2 w-64 overflow-x-auto overflow-y-visible">
-              <div className="flex flex-row h-fit gap-2">
+            <ScrollArea className="flex flex-col gap-2 w-full h-fit max-h-64 overflow-x-auto overflow-y-visible">
+              <div className="flex flex-col w-full h-fit gap-2">
                 {
-                  devices.map((device, i) => <DeviceButton popoverSide="bottom" device={device} key={i} />)
+                  devices.map((device, i) => <DeviceRow device={device} key={i} />)
                 }
               </div>
-              <ScrollBar orientation="horizontal" />
+              <ScrollBar orientation="vertical" />
             </ScrollArea>
             <ExitGameButton />
           </DialogContent>

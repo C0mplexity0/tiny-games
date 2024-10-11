@@ -7,7 +7,7 @@ import DeviceProfile from "./profile";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../dropdown-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "../popover";
 
-function DeviceProfileOptions({ device }: { device: Device }) {
+export function DeviceProfileOptions({ device }: { device: Device }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
