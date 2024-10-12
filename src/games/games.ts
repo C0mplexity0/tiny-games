@@ -57,6 +57,7 @@ export async function getGames() {
   await createGamesDir();
 
   games = [];
+  ipcOut.emitSetGames(games);
 
   fs.readdirSync(gamesDir).forEach(async file => {
     loadGame(file);
