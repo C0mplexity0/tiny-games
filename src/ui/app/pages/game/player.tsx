@@ -98,9 +98,7 @@ function DeviceRow({ device }: { device: Device }) {
         }
         <span className="text-sm text-secondary-foreground">{device.latency}ms</span>
       </div>
-      <Button variant="outline" size="icon">
-        <DeviceProfileOptions device={device} />
-      </Button>
+      <DeviceProfileOptions device={device} />
     </div>
   );
 }
