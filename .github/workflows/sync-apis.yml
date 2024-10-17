@@ -1,6 +1,6 @@
 # @format
 
-name: Sync APIs Script
+name: Sync API Scripts
 
 on:
   push:
