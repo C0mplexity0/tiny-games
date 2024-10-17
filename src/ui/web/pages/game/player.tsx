@@ -79,7 +79,7 @@ export default function PlayerPage() {
       <div className="size-full">
         <iframe 
           ref={iframeRef} 
-          src={`http://${url.hostname}:9977/${currentGame.webRoot}`} 
+          src={currentGame.devWebUrl ? currentGame.devWebUrl : `http://localhost:9977/${currentGame.webRoot}`} 
           className="size-full bg-white"
           onLoad={() => {
             let urlStr;

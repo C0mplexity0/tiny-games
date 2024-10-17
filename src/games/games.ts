@@ -17,6 +17,9 @@ export interface Game {
   appRoot: string,
   webRoot: string,
 
+  devAppUrl?: string,
+  devWebUrl?: string,
+
   gameDir: string,
 }
 
@@ -30,6 +33,12 @@ export interface GameConfig {
 
   appRoot: string,
   webRoot: string,
+
+  devAppRoot?: string,
+  devWebRoot?: string,
+
+  devAppUrl?: string,
+  devWebUrl?: string
 }
 
 export let games: Game[] = [];

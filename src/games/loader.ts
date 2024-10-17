@@ -2,6 +2,7 @@ import mimeTypes from "mime-types";
 import fs from "original-fs";
 import { addGame, Game, GameConfig, gamesDir } from "./games";
 import path from "path";
+import { isDev } from "@/main";
 
 function imageToBase64Url(path: string) {
   const contents = fs.readFileSync(path);
@@ -57,8 +58,11 @@ export function loadGame(file: string) {
     thumbnail,
     socials: config.socials,
 
-    appRoot: removePathPrefix(config.appRoot),
-    webRoot: removePathPrefix(config.webRoot),
+    appRoot: isDev() && config.devAppRoot ? removePathPrefix(config.devAppRoot) : removePathPrefix(config.appRoot),
+    webRoot: isDev() && config.devWebRoot ? removePathPrefix(config.devWebRoot) : removePathPrefix(config.webRoot),
+
+    devAppUrl: isDev() ? config.devAppUrl : undefined,
+    devWebUrl: isDev() ? config.devWebUrl : undefined,
 
     gameDir
   };

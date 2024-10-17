@@ -18,7 +18,7 @@ let gameExiting = false;
 
 export function postMessage(event: string, data?: any) {
   if (iframeRef.current)
-    iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, "http://localhost:9977");
+    iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, iframeRef.current.src);
 }
 
 export function exitGame() {
@@ -152,7 +152,7 @@ export default function PlayerPage() {
         <iframe 
           ref={iframeRef} 
           className="size-full bg-white"
-          src={`http://localhost:9977/${currentGame.appRoot}`}
+          src={currentGame.devAppUrl ? currentGame.devAppUrl : `http://localhost:9977/${currentGame.appRoot}`}
           onLoad={() => {
             const url = new URL(window.location.href);
             let urlStr;
