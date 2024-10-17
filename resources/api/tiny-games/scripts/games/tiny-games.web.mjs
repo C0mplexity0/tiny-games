@@ -4,6 +4,9 @@ let devices;
 
 // Exported Functions
 
+/**
+ * Checks if the API script has fetched all of the necessary info yet.
+*/
 function gameReady() {
   if (devices && communication.getParentUrl()) {
     return true;
@@ -12,10 +15,19 @@ function gameReady() {
   return false;
 }
 
+/**
+ * Gets an array of the currently connected devices.
+ * @returns {any[] | undefined}
+*/
 function getDevices() {
   return devices;
 }
 
+/**
+ * Emits a message to the app.
+ * @param {string} event - The event to emit.
+ * @param {any[]} data - Any data to send with the event.
+*/
 function emitToApp(event, ...data) {
   communication.postMessage("emitToApp", {
     event,
