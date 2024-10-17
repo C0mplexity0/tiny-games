@@ -1,0 +1,29 @@
+# @format
+
+name: Sync APIs Script
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  copy-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Push App API
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+            API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
+        with:
+            source_file: "resources/api/tiny-games/scripts/games/tiny-games.app.mjs"
+            destination_repo: "C0mplexity0/tiny-games-app"
+            destination_folder: ""
+            user_email: "106925362+C0mplexity0@users.noreply.github.com"
+            user_name: "C0mplexity"
+            commit_message: ${{ github.event.head_commit.message }}
+            git_server: "github.com"
