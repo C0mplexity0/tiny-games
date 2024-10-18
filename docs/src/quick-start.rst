@@ -1,6 +1,9 @@
 Quick Start
 -------------
 
+Cloning the Template
+====================
+
 To set up a project, first open Tiny Games, add a device and click 'Continue'.
 
 You should find yourself on this page:
@@ -24,3 +27,11 @@ Now you can click the refresh button and it should appear with this screen:
 .. image:: https://github.com/user-attachments/assets/8af8f1bd-97e4-4771-9c64-11289014023d
   :alt: Homepage with game
   :width: 500
+
+
+The App and Web Folders
+===========================
+
+These folders contain the code for your game. The app folder contains all of the code for the app, which is the software which the user hosts games off of. The web folder contains all code for any devices that are connected to the app.
+
+The app should coordinate all of the devices and should ultimately have control over the full game, meanwhile the devices should be treated more as controllers. Do, however, remember that the connection between the devices and the app may be unreliable or slow. You should think about designing your game around this.
