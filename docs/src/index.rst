@@ -9,7 +9,7 @@ Tiny Games is a simple piece of software which allows you to play games with fri
 These docs will guide you through how to make your own games for Tiny Games, if you were looking for something else, it probably won't be here!
 
 Contents
---------
+========
 
 .. toctree::
     :maxdepth: 3
