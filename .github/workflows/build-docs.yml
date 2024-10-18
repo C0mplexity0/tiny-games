@@ -1,0 +1,38 @@
+# https://github.com/annegentle/create-demo
+
+name: Build Docs
+
+env:
+  GITHUB_ACTOR: c0mplexity0
+  GITHUB_REPOSITORY: c0mplexity0/tiny-games
+  GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+
+  run-builder:
+    runs-on: ubuntu-latest
+    container: debian:buster-slim
+
+    steps:
+    
+      - name: Get prerequisites and clone repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          set -x
+          apt-get update
+          apt-get install -y git
+          git clone "https://token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" .
+        shell: bash
+
+      - name: Run build script for Sphinx pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: "docs/build.sh"
+        shell: bash
