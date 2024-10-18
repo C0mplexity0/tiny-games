@@ -13,6 +13,5 @@ Contents
 
 .. toctree::
     :maxdepth: 3
-    :caption: Contents:
 
     quick-start
