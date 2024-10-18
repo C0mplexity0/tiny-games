@@ -129,8 +129,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "DevNetCreateDemo.tex", "DevNet Create Demo Documentation",
-     "Anne Gentle", "manual"),
+    (master_doc, "TinyGames.tex", "Tiny Games Documentation",
+     "C0mplexity0", "manual"),
 ]
 
 
@@ -139,7 +139,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, "devnetcreatedemo", "DevNet Create Demo Documentation",
+    (master_doc, "tinygames", "Tiny Games Documentation",
      [author], 1)
 ]
 
@@ -150,8 +150,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, "DevNetCreateDemo", "DevNet Create Demo Documentation",
-     author, "DevNetCreateDemo", "For DevNet Create 2019, this demonstrated building using GitHub Pages with Sphinx.",
+    (master_doc, "TinyGames", "Tiny Games Documentation",
+     author, "TinyGames", "Play games with friends without needing extra controllers or hardware.",
      "Miscellaneous"),
 ]
 
