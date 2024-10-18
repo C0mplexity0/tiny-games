@@ -7,6 +7,9 @@ let data;
 
 // Classes
 
+/**
+ * A device which is connected.
+*/
 class AppDevice {
   constructor (device) {
     for (let property in device) {
@@ -14,6 +17,9 @@ class AppDevice {
     }
   }
 
+  /**
+   * Remove the device.
+  */
   remove() {
     communication.postMessage("removeDevice", this.id);
 
@@ -44,6 +50,10 @@ function getAppDeviceFromDevice(device) {
 
 // Exported functions
 
+/**
+ * Checks if the API script has fetched all of the necessary info yet.
+ * @returns {boolean} Whether the game is ready yet or not.
+*/
 function gameReady() {
   if (devices && data && communication.getParentUrl()) {
     return true;
@@ -52,12 +62,19 @@ function gameReady() {
   return false;
 }
 
-
+/**
+ * Gets an array of the currently connected devices.
+ * @returns {AppDevice[]} The array of devices.
+*/
 function getDevices() {
   return devices ? devices : [];
 }
 
-
+/**
+ * Gets the appropriate save data from the game's save file.
+ * @returns {any} The data that has been fetched.
+ * @param {string} key - The key for the save data to fetch.
+*/
 function getData(key) {
   if (!data) {
     return;
@@ -66,13 +83,23 @@ function getData(key) {
   return data[key];
 }
 
+/**
+ * Sets the appropriate save data and saves it to the game's save file.
+ * @param {string} key - The key for the data to be saved to.
+ * @param {any} val - The value to set the data to.
+*/
 function setData(key, val) {
   data[key] = val;
 
   communication.postMessage("setData", data);
 }
 
-
+/**
+ * Emits a message to a specified device.
+ * @param {AppDevice} device - The device to emit to.
+ * @param {string} event - The event to emit.
+ * @param {any[]} data - Any data to send with the event.
+*/
 function emitToDevice(device, event, ...data) {
   communication.postMessage("emitToDevice", {
     event,
@@ -81,6 +108,11 @@ function emitToDevice(device, event, ...data) {
   });
 }
 
+/**
+ * Emits a message to all devices.
+ * @param {string} event - The event to emit.
+ * @param {any[]} data - Any data to send with the event.
+*/
 function emitToAllDevices(event, ...data) {
   if (!devices) {
     return;
