@@ -23,7 +23,7 @@ export function getResourcesFolder() {
   }
 }
 
-export const appDataDir = path.resolve(app.getPath("appData"), "tiny-games/data");
+export const appDataDir = path.resolve(app.getPath("appData"), "Tiny Games/data");
 
 export let mainWindow: BrowserWindow;
 
