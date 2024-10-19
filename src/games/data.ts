@@ -2,30 +2,28 @@ import path from "path";
 import fs from "fs";
 import fsPromises from "fs/promises";
 import { Game } from "./games";
+import { getAppDataDir } from "@/main";
 
-let currentAbortController: AbortController | undefined;
+const HISTORY_FILE_PATH = path.join(getAppDataDir(), "history.json");
 
-export function saveGameData(game: Game, data: object) {
-  const dir = game.gameDir;
-
-  if (currentAbortController) {
-    currentAbortController.abort();
-  }
-
-  currentAbortController = new AbortController();
-  const signal = currentAbortController.signal;
-
-  fs.writeFile(path.join(dir, "data.json"), JSON.stringify(data), { signal: signal }, (err) => {
-    if (err && !signal.aborted) console.error(err);
-  });
+interface AbortControllers {
+  [filePath: string]: AbortController;
 }
 
-export async function getGameData(game: Game) {
-  const dir = game.gameDir;
-  const dataPath = path.join(dir, "data.json");
+interface GameHistoryEntry {
+  game: string,
+  timestamp: number
+}
 
+export let gameHistorySaved = true;
+let gameHistory: GameHistoryEntry[];
+
+let abortControllers: AbortControllers = {};
+
+
+async function getJSONFileContent(dataPath: string, defaultValue: any) {
   if (!fs.existsSync(dataPath)) {
-    return {};
+    return defaultValue;
   }
 
   const data = await fsPromises.readFile(dataPath);
@@ -33,4 +31,60 @@ export async function getGameData(game: Game) {
   const str = data.toString();
 
   return JSON.parse(str);
+}
+
+async function saveJSONFileContent(filePath: string, data: object) {
+  if (abortControllers[filePath]) {
+    abortControllers[filePath].abort();
+  }
+
+  let abortController = new AbortController();
+  abortControllers[filePath] = abortController;
+
+  const signal = abortController.signal;
+
+  await fsPromises.writeFile(filePath, JSON.stringify(data), { signal: signal });
+}
+
+export function saveGameData(game: Game, data: object) {
+  const dir = game.gameDir;
+  const filePath = path.join(dir, "data.json");
+
+  saveJSONFileContent(filePath, data);
+}
+
+export async function getGameData(game: Game) {
+  const dir = game.gameDir;
+  const dataPath = path.join(dir, "data.json");
+
+  const data = await getJSONFileContent(dataPath, {});
+
+  return data;
+}
+
+export async function getGameHistory() {
+  if (gameHistory) {
+    return gameHistory;
+  }
+
+  const data = await getJSONFileContent(HISTORY_FILE_PATH, []);
+
+  gameHistory = data;
+
+  return data;
+}
+
+export async function addGameHistoryEntry(entry: GameHistoryEntry) {
+  gameHistory.push(entry);
+  gameHistorySaved = false;
+}
+
+export async function saveGameHistory() {
+  if (gameHistorySaved) {
+    return;
+  }
+
+  await saveJSONFileContent(HISTORY_FILE_PATH, gameHistory);
+
+  gameHistorySaved = true;
 }

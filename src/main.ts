@@ -7,6 +7,7 @@ import MenuBuilder from "./menu";
 import ipcOut from "./ipc/ipcOut";
 import { currentGameActive } from "./games/player";
 import { updateElectronApp } from "update-electron-app";
+import { gameHistorySaved, saveGameHistory } from "./games/data";
 
 export let tryingToQuit = false;
 
@@ -23,7 +24,9 @@ export function getResourcesFolder() {
   }
 }
 
-export const appDataDir = path.resolve(app.getPath("appData"), "Tiny Games/data");
+export function getAppDataDir() {
+  return path.resolve(app.getPath("appData"), "Tiny Games/data");
+}
 
 export let mainWindow: BrowserWindow;
 
@@ -34,13 +37,14 @@ if (require("electron-squirrel-startup")) {
 
 updateElectronApp();
 
-function quitting(event: { preventDefault: () => void; }) {
-  if (!currentGameActive) {
+async function quitting(event: { preventDefault: () => void; }) {
+  if (gameHistorySaved && !currentGameActive) {
     return;
   }
 
-  event.preventDefault(); // If a game is active, make sure it exits properly first
+  event.preventDefault(); // Make sure everything saves and exits properly
   tryingToQuit = true;
+  await saveGameHistory();
   ipcOut.emitQuitting();
 }
 

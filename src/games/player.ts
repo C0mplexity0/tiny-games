@@ -1,5 +1,5 @@
 import ipcOut from "@/ipc/ipcOut";
-import { Game } from "./games";
+import { Game, getGames } from "./games";
 import express from "express";
 import http from "http";
 import socketOut from "@/devices/connection/socketOut";
@@ -7,6 +7,7 @@ import { io } from "@/web";
 import { getResourcesFolder, tryingToQuit } from "@/main";
 import path from "path";
 import { app } from "electron";
+import { addGameHistoryEntry } from "./data";
 
 const port = 9977;
 
@@ -46,10 +47,13 @@ export function startGame(game: Game) {
 
 export function endGame() {
   currentGameActive = false;
+  addGameHistoryEntry({ game: path.basename(currentGame.gameDir), timestamp: Date.now() })
   ipcOut.emitGameEnd();
   socketOut.emitGameEnd(io);
 
   if (tryingToQuit) {
     app.quit();
+  } else {
+    getGames();
   }
 }

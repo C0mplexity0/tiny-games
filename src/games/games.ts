@@ -1,9 +1,10 @@
 import path from "path";
 import fs from "original-fs";
-import { appDataDir } from "@/main";
+import { getAppDataDir } from "@/main";
 import ipcOut from "@/ipc/ipcOut";
 import { loadGame } from "./loader";
 import { startGame } from "./player";
+import { getGameHistory } from "./data";
 
 export interface Game {
   name: string,
@@ -62,15 +63,44 @@ export function addGame(game: Game) {
 }
 
 export async function getGames() {
-  gamesDir = path.resolve(appDataDir, "games");
+  gamesDir = path.resolve(getAppDataDir(), "games");
   await createGamesDir();
 
   games = [];
   ipcOut.emitSetGames(games);
 
+  let files: string[] = [];
+  let gamesLastOpened: {[key: string]: number} = {};
+
+  let gameHistory = await getGameHistory();
+  console.log(gameHistory);
+
   fs.readdirSync(gamesDir).forEach(async file => {
-    loadGame(file);
+    files.push(file);
+
+    for (let i=gameHistory.length-1;i>=0;i--) {
+      if (gameHistory[i].game === file) {
+        gamesLastOpened[file] = gameHistory[i].timestamp;
+        break;
+      }
+    }
   });
+
+  let orderedFiles = Object.keys(gamesLastOpened); // Order by last played
+
+  orderedFiles.sort((a, b) => {
+    return gamesLastOpened[b] - gamesLastOpened[a];
+  });
+
+  for (let i=0;i<files.length;i++) {
+    if (!orderedFiles.includes(files[i])) {
+      orderedFiles.push(files[i]);
+    }
+  }
+
+  for (let i=0;i<orderedFiles.length;i++) {
+    loadGame(orderedFiles[i]);
+  }
 }
 
 export function playGame(game: Game) {
