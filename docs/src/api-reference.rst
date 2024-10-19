@@ -7,7 +7,7 @@ game.json Config
 name ``string``
   The name of your game.
 
-  ::
+  .. code-block:: json
 
     {
       "name": "TG Template"
@@ -16,7 +16,7 @@ name ``string``
 author ``string``
   The author of your game.
 
-  ::
+  .. code-block:: json
 
     {
       "author": "C0mplexity"
@@ -25,7 +25,7 @@ author ``string``
 description? ``string``
   A description of your game.
 
-  ::
+  .. code-block:: json
 
     {
       "description": "A basic template that you can use to build games for Tiny Games."
@@ -34,7 +34,7 @@ description? ``string``
 icon? ``string``
   A path to the icon for your game.
 
-  ::
+  .. code-block:: json
 
     {
       "icon": "./icon.png"
@@ -43,7 +43,7 @@ icon? ``string``
 thumbnail? ``string``
   A path to the thumbnail for your game.
 
-  ::
+  .. code-block:: json
 
     {
       "thumbnail": "./thumbnail.png"
@@ -52,7 +52,7 @@ thumbnail? ``string``
 socials? ``string[]``
   An array of social media links for the author(s) of your game.
 
-  ::
+  .. code-block:: json
 
     {
       "socials": [
@@ -63,7 +63,7 @@ socials? ``string[]``
 appRoot ``string``
   The root directory of your app code.
 
-  ::
+  .. code-block:: json
 
     {
       "appRoot": "./app"
@@ -72,7 +72,7 @@ appRoot ``string``
 webRoot ``string``
   The root directory of your web code.
 
-  ::
+  .. code-block:: json
 
     {
       "webRoot": "./web"
@@ -81,7 +81,7 @@ webRoot ``string``
 devAppRoot? ``string``
   The root directory of your app code to be used when developing your game.
 
-  ::
+  .. code-block:: json
 
     {
       "devAppRoot": "./dev/app"
@@ -90,7 +90,7 @@ devAppRoot? ``string``
 devWebRoot? ``string``
   The root directory of your web code to be used when developing your game.
 
-  ::
+  .. code-block:: json
 
     {
       "devWebRoot": "./dev/web"
@@ -99,7 +99,7 @@ devWebRoot? ``string``
 devAppUrl? ``string``
   A URL to your app page to be used when developing your game. You may want to use this when developing a game with vite, for example.
 
-  ::
+  .. code-block:: json
 
     {
       "devAppUrl": "http://localhost:3000"
@@ -108,7 +108,7 @@ devAppUrl? ``string``
 devWebUrl? ``string``
   A URL to your web page to be used when developing your game. You may want to use this when developing a game with vite, for example.
 
-  ::
+  .. code-block:: json
 
     {
       "devWebUrl": "http://localhost:3000"
