@@ -1,0 +1,444 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>API Reference &#8212; Tiny Games 0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Quick Start" href="quick-start.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="game-json-config">
+<h2>game.json Config<a class="headerlink" href="#game-json-config" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>name <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">The name of your game.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;TG Template&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>author <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">The author of your game.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;C0mplexity&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>description? <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">A description of your game.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A basic template that you can use to build games for Tiny Games.&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>icon? <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">A path to the icon for your game.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;./icon.png&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>thumbnail? <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">A path to the thumbnail for your game.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;thumbnail&quot;</span><span class="p">:</span> <span class="s2">&quot;./thumbnail.png&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>socials? <code class="docutils literal notranslate"><span class="pre">string[]</span></code></dt>
+<dd><p class="first">An array of social media links for the author(s) of your game.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;socials&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;https://github.com/C0mplexity0&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>appRoot <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">The root directory of your app code.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;appRoot&quot;</span><span class="p">:</span> <span class="s2">&quot;./app&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>webRoot <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">The root directory of your web code.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;webRoot&quot;</span><span class="p">:</span> <span class="s2">&quot;./web&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>devAppRoot? <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">The root directory of your app code to be used when developing your game.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;devAppRoot&quot;</span><span class="p">:</span> <span class="s2">&quot;./dev/app&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>devWebRoot? <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">The root directory of your web code to be used when developing your game.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;devWebRoot&quot;</span><span class="p">:</span> <span class="s2">&quot;./dev/web&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>devAppUrl? <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">A URL to your app page to be used when developing your game. You may want to use this when developing a game with vite, for example.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;devAppUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:3000&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt>devWebUrl? <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd><p class="first">A URL to your web page to be used when developing your game. You may want to use this when developing a game with vite, for example.</p>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;devWebUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:3000&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="app-api">
+<h2>App API<a class="headerlink" href="#app-api" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways you can import this script:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="nx">tinyGames</span> <span class="nx">from</span> <span class="s2">&quot;/tiny-games/scripts/games/tiny-games.app.mjs&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>or, if you’re using NPM:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="nx">tinyGames</span> <span class="nx">from</span> <span class="s2">&quot;tiny-games-app&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="gameready-method">
+<h3>gameReady() method<a class="headerlink" href="#gameready-method" title="Permalink to this headline">¶</a></h3>
+<p>Returns whether or not the game has loaded all of the information it needs to (e.g. the currently connected devices &amp; the save data). Your game shouldn’t try to interact with Tiny Games while this is false.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">tinyGames</span><span class="p">.</span><span class="nx">gameReady</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// Start the game</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Return Value</strong> <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p>
+<p>Whether the game is ready yet or not.</p>
+</div>
+<div class="section" id="gameready-event">
+<h3>gameReady event<a class="headerlink" href="#gameready-event" title="Permalink to this headline">¶</a></h3>
+<p>Fires once gameReady() is set to true (see above).</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;gameReady&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Start the game</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><strong>Event Properties</strong></p>
+<p>None</p>
+</div>
+<div class="section" id="gameexiting-event">
+<h3>gameExiting event<a class="headerlink" href="#gameexiting-event" title="Permalink to this headline">¶</a></h3>
+<p>Fires before the game closes. Any save data that hasn’t been set yet should be set when this event fires, and anything else that needs to happen before the game closes should happen too.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;gameExiting&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">tinyGames</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s2">&quot;lastExitTime&quot;</span><span class="p">,</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">());</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><strong>Event properties</strong></p>
+<p>None</p>
+</div>
+<div class="section" id="appdevice-class">
+<h3>AppDevice class<a class="headerlink" href="#appdevice-class" title="Permalink to this headline">¶</a></h3>
+<p>The AppDevice class is used to list all of the currently connected devices through the app API. It is identical to the WebDevice class in the web API except it also includes the remove() method.</p>
+<p><strong>Instance Properties</strong></p>
+<dl class="docutils">
+<dt>username <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>The username the user entered when connecting.</dd>
+<dt>id <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>The unique id of the device.</dd>
+<dt>connected <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>Whether or not the user is connected to the app. (The connection between their device and the app may sometimes disconnect and reconnect).</dd>
+<dt>latency <code class="docutils literal notranslate"><span class="pre">number</span></code></dt>
+<dd>The latency in milliseconds of the connection between the device and the app.</dd>
+<dt>lastPong <code class="docutils literal notranslate"><span class="pre">number</span></code></dt>
+<dd>The last time the device responded to a ping from the app.</dd>
+</dl>
+<p><strong>Instance Methods</strong></p>
+<dl class="docutils">
+<dt>remove()</dt>
+<dd><p class="first">Disconnects the device from the app entirely. If it is the last device connected, the game will stop and the app will return to the Add Device screen.</p>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Return Value</strong></p>
+<p class="last">None</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="getdevices-method">
+<h3>getDevices() method<a class="headerlink" href="#getdevices-method" title="Permalink to this headline">¶</a></h3>
+<p>Returns an array of the currently connected AppDevices (see above).</p>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Return Value</strong> <code class="docutils literal notranslate"><span class="pre">AppDevice[]</span></code></p>
+<p>All of the currently connected AppDevices.</p>
+</div>
+<div class="section" id="emittodevice-method">
+<h3>emitToDevice() method<a class="headerlink" href="#emittodevice-method" title="Permalink to this headline">¶</a></h3>
+<p>Emits a message to a specified device.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">tinyGames</span><span class="p">.</span><span class="nx">gameReady</span><span class="p">())</span> <span class="p">{</span>
+  <span class="nx">tinyGames</span><span class="p">.</span><span class="nx">emitToDevice</span><span class="p">(</span><span class="nx">device</span><span class="p">,</span> <span class="s2">&quot;setLevel&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<dl class="docutils">
+<dt>device <code class="docutils literal notranslate"><span class="pre">AppDevice</span></code></dt>
+<dd>The device to emit to.</dd>
+<dt>event <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>The event to emit.</dd>
+<dt>…data <code class="docutils literal notranslate"><span class="pre">any[]</span></code></dt>
+<dd>Any extra information to send to the device.</dd>
+</dl>
+<p><strong>Return Value</strong></p>
+<p>None</p>
+</div>
+<div class="section" id="emittoalldevices-method">
+<h3>emitToAllDevices() method<a class="headerlink" href="#emittoalldevices-method" title="Permalink to this headline">¶</a></h3>
+<p>Emits a message to all connected devices.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">tinyGames</span><span class="p">.</span><span class="nx">gameReady</span><span class="p">())</span> <span class="p">{</span>
+  <span class="nx">tinyGames</span><span class="p">.</span><span class="nx">emitToAllDevices</span><span class="p">(</span><span class="s2">&quot;gameLoaded&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<dl class="docutils">
+<dt>event <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>The event to emit.</dd>
+<dt>…data <code class="docutils literal notranslate"><span class="pre">any[]</span></code></dt>
+<dd>Any extra information to send to the devices.</dd>
+</dl>
+<p><strong>Return Value</strong></p>
+<p>None</p>
+</div>
+<div class="section" id="getdata-method">
+<h3>getData() method<a class="headerlink" href="#getdata-method" title="Permalink to this headline">¶</a></h3>
+<p>Gets the specified save data.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;gameReady&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">playerAchievements</span> <span class="o">=</span> <span class="nx">tinyGames</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="s2">&quot;playerAchievements&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<dl class="docutils">
+<dt>key <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>The key for the save data that you want to access.</dd>
+</dl>
+<p><strong>Return Value</strong> <code class="docutils literal notranslate"><span class="pre">any</span></code></p>
+<p>The save data that you requested.</p>
+</div>
+<div class="section" id="setdata-method">
+<h3>setData() method<a class="headerlink" href="#setdata-method" title="Permalink to this headline">¶</a></h3>
+<p>Sets a value in the game’s save data. This value will be saved in a file automatically, ready for the next time your game is played.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">tinyGames</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s2">&quot;highScore&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<dl class="docutils">
+<dt>key <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>The key of the value you want to set.</dd>
+<dt>value <code class="docutils literal notranslate"><span class="pre">any</span></code></dt>
+<dd>The value you want to set.</dd>
+</dl>
+<p><strong>Return value</strong></p>
+<p>None</p>
+</div>
+</div>
+<div class="section" id="web-api">
+<h2>Web API<a class="headerlink" href="#web-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>gameReady() method<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Returns whether or not the game has loaded all of the information it needs to (e.g. the currently connected devices &amp; the save data). Your game shouldn’t try to interact with Tiny Games while this is false.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">tinyGames</span><span class="p">.</span><span class="nx">gameReady</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// Start the game</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Return Value</strong> <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p>
+<p>Whether the game is ready yet or not.</p>
+</div>
+<div class="section" id="id2">
+<h3>gameReady event<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Fires once gameReady() is set to true (see above).</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;gameReady&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Start the game</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><strong>Event Properties</strong></p>
+<p>None</p>
+</div>
+<div class="section" id="webdevice-class">
+<h3>WebDevice class<a class="headerlink" href="#webdevice-class" title="Permalink to this headline">¶</a></h3>
+<p>The WebDevice class is used to list all of the currently connected devices through the web API. It is identical to the AppDevice class in the app API except it doesn’t include the remove() method.</p>
+<p><strong>Instance Properties</strong></p>
+<dl class="docutils">
+<dt>username <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>The username the user entered when connecting.</dd>
+<dt>id <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>The unique id of the device.</dd>
+<dt>connected <code class="docutils literal notranslate"><span class="pre">boolean</span></code></dt>
+<dd>Whether or not the user is connected to the app. (The connection between their device and the app may sometimes disconnect and reconnect).</dd>
+<dt>latency <code class="docutils literal notranslate"><span class="pre">number</span></code></dt>
+<dd>The latency in milliseconds of the connection between the device and the app.</dd>
+<dt>lastPong <code class="docutils literal notranslate"><span class="pre">number</span></code></dt>
+<dd>The last time the device responded to a ping from the app.</dd>
+</dl>
+<p><strong>Instance Methods</strong></p>
+<p>None</p>
+</div>
+<div class="section" id="id3">
+<h3>getDevices() method<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Returns an array of the currently connected WebDevices (see above).</p>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Return Value</strong> <code class="docutils literal notranslate"><span class="pre">WebDevice[]</span></code></p>
+<p>All of the currently connected WebDevices.</p>
+</div>
+<div class="section" id="emittoapp-method">
+<h3>emitToApp() method<a class="headerlink" href="#emittoapp-method" title="Permalink to this headline">¶</a></h3>
+<p>Emits a message to the app.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">tinyGames</span><span class="p">.</span><span class="nx">gameReady</span><span class="p">())</span> <span class="p">{</span>
+  <span class="nx">tinyGames</span><span class="p">.</span><span class="nx">emitToApp</span><span class="p">(</span><span class="s2">&quot;loaded&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Parameters</strong></p>
+<dl class="docutils">
+<dt>event <code class="docutils literal notranslate"><span class="pre">string</span></code></dt>
+<dd>The event to emit.</dd>
+<dt>…data <code class="docutils literal notranslate"><span class="pre">any[]</span></code></dt>
+<dd>Any extra information to send to the app.</dd>
+</dl>
+<p><strong>Return Value</strong></p>
+<p>None</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick-start.html">Quick Start</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#game-json-config">game.json Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#app-api">App API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gameready-method">gameReady() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gameready-event">gameReady event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gameexiting-event">gameExiting event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#appdevice-class">AppDevice class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getdevices-method">getDevices() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#emittodevice-method">emitToDevice() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#emittoalldevices-method">emitToAllDevices() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getdata-method">getData() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setdata-method">setData() method</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#web-api">Web API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">gameReady() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">gameReady event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#webdevice-class">WebDevice class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">getDevices() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#emittoapp-method">emitToApp() method</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="quick-start.html" title="previous chapter">Quick Start</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api-reference.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, https://github.com/C0mplexity0.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/api-reference.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
