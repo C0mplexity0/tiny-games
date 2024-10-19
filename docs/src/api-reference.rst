@@ -260,6 +260,30 @@ event ``string``
 None
 
 
+emitToAllDevices() method
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Emits a message to all connected devices.
+
+.. code-block:: javascript
+
+  if (tinyGames.gameReady()) {
+    tinyGames.emitToAllDevices("gameLoaded");
+  }
+
+**Parameters**
+
+event ``string``
+  The event to emit.
+
+...data ``any[]``
+  Any extra information to send to the devices.
+
+**Return Value**
+
+None
+
+
 getData() method
 ~~~~~~~~~~~~~~~~
 
