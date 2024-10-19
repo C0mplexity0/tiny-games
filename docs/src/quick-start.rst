@@ -70,4 +70,4 @@ or, if you're using NPM:
 data.json
 =========
 
-This file contains any save data from your game.
+This file contains any save data from your game. You shouldn't need to worry about this file.
