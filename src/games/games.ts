@@ -29,7 +29,7 @@ export interface GameConfig {
   description?: string,
   icon?: string, // Icon/thumbnail should both be paths to images
   thumbnail?: string,
-  socials: string[],
+  socials?: string[],
 
   appRoot: string,
   webRoot: string,

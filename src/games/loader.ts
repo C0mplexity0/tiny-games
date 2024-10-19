@@ -56,7 +56,7 @@ export function loadGame(file: string) {
     description: config.description,
     icon,
     thumbnail,
-    socials: config.socials,
+    socials: config.socials ? config.socials : [],
 
     appRoot: isDev() && config.devAppRoot ? removePathPrefix(config.devAppRoot) : removePathPrefix(config.appRoot),
     webRoot: isDev() && config.devWebRoot ? removePathPrefix(config.devWebRoot) : removePathPrefix(config.webRoot),
