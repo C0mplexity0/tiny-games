@@ -29,9 +29,45 @@ Now you can click the refresh button and it should appear with this screen:
   :width: 500
 
 
+game.json
+=========
+
+This file contains the config for your game.
+
+
 The App and Web Folders
 ===========================
 
 These folders contain the code for your game. The app folder contains all of the code for the app, which is the software which the user hosts games off of. The web folder contains all code for any devices that are connected to the app.
 
 The app should coordinate all of the devices and should ultimately have control over the full game, meanwhile the devices should be treated more as controllers. Do, however, remember that the connection between the devices and the app may be unreliable or slow. You should think about designing your game around this.
+
+
+Tiny Games API
+==============
+
+By default, ``tiny-games.app.mjs`` and ``tiny-games.web.mjs`` are imported into the code (the app script being imported into the app's code, and the web script into the web's code).
+
+These are both important as they enable your game to properly communicate with Tiny Games, which allows you to send information between the app and the devices connected to it, save information to a file, and a number of other things. It is essential that you use these scripts otherwise the devices simply won't be able to communicate properly with the app.
+
+There are two ways you can import these:
+
+::
+
+  import tinyGames from "/tiny-games/scripts/games/tiny-games.app.mjs";
+
+  import tinyGames from "/tiny-games/scripts/games/tiny-games.web.mjs";
+
+or, if you're using NPM:
+
+::
+
+  import tinyGames from "tiny-games-app";
+
+  import tinyGames from "tiny-games-web";
+
+
+data.json
+=========
+
+This file contains any save data from your game.
