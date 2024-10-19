@@ -2,6 +2,37 @@ import communication from "./communication.mjs";
 
 let devices;
 
+// Classes
+
+/**
+ * A device which is connected.
+*/
+class WebDevice {
+  constructor (device) {
+    for (let property in device) {
+      this[property] = device[property];
+    }
+  }
+}
+
+function getWebDeviceFromDevice(device) {
+
+  if (!devices) {
+    return;
+  }
+
+  const id = device.id;
+
+  for (let i=0;i<devices.length;i++) {
+    if (devices[i].id === id) {
+      return devices[i];
+    }
+  }
+
+  return;
+}
+
+
 // Exported Functions
 
 /**
@@ -17,10 +48,10 @@ function gameReady() {
 
 /**
  * Gets an array of the currently connected devices.
- * @returns {any[] | undefined}
+ * @returns {WebDevice[]} The array of devices.
 */
 function getDevices() {
-  return devices;
+  return devices ? devices : [];
 }
 
 /**
@@ -50,11 +81,26 @@ function handleMessage(event) {
       communication.setParentUrl(info.data);
       break;
     case "setDevices":
-      devices = info;
+      devices = [];
+      for (let i=0;i<info.data.length;i++) {
+        devices.push(new WebDevice(info.data[i]));
+      }
+
+      window.dispatchEvent(new CustomEvent("devicesUpdated", {
+        detail: {
+          devices
+        }
+      }));
+
       break;
-    case "emitToDevice": { 
+    case "emitToDevice": {
+      const messageInfo = info.data;
       window.dispatchEvent(new CustomEvent("appMessageReceive", {
-        detail: info.data
+        detail: {
+          event: messageInfo.event,
+          device: getWebDeviceFromDevice(messageInfo.device),
+          data: messageInfo.data
+        }
       }));
       break;
     }
