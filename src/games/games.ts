@@ -73,7 +73,6 @@ export async function getGames() {
   let gamesLastOpened: {[key: string]: number} = {};
 
   let gameHistory = await getGameHistory();
-  console.log(gameHistory);
 
   fs.readdirSync(gamesDir).forEach(async file => {
     files.push(file);
