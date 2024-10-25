@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - resources/api/tiny-games/scripts/games/**
 
 jobs:
   copy-files:
