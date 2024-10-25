@@ -7,10 +7,8 @@ let iframeRef: React.MutableRefObject<any>;
 
 
 function postMessage(event: string, data?: any) {
-  const url = new URL(window.location.href);
-
   if (iframeRef.current)
-    iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, `http://${url.hostname}:9977`);
+    iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, iframeRef.current.src);
 }
 
 
@@ -91,6 +89,8 @@ export default function PlayerPage() {
             }
 
             postMessage("setParentUrl", urlStr);
+
+            console.log("message sent");
           }}
         />
       </div>
