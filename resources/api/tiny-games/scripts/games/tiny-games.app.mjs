@@ -1,8 +1,17 @@
 import communication from "./communication.mjs";
+import GameEvent from "./events.mjs";
 
 let devices;
 
 let data;
+
+
+// Events
+
+const gameReadyEvent = new GameEvent();
+const devicesUpdatedEvent = new GameEvent();
+const deviceMessageReceiveEvent = new GameEvent();
+const gameExitingEvent = new GameEvent();
 
 
 // Classes
@@ -128,6 +137,77 @@ function emitToAllDevices(event, ...data) {
 }
 
 
+// Events
+
+/**
+ * Fires when the game has finished fetching all the required information.
+ * @param {() => void} listener - The callback for when the event fires.
+*/
+function onGameReady(listener) {
+  gameReadyEvent.addListener(listener);
+}
+
+/**
+ * Fires when the game has finished fetching all the required information.
+ * @param {() => void} listener - The callback to remove.
+*/
+function offGameReady(listener) {
+  gameReadyEvent.removeListener(listener);
+}
+
+
+/**
+ * Fires when a device is added or removed.
+ * @param {(devices: AppDevice[]) => void} listener - The callback for when the event fires.
+*/
+function onDevicesUpdated(listener) {
+  devicesUpdatedEvent.addListener(listener);
+}
+
+/**
+ * Fires when a device is added or removed.
+ * @param {(devices: AppDevice[]) => void} listener - The callback to remove.
+*/
+function offDevicesUpdated(listener) {
+  devicesUpdatedEvent.removeListener(listener);
+}
+
+
+/**
+ * Fires when a device sends a message to the app.
+ * @param {(event: string, device: AppDevice, ...data: any[]) => void} listener - The callback for when the event fires.
+*/
+function onDeviceMessageReceive(listener) {
+  deviceMessageReceiveEvent.addListener(listener);
+}
+
+/**
+ * Fires when a device sends a message to the app.
+ * @param {(event: string, device?: AppDevice, ...data: any[]) => void} listener - The callback to remove.
+*/
+function offDeviceMessageReceive(listener) {
+  deviceMessageReceiveEvent.removeListener(listener);
+}
+
+
+/**
+ * Fires when the game is closing.
+ * @param {() => void} listener - The callback for when the event fires.
+*/
+function onGameExiting(listener) {
+  gameExitingEvent.addListener(listener);
+}
+
+/**
+ * Fires when the game is closing.
+ * @param {() => void} listener - The callback to remove.
+*/
+function offGameExiting(listener) {
+  gameExitingEvent.removeListener(listener);
+}
+
+
+
 // Handling communication between iframe and player page
 
 function handleMessage(event) {
@@ -150,7 +230,8 @@ function handleMessage(event) {
         devices.push(new AppDevice(info.data[i]));
       }
 
-      window.dispatchEvent(new CustomEvent("devicesUpdated", {
+      devicesUpdatedEvent.fire(devices);
+      window.dispatchEvent(new CustomEvent("devicesUpdated", { // For compatibility
         detail: {
           devices
         }
@@ -160,7 +241,9 @@ function handleMessage(event) {
     }
     case "emitToApp": {
       const messageInfo = info.data;
-      window.dispatchEvent(new CustomEvent("deviceMessageReceive", {
+
+      deviceMessageReceiveEvent.fire(messageInfo.event, getAppDeviceFromDevice(messageInfo.device), messageInfo.data);
+      window.dispatchEvent(new CustomEvent("deviceMessageReceive", { // For compatibility
         detail: {
           event: messageInfo.event,
           device: getAppDeviceFromDevice(messageInfo.device),
@@ -170,7 +253,7 @@ function handleMessage(event) {
       break; 
     }
     case "gameExiting":
-      window.dispatchEvent(new CustomEvent("gameExiting"));
+      window.dispatchEvent(new CustomEvent("gameExiting")); // For compatibility
   }
 }
 
@@ -190,7 +273,9 @@ function init() {
 
     if (gameReady()) {
       clearInterval(checkReadyInterval);
-      window.dispatchEvent(new CustomEvent("gameReady"));
+
+      gameReadyEvent.fire();
+      window.dispatchEvent(new CustomEvent("gameReady")); // For compatibility
     }
   }, 0);
 }
@@ -212,4 +297,17 @@ export default {
 
   emitToDevice,
   emitToAllDevices,
+
+  // Events
+  onGameReady,
+  offGameReady,
+  
+  onDevicesUpdated,
+  offDevicesUpdated,
+
+  onDeviceMessageReceive,
+  offDeviceMessageReceive,
+
+  onGameExiting,
+  offGameExiting
 };
