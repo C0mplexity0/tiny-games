@@ -89,8 +89,6 @@ export default function PlayerPage() {
             }
 
             postMessage("setParentUrl", urlStr);
-
-            console.log("message sent");
           }}
         />
       </div>
