@@ -12,13 +12,12 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "makeDebug": "DEBUG=electron-packager electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx ."
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
-    "@electron-forge/maker-deb": "^7.4.0",
-    "@electron-forge/maker-rpm": "^7.5.0",
     "@electron-forge/maker-squirrel": "^7.4.0",
     "@electron-forge/maker-zip": "^7.5.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
@@ -38,6 +37,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@electron-forge/maker-deb": "7.4.0",
+    "@electron-forge/maker-rpm": "7.4.0",
     "@electron-forge/plugin-fuses": "7.4.0",
     "@electron-forge/plugin-vite": "7.4.0",
     "@icons-pack/react-simple-icons": "^10.0.0",
