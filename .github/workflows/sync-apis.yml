@@ -9,6 +9,7 @@ on:
       - sync-apis-copy-multiple-test
     paths:
       - resources/api/tiny-games/scripts/games/**
+      - .github/workflows/sync-apis.yml
 
 jobs:
   copy-files:
