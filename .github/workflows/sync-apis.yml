@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - sync-apis-copy-multiple-test
     paths:
       - resources/api/tiny-games/scripts/games/**
 
@@ -18,80 +19,28 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Push App API
-        uses: dmnemec/copy_file_to_another_repo_action@main
+        uses: c0mplexity0/copy_file_pattern_to_another_repo_action@main
         env:
-            API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
         with:
-            source_file: "resources/api/tiny-games/scripts/games/tiny-games.app.mjs"
-            destination_repo: "C0mplexity0/tiny-games-app"
-            destination_folder: ""
-            user_email: "106925362+C0mplexity0@users.noreply.github.com"
-            user_name: "C0mplexity"
-            commit_message: ${{ github.event.head_commit.message }}
-            git_server: "github.com"
-
-      - name: Push App API Communication Script
-        uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-            API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
-        with:
-            source_file: "resources/api/tiny-games/scripts/games/communication.mjs"
-            destination_repo: "C0mplexity0/tiny-games-app"
-            destination_folder: ""
-            user_email: "106925362+C0mplexity0@users.noreply.github.com"
-            user_name: "C0mplexity"
-            commit_message: ${{ github.event.head_commit.message }}
-            git_server: "github.com"
-      
-      - name: Push App API Events Script
-        uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-            API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
-        with:
-            source_file: "resources/api/tiny-games/scripts/games/events.mjs"
-            destination_repo: "C0mplexity0/tiny-games-app"
-            destination_folder: ""
-            user_email: "106925362+C0mplexity0@users.noreply.github.com"
-            user_name: "C0mplexity"
-            commit_message: ${{ github.event.head_commit.message }}
-            git_server: "github.com"
+          source_pattern: 'resources/api/tiny-games/scripts/games/!(tiny-games.web).@(js|mjs|d.ts|d.mts)'
+          destination_repo: 'c0mplexity0/tiny-games-app'
+          destination_folder: ""
+          user_email: '106925362+C0mplexity0@users.noreply.github.com'
+          user_name: 'C0mplexity0'
+          commit_message: ${{ github.event.head_commit.message }}
+          git_server: "github.com"
 
 
       - name: Push Web API
-        uses: dmnemec/copy_file_to_another_repo_action@main
+        uses: c0mplexity0/copy_file_pattern_to_another_repo_action@main
         env:
-            API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
         with:
-            source_file: "resources/api/tiny-games/scripts/games/tiny-games.web.mjs"
-            destination_repo: "C0mplexity0/tiny-games-web"
-            destination_folder: ""
-            user_email: "106925362+C0mplexity0@users.noreply.github.com"
-            user_name: "C0mplexity"
-            commit_message: ${{ github.event.head_commit.message }}
-            git_server: "github.com"
-
-      - name: Push Web API Communication Script
-        uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-            API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
-        with:
-            source_file: "resources/api/tiny-games/scripts/games/communication.mjs"
-            destination_repo: "C0mplexity0/tiny-games-web"
-            destination_folder: ""
-            user_email: "106925362+C0mplexity0@users.noreply.github.com"
-            user_name: "C0mplexity"
-            commit_message: ${{ github.event.head_commit.message }}
-            git_server: "github.com"
-      
-      - name: Push Web API Events Script
-        uses: dmnemec/copy_file_to_another_repo_action@main
-        env:
-            API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
-        with:
-            source_file: "resources/api/tiny-games/scripts/games/events.mjs"
-            destination_repo: "C0mplexity0/tiny-games-web"
-            destination_folder: ""
-            user_email: "106925362+C0mplexity0@users.noreply.github.com"
-            user_name: "C0mplexity"
-            commit_message: ${{ github.event.head_commit.message }}
-            git_server: "github.com"
+          source_pattern: 'resources/api/tiny-games/scripts/games/!(tiny-games.app).@(js|mjs|d.ts|d.mts)'
+          destination_repo: 'c0mplexity0/tiny-games-web'
+          destination_folder: ""
+          user_email: '106925362+C0mplexity0@users.noreply.github.com'
+          user_name: 'C0mplexity0'
+          commit_message: ${{ github.event.head_commit.message }}
+          git_server: "github.com"
