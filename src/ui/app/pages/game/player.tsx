@@ -10,7 +10,6 @@ import { ScrollArea, ScrollBar } from "@components/ui/scroll-area";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Menu, SignalHigh, SignalLow, SignalMedium, X } from "lucide-react";
 import React, { useEffect, useRef } from "react";
-import { Helmet } from "react-helmet";
 
 let iframeRef: React.MutableRefObject<any>;
 
