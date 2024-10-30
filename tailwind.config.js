@@ -25,6 +25,12 @@ export const theme = {
       },
       secondary: {
         DEFAULT: "hsl(var(--secondary))",
+        background: "hsl(var(--secondary-background))",
+        foreground: "hsl(var(--secondary-foreground))",
+      },
+      tertiary: {
+        DEFAULT: "hsl(var(--secondary))",
+        background: "hsl(var(--tertiary-background))",
         foreground: "hsl(var(--secondary-foreground))",
       },
       destructive: {
@@ -47,6 +53,14 @@ export const theme = {
         DEFAULT: "hsl(var(--card))",
         foreground: "hsl(var(--card-foreground))",
       },
+      device: {
+        "0": "hsl(var(--device-0))",
+        "1": "hsl(var(--device-1))",
+        "2": "hsl(var(--device-2))",
+        "3": "hsl(var(--device-3))",
+        "4": "hsl(var(--device-4))",
+        "5": "hsl(var(--device-5))"
+      }
     },
     borderRadius: {
       lg: "var(--radius)",

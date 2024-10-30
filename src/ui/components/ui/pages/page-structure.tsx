@@ -3,7 +3,7 @@ import styles from "./page-structure.module.css";
 
 export function TitleBar({ children }: { children?: ReactNode }) {
   return (
-    <div className={`${styles.titleBar} bg-secondary`}>
+    <div className={`${styles.titleBar} bg-secondary-background`}>
       {
         children ?
         children :

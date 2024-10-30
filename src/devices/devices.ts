@@ -4,6 +4,7 @@ import socketOut from "./connection/socketOut";
 
 export interface Device {
   username: string,
+  colourId: number,
   socket?: Socket,
   id: string,
 
@@ -58,6 +59,7 @@ export function removeDevice(device: Device) {
 export function getIpcReadyDeviceInfo(device: Device) { // For filtering out socket from the device's information so that it can be sent through Socket.IO and IPC with no issues
   let filteredDevice: Device = {
     username: device.username,
+    colourId: device.colourId,
     id: device.id,
   
     connected: device.connected,

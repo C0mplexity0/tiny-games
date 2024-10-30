@@ -50,6 +50,7 @@ export function setupIo(io: Server) {
 
       device = {
         username,
+        colourId: Math.floor(Math.random() * 6),
         socket,
         connected: true,
         id: socket.id,

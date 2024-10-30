@@ -29,7 +29,7 @@ const SOCIAL_ICONS: { [social: string]: ReactNode } = {
 
 function Sidebar() {
   return (
-    <div className="w-16 h-full border-r p-2">
+    <div className="w-16 h-full border-r p-2 bg-secondary-background">
       <div className="flex flex-col gap-2">
         {
           devices.map((device, i) => <DeviceButton key={i} device={device} />)
@@ -51,7 +51,7 @@ function GameButton({ game }: { game: Game }) {
         setCurrentGame(game);
       }}
       variant="outline"
-      className={`${game == currentGame ? "bg-secondary" : ""} hover:bg-secondary/90 text-secondary-foreground w-full justify-start h-12 p-2 flex flex-row space-x-3`}
+      className={`${game == currentGame ? "bg-secondary-background" : ""} hover:bg-secondary-background/90 text-secondary-foreground w-full justify-start h-12 p-2 flex flex-row space-x-3`}
     >
       {
         game.icon ?
