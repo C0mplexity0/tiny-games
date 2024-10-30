@@ -4,25 +4,29 @@
 
 @layer base {
   :root {
-    --background: 240 3% 6%;
-    --foreground: 0 0% 100%;
-    --card: 240 2% 8%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 3% 6%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 240 2% 11%;
-    --secondary-foreground: 0 0% 78%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 349 65% 39%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --background: 214 9% 9%;
+    --background-secondary: 216 8% 13%;
+    --background-tertiary: 220 6% 20%;
+    --background-active: 214 21% 94% 5%;
+    --foreground: 0 0% 98%;
+    --foreground-secondary: 0 0% 82%;
+    --card: var(--background-secondary);
+    --card-foreground: var(--foreground-secondary);
+    --popover: var(--background-secondary);
+    --popover-foreground: var(--foreground-secondary);
+    --primary: var(--foreground);
+    --primary-foreground: var(--background-tertiary);
+    --secondary: var(--background-secondary);
+    --secondary-foreground: var(--foreground-secondary);
+    --muted: 210 18% 4%;
+    --muted-foreground: 0 0% 71;
+    --accent: 214 50% 50%;
+    --accent-foreground: var(--foreground);
+    --destructive: 3 40% 51%;
+    --destructive-foreground: var(--foreground);
+    --border: 0 0% 18%;
+    --input: var(--border);
+    --ring: var(--foreground-secondary);
     --radius: 0.75rem;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
