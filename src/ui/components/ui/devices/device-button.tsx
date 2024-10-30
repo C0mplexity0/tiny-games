@@ -17,7 +17,7 @@ export function DeviceProfileOptions({ device }: { device: Device }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem 
-          color="red"
+          destructive
           onClick={() => {
             window.electron.ipcRenderer.sendMessage("removeDevice", device.id);
           }}
