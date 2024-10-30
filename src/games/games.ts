@@ -57,12 +57,7 @@ export function createGamesDir() {
   });
 }
 
-export function addGame(game: Game) {
-  games.push(game);
-  ipcOut.emitSetGames(games);
-}
-
-export async function getGames() {
+export async function getGames(order?: "lastPlayed" | "alphabetically" | undefined) {
   gamesDir = path.resolve(getAppDataDir(), "games");
   await createGamesDir();
 
@@ -100,6 +95,8 @@ export async function getGames() {
   for (let i=0;i<orderedFiles.length;i++) {
     loadGame(orderedFiles[i]);
   }
+
+  ipcOut.emitSetGames(games, order);
 }
 
 export function playGame(game: Game) {

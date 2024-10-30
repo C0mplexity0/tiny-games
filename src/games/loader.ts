@@ -1,6 +1,6 @@
 import mimeTypes from "mime-types";
 import fs from "original-fs";
-import { addGame, Game, GameConfig, gamesDir } from "./games";
+import { Game, GameConfig, games, gamesDir } from "./games";
 import path from "path";
 import { isDev } from "@/main";
 
@@ -67,5 +67,5 @@ export function loadGame(file: string) {
     gameDir
   };
 
-  addGame(game);
+  games.push(game);
 }

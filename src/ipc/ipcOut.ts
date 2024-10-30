@@ -36,12 +36,25 @@ function emitDeviceConnected(device: Device, webContents=mainWindow.webContents)
   send(webContents, "deviceConnected", getIpcReadyDeviceInfo(device));
 }
 
-function emitSetGames(games: Game[], webContents=mainWindow.webContents) {
+function emitSetGames(games: Game[], order: "lastPlayed" | "alphabetically"="lastPlayed", webContents=mainWindow.webContents) {
   if (!webContents) {
     return;
   }
 
-  send(webContents, "setGames", games);
+  if (order == "lastPlayed") {
+    send(webContents, "setGames", games, order);
+    return;
+  }
+
+  let sortedGames = [...games];
+
+  sortedGames.sort((a, b) => {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
+  });
+
+  send(webContents, "setGames", sortedGames, order);
 }
 
 function emitLaunchGame(game: Game, webContents=mainWindow.webContents) {

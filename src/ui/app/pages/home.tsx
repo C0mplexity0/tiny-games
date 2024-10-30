@@ -1,13 +1,16 @@
 import { Game } from "@/games/games";
-import { devices, games } from "@app/App";
+import { devices, games, gamesOrder } from "@app/App";
 import { Button } from "@components/ui/button";
 import DeviceButton from "@components/ui/devices/device-button";
 import { Content, TitleBar } from "@components/ui/pages/page-structure";
 import BrowserLink from "@components/util/browser-link";
 import { SiFacebook, SiGithub, SiPatreon, SiReddit, SiReplit, SiTumblr, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
-import { Folder, Gamepad2, Link, Play, RefreshCcw } from "lucide-react";
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@components/ui/tooltip";
+import { ArrowDownWideNarrow, Folder, Gamepad2, Link, Play, RefreshCcw } from "lucide-react";
 import React, { ReactNode, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuTrigger } from "@components/ui/context-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuRadioGroup, DropdownMenuLabel, DropdownMenuRadioItem } from "@components/ui/dropdown-menu";
 
 
 let currentGame: Game;
@@ -46,46 +49,159 @@ function Sidebar() {
 
 function GameButton({ game }: { game: Game }) {
   return (
-    <Button 
-      onClick={() => {
-        setCurrentGame(game);
-      }}
-      variant="outline"
-      className={`${game == currentGame ? "bg-secondary-background" : ""} hover:bg-secondary-background/90 text-secondary-foreground w-full justify-start h-12 p-2 flex flex-row space-x-3`}
-    >
-      {
-        game.icon ?
-        <img src={game.icon} className="size-8 rounded-sm border" /> :
-        <div className="size-8 rounded-sm border relative"><Gamepad2 className="size-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" /></div>
-      }
-      <h2 className="font-bold inline-block h-8 leading-8 align-middle">{game.name}</h2>
-    </Button>
+    <ContextMenu>
+      <ContextMenuTrigger asChild>
+        <Button 
+          onClick={() => {
+            setCurrentGame(game);
+          }}
+          variant="ghost"
+          className={`${game == currentGame ? "bg-secondary-background" : ""} hover:bg-secondary-background/90 text-secondary-foreground w-full justify-start h-10 p-2 flex flex-row space-x-3`}
+        >
+          {
+            game.icon ?
+            <img src={game.icon} className="size-7 rounded-sm" /> :
+            <div className="size-7 rounded-sm border relative"><Gamepad2 className="size-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" /></div>
+          }
+          <h2 className="font-bold inline-block h-8 leading-8 align-middle overflow-hidden whitespace-nowrap text-ellipsis">{game.name}</h2>
+        </Button>
+      </ContextMenuTrigger>
+      <ContextMenuContent className="w-64">
+        <ContextMenuItem
+          inset
+          onClick={() => {
+            window.electron.ipcRenderer.sendMessage("playGame", games.indexOf(game));
+          }}
+        >
+          Play Game
+        </ContextMenuItem>
+        <ContextMenuItem
+          inset
+          onClick={() => {
+            window.electron.ipcRenderer.sendMessage("reloadGames", gamesOrder);
+          }}
+        >
+          Reload Games
+        </ContextMenuItem>
+        <ContextMenuItem
+          inset
+          onClick={() => {
+            window.electron.ipcRenderer.sendMessage("openGamesDir");
+          }}
+        >
+          Show in File Explorer
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuRadioGroup value={gamesOrder}>
+          <ContextMenuLabel inset>Sort By</ContextMenuLabel>
+          <ContextMenuRadioItem
+            value="lastPlayed"
+            onClick={() => {
+              window.electron.ipcRenderer.sendMessage("getGames", "lastPlayed");
+            }}
+          >
+            Last Played
+          </ContextMenuRadioItem>
+          <ContextMenuRadioItem 
+            value="alphabetically"
+            onClick={() => {
+              window.electron.ipcRenderer.sendMessage("getGames", "alphabetically");
+            }}
+          >
+            Alphabetically
+          </ContextMenuRadioItem>
+        </ContextMenuRadioGroup>
+      </ContextMenuContent>
+    </ContextMenu>
   )
 }
 
 function GamesList() {
   return (
     <div className="w-56 md:w-72 lg:w-96 h-full border-r flex flex-col">
-      <div className="w-full h-fit border-b p-1 flex flex-row">
-        <span className="text-secondary-foreground font-bold flex-1 pl-2 h-6 leading-6 block">Games</span>
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className="size-6 rounded-sm"
-          onClick={() => {
-            window.electron.ipcRenderer.sendMessage("openGamesDir");
-          }}
-        ><Folder className="size-4 text-secondary-foreground" /></Button>
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className="size-6 rounded-sm"
-          onClick={() => {
-            window.electron.ipcRenderer.sendMessage("reloadGames");
-          }}
-        ><RefreshCcw className="size-4 text-secondary-foreground" /></Button>
+      <div className="w-full h-fit p-1 flex flex-row justify-center">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="size-6 rounded-sm"
+                onClick={() => {
+                  window.electron.ipcRenderer.sendMessage("reloadGames", gamesOrder);
+                }}
+              >
+                <RefreshCcw className="size-4 text-secondary-foreground" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Reload games</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="size-6 rounded-sm"
+                onClick={() => {
+                  window.electron.ipcRenderer.sendMessage("openGamesDir");
+                }}
+              >
+                <Folder className="size-4 text-secondary-foreground" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Open games folder</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        <DropdownMenu>
+          <TooltipProvider>
+            <Tooltip>
+              <DropdownMenuTrigger asChild>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="size-6 rounded-sm"
+                  >
+                    <ArrowDownWideNarrow className="size-4 text-secondary-foreground" />
+                  </Button>
+                </TooltipTrigger>
+              </DropdownMenuTrigger>
+
+              <TooltipContent side="bottom">
+                <p>Sort by...</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
+          <DropdownMenuContent className="w-56">
+            <DropdownMenuRadioGroup value={gamesOrder}>
+              <DropdownMenuLabel>Sort By</DropdownMenuLabel>
+
+              <DropdownMenuRadioItem 
+                value="lastPlayed"
+                onClick={() => {
+                  window.electron.ipcRenderer.sendMessage("getGames", "lastPlayed");
+                }}
+              >Last Played</DropdownMenuRadioItem>
+
+              <DropdownMenuRadioItem 
+                value="alphabetically"
+                onClick={() => {
+                  window.electron.ipcRenderer.sendMessage("getGames", "alphabetically");
+                }}
+              >Alphabetically</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
-      <div className="p-2 w-full flex-1 flex flex-col gap-2">
+      <div className="p-2 pt-0 w-full flex-1 flex flex-col gap-2">
         {
           games.map((game, i) => <GameButton game={game} key={i} />)
         }

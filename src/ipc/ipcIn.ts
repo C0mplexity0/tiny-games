@@ -35,8 +35,8 @@ export function initIpc() {
     }
   });
 
-  ipcMain.on("getGames", () => {
-    ipcOut.emitSetGames(games);
+  ipcMain.on("getGames", (_event, order?: "lastPlayed" | "alphabetically" | undefined) => {
+    ipcOut.emitSetGames(games, order);
   });
 
   ipcMain.on("openLinkInBrowser", (_event, link) => {
@@ -55,8 +55,8 @@ export function initIpc() {
     endGame();
   });
 
-  ipcMain.on("reloadGames", () => {
-    getGames();
+  ipcMain.on("reloadGames", (_event, order?: "lastPlayed" | "alphabetically" | undefined) => {
+    getGames(order);
   });
 
   ipcMain.on("openGamesDir", () => {
