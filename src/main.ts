@@ -56,8 +56,14 @@ const createWindow = () => {
     minWidth: 700,
     minHeight: 480,
     autoHideMenuBar: true,
-    backgroundColor: "#0f0f10", // From globals.css
+    backgroundColor: "#1E2023", // From globals.css
     show: false,
+    titleBarStyle: "hidden",
+    titleBarOverlay: {
+      color: "#1E2023",
+      symbolColor: "#D2D2D2",
+      height: 35
+    },
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },

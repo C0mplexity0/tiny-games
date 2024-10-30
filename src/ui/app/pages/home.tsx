@@ -2,10 +2,12 @@ import { Game } from "@/games/games";
 import { devices, games } from "@app/App";
 import { Button } from "@components/ui/button";
 import DeviceButton from "@components/ui/devices/device-button";
+import { Content, TitleBar } from "@components/ui/pages/page-structure";
 import BrowserLink from "@components/util/browser-link";
 import { SiFacebook, SiGithub, SiPatreon, SiReddit, SiReplit, SiTumblr, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
 import { Folder, Gamepad2, Link, Play, RefreshCcw } from "lucide-react";
 import React, { ReactNode, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 
 
 let currentGame: Game;
@@ -190,17 +192,25 @@ export default function AppHomePage() {
   }, [games]);
 
   return (
-    <div className="size-full flex flex-row">
-      <Sidebar />
+    <div className="size-full">
+      <Helmet>
+        <title>Games</title>
+      </Helmet>
+      <TitleBar />
+      <Content>
+        <div className="size-full flex flex-row">
+          <Sidebar />
 
-      <div className="flex-1 flex flex-row">
-        <GamesList />
-        <div className="flex-1">
-          {
-            <GamePage game={currentGame} />
-          }
+          <div className="flex-1 flex flex-row">
+            <GamesList />
+            <div className="flex-1">
+              {
+                <GamePage game={currentGame} />
+              }
+            </div>
+          </div>
         </div>
-      </div>
+      </Content>
     </div>
   )
 }

@@ -3,9 +3,11 @@ import { devices } from "@app/App";
 import { Button } from "@components/ui/button";
 import DeviceNewButton from "@components/ui/devices/new";
 import DeviceProfile from "@components/ui/devices/profile";
+import { Content, TitleBar } from "@components/ui/pages/page-structure";
 import { PageHeader, PageSubtitle, PageTitle } from "@components/ui/text/page-header";
 import { X } from "lucide-react";
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 function DeviceDisplay({ device, newButton }: { device?: Device, newButton?: boolean }) {
@@ -54,26 +56,34 @@ function DeviceDisplay({ device, newButton }: { device?: Device, newButton?: boo
 
 export default function AddDevicesPage() {
   return (
-    <div className="size-full flex flex-col">
-      <PageHeader>
-        <PageTitle>Add Devices</PageTitle>
-        <PageSubtitle>You can change these later</PageSubtitle>
-      </PageHeader>
-      <div className="flex-1 relative">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-fit flex flex-wrap justify-center align-middle gap-x-5">
-          {
-            devices.map((device, i) => <DeviceDisplay key={i} device={device} />)
-          }
-          <DeviceDisplay newButton={true} />
+    <div className="size-full">
+      <Helmet>
+        <title>Add Devices</title>
+      </Helmet>
+      <TitleBar />
+      <Content>
+        <div className="size-full flex flex-col">
+          <PageHeader>
+            <PageTitle>Add Devices</PageTitle>
+            <PageSubtitle>You can change these later</PageSubtitle>
+          </PageHeader>
+          <div className="flex-1 relative">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-fit flex flex-wrap justify-center align-middle gap-x-5">
+              {
+                devices.map((device, i) => <DeviceDisplay key={i} device={device} />)
+              }
+              <DeviceDisplay newButton={true} />
+            </div>
+          </div>
+          <div className="footer h-40px p-3">
+            {
+              devices.length == 0 ?
+              <Button disabled className="float-right">Continue</Button> :
+              <Button className="float-right" asChild><Link to="/">Continue</Link></Button>
+            }
+          </div>
         </div>
-      </div>
-      <div className="footer h-40px p-3">
-        {
-          devices.length == 0 ?
-          <Button disabled className="float-right">Continue</Button> :
-          <Button className="float-right" asChild><Link to="/">Continue</Link></Button>
-        }
-      </div>
+      </Content>
     </div>
   )
 }

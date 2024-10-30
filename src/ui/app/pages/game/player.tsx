@@ -5,10 +5,12 @@ import { Button } from "@components/ui/button";
 import { DeviceProfileOptions } from "@components/ui/devices/device-button";
 import DeviceProfile from "@components/ui/devices/profile";
 import { Dialog, DialogClose, DialogContent, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger } from "@components/ui/dialog";
+import { Content, TitleBar } from "@components/ui/pages/page-structure";
 import { ScrollArea, ScrollBar } from "@components/ui/scroll-area";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Menu, SignalHigh, SignalLow, SignalMedium, X } from "lucide-react";
 import React, { useEffect, useRef } from "react";
+import { Helmet } from "react-helmet";
 
 let iframeRef: React.MutableRefObject<any>;
 
@@ -148,55 +150,58 @@ export default function PlayerPage() {
 
   return (
     <div className="size-full">
-      <div className="size-full absolute top-0 left-0">
-        <iframe 
-          ref={iframeRef} 
-          className="size-full bg-white"
-          src={currentGame.devAppUrl ? currentGame.devAppUrl : `http://localhost:9977/${currentGame.appRoot}`}
-          onLoad={() => {
-            const url = new URL(window.location.href);
-            let urlStr;
+      <TitleBar />
+      <Content>
+        <div className="size-full absolute top-0 left-0">
+          <iframe 
+            ref={iframeRef} 
+            className="size-full bg-white"
+            src={currentGame.devAppUrl ? currentGame.devAppUrl : `http://localhost:9977/${currentGame.appRoot}`}
+            onLoad={() => {
+              const url = new URL(window.location.href);
+              let urlStr;
 
-            if (window.location.href.startsWith("http://")) {
-              urlStr = `http://${url.hostname}:${url.port}/`;
-            } else {
-              urlStr = "*";
-            }
+              if (window.location.href.startsWith("http://")) {
+                urlStr = `http://${url.hostname}:${url.port}/`;
+              } else {
+                urlStr = "*";
+              }
 
-            postMessage("setParentUrl", urlStr);
-          }}
-        />
-      </div>
+              postMessage("setParentUrl", urlStr);
+            }}
+          />
+        </div>
 
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button 
-            className="absolute top-2 right-2" 
-            size="icon" 
-            variant="outline"
-          ><Menu /></Button>
-        </DialogTrigger>
-        <DialogPortal>
-          <DialogOverlay />
-          <DialogContent aria-describedby={undefined} className="pt-12">
-            <DialogClose
-              className="h-8 w-8 absolute right-2 top-2 bg-transparent hover:bg-secondary rounded-md p-1 text-foreground/50 opacity-70 transition-opacity-colors hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600"
-            >
-              <X className="h-5 w-5" />
-            </DialogClose>
-            <VisuallyHidden><DialogTitle>Game Menu</DialogTitle></VisuallyHidden>
-            <ScrollArea className="flex flex-col gap-2 w-full h-fit max-h-64 overflow-x-auto overflow-y-visible">
-              <div className="flex flex-col w-full h-fit gap-2">
-                {
-                  devices.map((device, i) => <DeviceRow device={device} key={i} />)
-                }
-              </div>
-              <ScrollBar orientation="vertical" />
-            </ScrollArea>
-            <ExitGameButton />
-          </DialogContent>
-        </DialogPortal>
-      </Dialog>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button 
+              className="absolute top-2 right-2" 
+              size="icon" 
+              variant="outline"
+            ><Menu /></Button>
+          </DialogTrigger>
+          <DialogPortal>
+            <DialogOverlay />
+            <DialogContent aria-describedby={undefined} className="pt-12">
+              <DialogClose
+                className="h-8 w-8 absolute right-2 top-2 bg-transparent hover:bg-secondary rounded-md p-1 text-foreground/50 opacity-70 transition-opacity-colors hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600"
+              >
+                <X className="h-5 w-5" />
+              </DialogClose>
+              <VisuallyHidden><DialogTitle>Game Menu</DialogTitle></VisuallyHidden>
+              <ScrollArea className="flex flex-col gap-2 w-full h-fit max-h-64 overflow-x-auto overflow-y-visible">
+                <div className="flex flex-col w-full h-fit gap-2">
+                  {
+                    devices.map((device, i) => <DeviceRow device={device} key={i} />)
+                  }
+                </div>
+                <ScrollBar orientation="vertical" />
+              </ScrollArea>
+              <ExitGameButton />
+            </DialogContent>
+          </DialogPortal>
+        </Dialog>
+      </Content>
     </div>
   )
 }
