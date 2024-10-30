@@ -30,7 +30,15 @@ async function getJSONFileContent(dataPath: string, defaultValue: any) {
 
   const str = data.toString();
 
-  return JSON.parse(str);
+  let json;
+
+  try {
+    json = JSON.parse(str);
+  } catch(err) {
+    json = defaultValue;
+  }
+
+  return json;
 }
 
 async function saveJSONFileContent(filePath: string, data: object) {
