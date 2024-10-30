@@ -10,10 +10,10 @@
     --background-active: 214 21% 94% 5%;
     --foreground: 0 0% 98%;
     --foreground-secondary: 0 0% 82%;
-    --card: var(--background-secondary);
-    --card-foreground: var(--foreground-secondary);
-    --popover: var(--background-secondary);
-    --popover-foreground: var(--foreground-secondary);
+    --card: var(--background);
+    --card-foreground: var(--foreground);
+    --popover: var(--background);
+    --popover-foreground: var(--foreground);
     --primary: var(--foreground);
     --primary-foreground: var(--background-tertiary);
     --secondary: var(--background-secondary);
