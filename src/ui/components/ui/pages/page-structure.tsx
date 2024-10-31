@@ -1,14 +1,20 @@
 import React, { ReactNode } from "react";
 import styles from "./page-structure.module.css";
 
-export function TitleBar({ children }: { children?: ReactNode }) {
+export function Title({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
   return (
-    <div className={`${styles.titleBar} bg-secondary-background`}>
+    <span className={`${styles.title} ${className}`} {...props} />
+  );
+}
+
+export function TitleBar({ children, className }: { children?: ReactNode, className?: string }) {
+  return (
+    <div className={`${styles.titleBar} bg-secondary-background ${className}`}>
       {
         children ?
         children :
         <DraggableArea className="size-full">
-          <span className={styles.title}>{document.title}</span>
+          <Title>{document.title}</Title>
         </DraggableArea>
       }
     </div>

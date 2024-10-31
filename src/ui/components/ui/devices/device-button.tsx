@@ -38,7 +38,7 @@ export default function DeviceButton({ device, newButton, popoverSide }: { devic
         :
         <Popover>
           <PopoverTrigger asChild>
-            <Button size="icon" style={{borderColor: `hsl(var(--device-${device.colourId}))`}} className="size-12 rounded-[37.5%] bg-tertiary-background hover:bg-tertiary-background/90 relative border-2">
+            <Button size="icon" className="size-12 rounded-[37.5%] relative bg-tertiary-background hover:bg-tertiary-background/90">
               <DeviceProfile className="bg-transparent" device={device} />
             </Button>
           </PopoverTrigger>
