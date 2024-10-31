@@ -311,9 +311,9 @@ function GamePage({ game }: { game: Game }) {
       <div className="absolute w-full h-fit p-4 left-0 top-[50vh] -translate-y-24 flex flex-col gap-y-4">
         <div className="flex flex-row gap-x-2 mb-4">
           <img src={game.icon} className="rounded-2xl size-32 shadow-lg shadow-stone-900 border" />
-          <div>
+          <div className="flex-1 overflow-hidden">
             <div className="h-20">
-              <h2 className="text-3xl font-bold m-0 p-0">{game.name}</h2>
+              <h2 className="text-3xl font-bold m-0 p-0 overflow-hidden whitespace-nowrap text-ellipsis">{game.name}</h2>
               {
                 game.author ?
                 <span className="m-0 p-0 text-secondary-foreground">By {game.author}</span> :
