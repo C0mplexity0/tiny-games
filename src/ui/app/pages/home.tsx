@@ -4,7 +4,7 @@ import { Button } from "@components/ui/button";
 import DeviceButton from "@components/ui/devices/device-button";
 import { Content, TitleBar } from "@components/ui/pages/page-structure";
 import BrowserLink from "@components/util/browser-link";
-import { SiFacebook, SiGithub, SiPatreon, SiReddit, SiReplit, SiTumblr, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
+import { SiBuymeacoffee, SiFacebook, SiGithub, SiKofi, SiMastodon, SiPatreon, SiReddit, SiReplit, SiThreads, SiTumblr, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@components/ui/tooltip";
 import { ArrowDownWideNarrow, Folder, Gamepad2, Link, Play, RefreshCcw } from "lucide-react";
 import React, { ReactNode, useEffect, useState } from "react";
@@ -17,16 +17,59 @@ let currentGame: Game;
 let setCurrentGame: (currentGame: Game) => void;
 
 
-const SOCIAL_ICONS: { [social: string]: ReactNode } = {
-  "github.com": <SiGithub size="16px" />,
-  "youtube.com": <SiYoutube size="16px" />,
-  "twitter.com": <SiX size="16px" />,
-  "x.com": <SiX size="16px" />,
-  "replit.com": <SiReplit size="16px" />,
-  "facebook.com": <SiFacebook size="16px" />,
-  "tumblr.com": <SiTumblr size="16px" />,
-  "reddit.com": <SiReddit size="16px" />,
-  "patreon.com": <SiPatreon size="16px" />
+const SOCIAL_ICONS: { [social: string]: { icon: ReactNode, name: string } } = {
+  "github.com": {
+    icon: <SiGithub title="" size="16px" />,
+    name: "GitHub"
+  },
+  "youtube.com": {
+    icon: <SiYoutube title="" size="16px" />,
+    name: "YouTube"
+  },
+  "twitter.com": {
+    icon: <SiX title="" size="16px" />,
+    name: "X / Twitter"
+  },
+  "x.com": {
+    icon: <SiX title="" size="16px" />,
+    name: "X / Twitter"
+  },
+  "mastodon.social": {
+    icon: <SiMastodon title="" size="16px" />,
+    name: "Mastodon"
+  },
+  "replit.com": {
+    icon: <SiReplit title="" size="16px" />,
+    name: "Replit"
+  },
+  "facebook.com": {
+    icon: <SiFacebook title="" size="16px" />,
+    name: "Facebook"
+  },
+  "threads.net": {
+    icon: <SiThreads title="" size="16px" />,
+    name: "Threads"
+  },
+  "tumblr.com": {
+    icon: <SiTumblr title="" size="16px" />,
+    name: "Tumblr"
+  },
+  "reddit.com": {
+    icon: <SiReddit title="" size="16px" />,
+    name: "Reddit"
+  },
+  "patreon.com": {
+    icon: <SiPatreon title="" size="16px" />,
+    name: "Patreon"
+  },
+  "buymeacoffee.com": {
+    icon: <SiBuymeacoffee title="" size="16px" />,
+    name: "Buy Me a Coffee"
+  },
+  "ko-fi.com": {
+    icon: <SiKofi title="" size="16px" />,
+    name: "Ko-fi"
+  },
 }
 
 
@@ -210,7 +253,7 @@ function GamesList() {
   )
 }
 
-function getSocialIcon(social: string) {
+function getSocialInfo(social: string) {
   const url = new URL(social);
   const icon = SOCIAL_ICONS[url.hostname];
 
@@ -218,19 +261,28 @@ function getSocialIcon(social: string) {
     return icon;
   }
 
-  return <Link size="16px" />
+  return {icon: <Link size="16px" />, name: url.hostname};
 }
 
 function SocialButton({ social }: { social: string }) {
+  let socialInfo = getSocialInfo(social);
+
   return (
-    <Button size="icon" variant="ghost" className="size-9" asChild>
-      <BrowserLink to={social}>
-        {
-          getSocialIcon(social)
-        }
-      </BrowserLink>
-    </Button>
-  )
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button size="icon" variant="ghost" className="size-9" asChild>
+            <BrowserLink to={social}>
+              {socialInfo.icon}
+            </BrowserLink>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          {socialInfo.name}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
 }
 
 function GamePage({ game }: { game: Game }) {
