@@ -3,7 +3,6 @@ import { devices, games, gamesOrder } from "@app/App";
 import { Button } from "@components/ui/button";
 import DeviceButton from "@components/ui/devices/device-button";
 import { Content, TitleBar } from "@components/ui/pages/page-structure";
-import BrowserLink from "@components/util/browser-link";
 import { SiBuymeacoffee, SiFacebook, SiGithub, SiKofi, SiMastodon, SiPatreon, SiReddit, SiReplit, SiThreads, SiTumblr, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@components/ui/tooltip";
 import { ArrowDownWideNarrow, Folder, Gamepad2, Link, Play, RefreshCcw } from "lucide-react";
@@ -11,6 +10,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuTrigger } from "@components/ui/context-menu";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuRadioGroup, DropdownMenuLabel, DropdownMenuRadioItem } from "@components/ui/dropdown-menu";
+import { openLinkInBrowser } from "@app/utils";
 
 
 let currentGame: Game;
@@ -271,10 +271,8 @@ function SocialButton({ social }: { social: string }) {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size="icon" variant="ghost" className="size-9" asChild>
-            <BrowserLink to={social}>
-              {socialInfo.icon}
-            </BrowserLink>
+          <Button size="icon" variant="ghost" className="size-9" onClick={() => openLinkInBrowser(social)}>
+            {socialInfo.icon}
           </Button>
         </TooltipTrigger>
         <TooltipContent>

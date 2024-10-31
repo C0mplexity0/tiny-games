@@ -1,7 +1,7 @@
 import { connectLink } from "@app/App";
+import { openLinkInBrowser } from "@app/utils";
 import { Button } from "@components/ui/button";
 import { Content, TitleBar } from "@components/ui/pages/page-structure";
-import BrowserLink from "@components/util/browser-link";
 import React from "react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
@@ -28,7 +28,7 @@ export default function ConnectDevicePage() {
           </div>
           <div className="mt-2 w-full flex flex-col">
             <h2 className="text-center text-2xl font-bold">Scan the code with your phone</h2>
-            <span className="text-center inline-block w-full align-top font-regular text-lg">or go to <BrowserLink to={connectLink} className="text-blue-500 cursor-pointer">{connectLink}</BrowserLink></span>
+            <span className="text-center inline-block w-full align-top font-regular text-lg">or go to <a onClick={() => openLinkInBrowser(connectLink)} className="text-blue-500 cursor-pointer">{connectLink}</a></span>
           </div>
         </div>
         <div className="w-full absolute bottom-0 p-3">
