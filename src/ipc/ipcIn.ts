@@ -26,7 +26,7 @@ export function initIpc() {
 
   ipcMain.on("removeDevice", (_event, deviceId) => {
     if (typeof deviceId != "string") {
-      return
+      return;
     }
 
     const device = getDeviceById(deviceId);

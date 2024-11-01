@@ -60,5 +60,5 @@ export default function DeviceButton({ device, newButton, popoverSide }: { devic
         </Popover>
       }
     </div>
-  )
+  );
 }

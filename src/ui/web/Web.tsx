@@ -37,7 +37,7 @@ function Layout() {
       <Toaster />
       <Outlet />
     </>
-  )
+  );
 }
 
 export default function Web() {
@@ -71,5 +71,5 @@ export default function Web() {
         </Routes>
       </HashRouter>
     </div>
-  )
+  );
 }

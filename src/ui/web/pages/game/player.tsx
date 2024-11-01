@@ -63,7 +63,7 @@ export default function PlayerPage() {
       socket.off("setDevices", handleSetDevices);
       socket.off("gameEmitToDevice", handleEmitToDevice);
       removeMessageListener();
-    }
+    };
   });
 
   if (!currentGame) {
@@ -93,5 +93,5 @@ export default function PlayerPage() {
         />
       </div>
     </div>
-  )
+  );
 }

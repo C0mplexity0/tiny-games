@@ -47,7 +47,7 @@ export function startGame(game: Game) {
 
 export function endGame() {
   currentGameActive = false;
-  addGameHistoryEntry({ game: path.basename(currentGame.gameDir), timestamp: Date.now() })
+  addGameHistoryEntry({ game: path.basename(currentGame.gameDir), timestamp: Date.now() });
   ipcOut.emitGameEnd();
   socketOut.emitGameEnd(io);
 

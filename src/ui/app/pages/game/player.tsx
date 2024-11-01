@@ -90,11 +90,11 @@ function DeviceRow({ device }: { device: Device }) {
         {
           (() => {
             if (device.latency > 200) {
-              return <SignalLow className="text-secondary-foreground" width="18" height="18" />
+              return <SignalLow className="text-secondary-foreground" width="18" height="18" />;
             } else if (device.latency > 70) {
-              return <SignalMedium className="text-secondary-foreground" width="18" height="18" />
+              return <SignalMedium className="text-secondary-foreground" width="18" height="18" />;
             } else {
-              return <SignalHigh className="text-secondary-foreground" width="18" height="18" />
+              return <SignalHigh className="text-secondary-foreground" width="18" height="18" />;
             }
           })()
         }
@@ -126,7 +126,7 @@ function ExitGameButton() {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  );
 }
 
 export default function PlayerPage() {
@@ -141,7 +141,7 @@ export default function PlayerPage() {
       removeMessageListener();
 
       clearInterval(saveInterval);
-    }
+    };
   });
 
   if (!currentGame) {
@@ -215,5 +215,5 @@ export default function PlayerPage() {
         </div>
       </Content>
     </div>
-  )
+  );
 }

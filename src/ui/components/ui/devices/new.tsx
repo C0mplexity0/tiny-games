@@ -10,5 +10,5 @@ export default function DeviceNewButton({ to }: { to: string }) {
         <Plus className="size-3/5 absolute block top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-secondary-foreground" />
       </Link>
     </Button>
-  )
+  );
 }

@@ -51,7 +51,7 @@ function DeviceDisplay({ device, newButton }: { device?: Device, newButton?: boo
         </Button>
       }
     </div>
-  )
+  );
 }
 
 export default function AddDevicesPage() {
@@ -85,5 +85,5 @@ export default function AddDevicesPage() {
         </div>
       </Content>
     </div>
-  )
+  );
 }

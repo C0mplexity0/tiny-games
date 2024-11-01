@@ -54,7 +54,7 @@ function ConnectedPage() {
       <h2 className="text-2xl font-bold">Connected!</h2>
       <span className="text-secondary-foreground">Continue through the app.</span>
     </div>
-  )
+  );
 }
 
 export default function WebHomePage() {

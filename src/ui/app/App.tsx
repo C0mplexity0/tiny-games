@@ -33,7 +33,7 @@ function Layout() {
     <>
       <Outlet />
     </>
-  )
+  );
 }
 
 export default function App() {
@@ -152,5 +152,5 @@ export default function App() {
         </Routes>
       </HashRouter>
     </div>
-  )
+  );
 }

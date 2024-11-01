@@ -70,7 +70,7 @@ const SOCIAL_ICONS: { [social: string]: { icon: ReactNode, name: string } } = {
     icon: <SiKofi title="" size="16px" />,
     name: "Ko-fi"
   },
-}
+};
 
 
 function Sidebar() {
@@ -87,7 +87,7 @@ function Sidebar() {
 
       </div>
     </div>
-  )
+  );
 }
 
 function GameButton({ game }: { game: Game }) {
@@ -156,7 +156,7 @@ function GameButton({ game }: { game: Game }) {
         </ContextMenuRadioGroup>
       </ContextMenuContent>
     </ContextMenu>
-  )
+  );
 }
 
 function GamesList() {
@@ -250,7 +250,7 @@ function GamesList() {
         }
       </div>
     </div>
-  )
+  );
 }
 
 function getSocialInfo(social: string) {
@@ -287,7 +287,7 @@ function GamePage({ game }: { game: Game }) {
   if (!game) {
     return (
       <div></div>
-    )
+    );
   }
 
   return (
@@ -344,7 +344,7 @@ function GamePage({ game }: { game: Game }) {
         }
       </div>
     </div>
-  )
+  );
 }
 
 
@@ -378,5 +378,5 @@ export default function AppHomePage() {
         </div>
       </Content>
     </div>
-  )
+  );
 }

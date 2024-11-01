@@ -5,7 +5,7 @@ import styles from "./profile.module.css";
 function ReconnectingAnimation() {
   return (
     <div className={styles.reconnectingAnimation}></div>
-  )
+  );
 }
 
 export default function DeviceProfile({ device, className }: { device: Device, className?: string }) {
