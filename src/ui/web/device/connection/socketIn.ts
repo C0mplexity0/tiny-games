@@ -1,4 +1,5 @@
 import { Game } from "@/games/games";
+import { DEFAULT_IO_SERVER_PORT } from "@/web";
 import { currentGame, device, setCurrentGame, setDevice } from "@web/Web";
 import io, { Socket } from "socket.io-client";
 
@@ -8,7 +9,7 @@ export let hasConnected = false;
 
 export function initSocket() {
   const url = new URL(window.location.href);
-  const socketPort = url.searchParams.get("sp") ?? "9976";
+  const socketPort = url.searchParams.get("sp") ?? DEFAULT_IO_SERVER_PORT;
 
   if (!socketPort) {
     return;

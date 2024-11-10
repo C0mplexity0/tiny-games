@@ -9,7 +9,7 @@ import ipcOut from "./ipc/ipcOut";
 import findFreePorts from "find-free-ports";
 
 const DEFAULT_PRODUCTION_SERVER_PORT = 8976;
-const DEFAULT_IO_SERVER_PORT = 9976;
+export const DEFAULT_IO_SERVER_PORT = 9976;
 
 let currentIp: string | undefined;
 let currentProductionServerPort: number | undefined;
