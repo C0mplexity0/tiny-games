@@ -45,7 +45,12 @@ async function quitting(event: { preventDefault: () => void; }) {
   event.preventDefault(); // Make sure everything saves and exits properly
   tryingToQuit = true;
   await saveGameHistory();
-  ipcOut.emitQuitting();
+
+  if (currentGameActive) {
+    ipcOut.emitQuitting();
+  } else {
+    app.quit();
+  }
 }
 
 
