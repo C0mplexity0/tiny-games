@@ -5,7 +5,7 @@ import DeviceButton from "@components/ui/devices/device-button";
 import { Content, TitleBar } from "@components/ui/pages/page-structure";
 import { SiBuymeacoffee, SiFacebook, SiGithub, SiKofi, SiMastodon, SiPatreon, SiReddit, SiReplit, SiThreads, SiTumblr, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@components/ui/tooltip";
-import { ArrowDownWideNarrow, Folder, Gamepad2, Link, Play, RefreshCcw } from "lucide-react";
+import { ArrowDownWideNarrow, Folder, Gamepad2, Link, Play, RefreshCcw, Terminal } from "lucide-react";
 import React, { ReactNode, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuTrigger } from "@components/ui/context-menu";
@@ -318,12 +318,33 @@ function GamePage({ game }: { game: Game }) {
                 null
               }
             </div>
-            <Button 
-              className="w-44 h-10"
-              onClick={() => {
-                window.electron.ipcRenderer.sendMessage("playGame", games.indexOf(game));
-              }}
-            ><Play className="mr-2 h-4 w-4" />Play</Button>
+            <div className="flex flex-row gap-2">
+              <Button 
+                className="w-44 h-10"
+                onClick={() => {
+                  window.electron.ipcRenderer.sendMessage("playGame", games.indexOf(game));
+                }}
+              ><Play className="mr-2 h-4 w-4" />Play</Button>
+              
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => {
+                        window.electron.ipcRenderer.sendMessage("playGame", games.indexOf(game), true);
+                      }}
+                    >
+                      <Terminal />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Develop</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
           </div>
         </div>
         

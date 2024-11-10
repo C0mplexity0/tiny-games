@@ -9,7 +9,7 @@ import { Content, DraggableArea, Title, TitleBar } from "@components/ui/pages/pa
 import { ScrollArea, ScrollBar } from "@components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@components/ui/tooltip";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { Menu, SignalHigh, SignalLow, SignalMedium, X } from "lucide-react";
+import { Menu, SignalHigh, SignalLow, SignalMedium, Terminal, X } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 
 let iframeRef: React.MutableRefObject<any>;
@@ -129,6 +129,19 @@ function ExitGameButton() {
   );
 }
 
+function DevToolsToggle() {
+  return (
+    <Button
+      variant="outline"
+      className="bg-transparent flex flex-row gap-2 p-2 h-8"
+      onClick={() => {window.electron.ipcRenderer.sendMessage("toggleDevTools");}}
+    >
+      <Terminal className="h-4 w-4" />
+      Dev Tools
+    </Button>
+  );
+}
+
 export default function PlayerPage() {
   iframeRef = useRef();
 
@@ -157,10 +170,10 @@ export default function PlayerPage() {
               <DialogTrigger asChild>
                 <TooltipTrigger asChild>
                   <Button 
-                    className="w-8 h-8" 
+                    className="w-8 h-8 bg-transparent" 
                     size="icon" 
-                    variant="ghost"
-                  ><Menu /></Button>
+                    variant="outline"
+                  ><Menu className="h-5 w-5" /></Button>
                 </TooltipTrigger>
               </DialogTrigger>
               <TooltipContent>
@@ -192,13 +205,19 @@ export default function PlayerPage() {
         <DraggableArea className="h-full flex-1">
           <Title>{currentGame.name}</Title>
         </DraggableArea>
+        {
+          currentGame.inDeveloperMode ?
+          <DevToolsToggle />
+          :
+          null
+        }
       </TitleBar>
       <Content>
         <div className="size-full absolute top-0 left-0">
           <iframe 
             ref={iframeRef} 
             className="size-full bg-white"
-            src={currentGame.devAppUrl ? currentGame.devAppUrl : `http://localhost:9977/${currentGame.appRoot}`}
+            src={currentGame.inDeveloperMode && currentGame.devAppUrl ? currentGame.devAppUrl : `http://localhost:9977/${currentGame.inDeveloperMode && currentGame.devAppRoot ? currentGame.devAppRoot : currentGame.appRoot}`}
             onLoad={() => {
               const url = new URL(window.location.href);
               let urlStr;

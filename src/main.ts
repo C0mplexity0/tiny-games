@@ -89,7 +89,7 @@ const createWindow = () => {
     mainWindow.show();
 
     if (isDev()) {
-      mainWindow.webContents.openDevTools();
+      mainWindow.webContents.openDevTools({ mode: "detach" });
     }
   });
 };

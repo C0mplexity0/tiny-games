@@ -4,7 +4,7 @@ import express from "express";
 import http from "http";
 import socketOut from "@/devices/connection/socketOut";
 import { io } from "@/web";
-import { getResourcesFolder, tryingToQuit } from "@/main";
+import { getResourcesFolder, mainWindow, tryingToQuit } from "@/main";
 import path from "path";
 import { app } from "electron";
 import { addGameHistoryEntry } from "./data";
@@ -17,9 +17,14 @@ export let currentGameActive = false;
 export let expressApp: express.Application;
 let httpServer: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 
-export function startGame(game: Game) {
+export function startGame(game: Game, developerMode=false) {
   currentGameActive = true;
   currentGame = game;
+  currentGame.inDeveloperMode = developerMode;
+
+  if (developerMode) {
+    mainWindow.webContents.openDevTools({ mode: "detach" });
+  }
 
   if (httpServer) {
     httpServer.close();

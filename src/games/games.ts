@@ -18,10 +18,16 @@ export interface Game {
   appRoot: string,
   webRoot: string,
 
+  devAppRoot?: string,
+  devWebRoot?: string,
+
   devAppUrl?: string,
   devWebUrl?: string,
 
   gameDir: string,
+
+
+  inDeveloperMode?: boolean
 }
 
 export interface GameConfig {
@@ -31,6 +37,7 @@ export interface GameConfig {
   icon?: string, // Icon/thumbnail should both be paths to images
   thumbnail?: string,
   socials?: string[],
+
 
   appRoot: string,
   webRoot: string,
@@ -99,6 +106,6 @@ export async function getGames(order?: "lastPlayed" | "alphabetically" | undefin
   ipcOut.emitSetGames(games, order);
 }
 
-export function playGame(game: Game) {
-  startGame(game);
+export function playGame(game: Game, developerMode: boolean) {
+  startGame(game, developerMode);
 }

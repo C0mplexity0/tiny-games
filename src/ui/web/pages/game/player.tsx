@@ -77,7 +77,7 @@ export default function PlayerPage() {
       <div className="size-full">
         <iframe 
           ref={iframeRef} 
-          src={currentGame.devWebUrl ? currentGame.devWebUrl : `http://${url.hostname}:9977/${currentGame.webRoot}`} 
+          src={currentGame.inDeveloperMode && currentGame.devWebUrl ? currentGame.devWebUrl : `http://${url.hostname}:9977/${currentGame.inDeveloperMode && currentGame.devWebRoot ? currentGame.devWebRoot : currentGame.webRoot}`} 
           className="size-full bg-white"
           onLoad={() => {
             let urlStr;
