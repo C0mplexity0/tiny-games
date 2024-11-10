@@ -1,8 +1,9 @@
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
+import { hasConnected, socket } from "@web/device/connection/socketIn";
 import socketOut from "@web/device/connection/socketOut";
 import { activateWakeLock, device } from "@web/Web";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 let usernameInputRef: React.MutableRefObject<HTMLInputElement>;
 
@@ -17,7 +18,7 @@ function submitUsername() {
   }
 }
 
-function ConnectPrompt() {
+function JoinPrompt() {
   [inputHasText, setInputHasText] = useState(false);
 
   return (
@@ -48,7 +49,7 @@ function ConnectPrompt() {
   );
 }
 
-function ConnectedPage() {
+function JoinedPage() {
   return (
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
       <h2 className="text-2xl font-bold">Connected!</h2>
@@ -57,15 +58,45 @@ function ConnectedPage() {
   );
 }
 
+function ConnectingPage() {
+  return (
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+      <h2 className="text-2xl font-bold">Connecting...</h2>
+      <span className="text-secondary-foreground">If this doesn't work, try scanning the code again.</span>
+    </div>
+  );
+}
+
 export default function WebHomePage() {
   usernameInputRef = useRef();
+
+  let [socketConnected, setSocketConnected] = useState(hasConnected);
+
+  useEffect(() => {
+    setSocketConnected(hasConnected);
+
+    if (!hasConnected) {
+      const handleSocketConnected = () => {
+        setSocketConnected(true);
+      };
+
+      socket.on("connect", handleSocketConnected);
+
+      return () => {
+        socket.off("connect", handleSocketConnected);
+      };
+    }
+  });
 
   return (
     <div className="size-full">
       {
+        socketConnected ?
         device ?
-        <ConnectedPage /> :
-        <ConnectPrompt />
+        <JoinedPage /> :
+        <JoinPrompt />
+        :
+        <ConnectingPage />
       }
     </div>
   );

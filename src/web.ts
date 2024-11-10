@@ -6,14 +6,43 @@ import { setupIo } from "./devices/connection/socketIn";
 import { ip } from "address";
 import path from "path";
 import ipcOut from "./ipc/ipcOut";
+import findFreePorts from "find-free-ports";
 
-const port = 8976;
-const socketIoPort = 9976;
-let currentPort: number | undefined;
+const DEFAULT_PRODUCTION_SERVER_PORT = 8976;
+const DEFAULT_IO_SERVER_PORT = 9976;
+
+let currentIp: string | undefined;
+let currentProductionServerPort: number | undefined;
+let currentIoServerPort: number | undefined;
 
 let expressApp: express.Application;
 let httpServer: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 export let io: Server;
+
+function getIp() {
+  if (currentIp) {
+    return currentIp;
+  }
+
+  const ipAddress = ip();
+
+  if (!ipAddress) {
+    return "localhost";
+  }
+
+  return ipAddress;
+}
+
+async function getPorts() {
+  if (isDev()) {
+    return [8976, 9976];
+  }
+
+  const prodServerPort = await findFreePorts(1, {startPort: DEFAULT_PRODUCTION_SERVER_PORT});
+  const ioServerPort = await findFreePorts(1, {startPort: DEFAULT_IO_SERVER_PORT});
+
+  return [prodServerPort[0], ioServerPort[0]];
+}
 
 function startProductionServer() {
   const root = path.join(__dirname, `../renderer/${WEB_VITE_NAME}`);
@@ -21,15 +50,14 @@ function startProductionServer() {
 
   expressApp.use(staticHandler);
   
-  httpServer.listen(port);
-  currentPort = port;
+  httpServer.listen(currentProductionServerPort);
 }
 
 function startIoServer() {
   io = new Server({ 
     serveClient: false, 
     cors: {
-      origin: `http://${ip()}:${port}`,
+      origin: `http://${currentIp}:${currentProductionServerPort}`,
       credentials: true
     },
     connectionStateRecovery: {
@@ -37,19 +65,21 @@ function startIoServer() {
     }
   });
 
-  io.listen(socketIoPort);
+  io.listen(currentIoServerPort);
 
   setupIo(io);
 }
 
-export function startWebServer() {
+export async function startWebServer() {
   expressApp = express();
   httpServer = new http.Server(expressApp);
+  currentIp = null;
+  currentIp = getIp();
+  
+  [currentProductionServerPort, currentIoServerPort] = await getPorts();
 
   if (!isDev()) {
     startProductionServer();
-  } else {
-    currentPort = port;
   }
 
   startIoServer();
@@ -57,10 +87,7 @@ export function startWebServer() {
   ipcOut.emitSetConnectLink(getConnectLink());
 }
 
-export function getWebServerPort() {
-  return currentPort;
-}
-
 export function getConnectLink() {
-  return `http://${ip()}:${getWebServerPort()}`;
+  // sp = socketPort
+  return `http://${currentIp}:${currentProductionServerPort}${currentIoServerPort !== DEFAULT_IO_SERVER_PORT ? `?sp=${currentIoServerPort}` : ""}`;
 }
