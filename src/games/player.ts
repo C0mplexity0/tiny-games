@@ -56,6 +56,10 @@ export function endGame() {
   ipcOut.emitGameEnd();
   socketOut.emitGameEnd(io);
 
+  if (!nodeEnvDevelopment()) {
+    mainWindow.webContents.closeDevTools();
+  }
+
   if (tryingToQuit) {
     app.quit();
   } else {
