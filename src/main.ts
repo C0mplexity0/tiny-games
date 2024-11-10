@@ -11,13 +11,13 @@ import { gameHistorySaved, saveGameHistory } from "./games/data";
 
 export let tryingToQuit = false;
 
-export function isDev() {
+export function nodeEnvDevelopment() {
   return process.env.NODE_ENV === "development" ||
     process.env.DEBUG_PROD === "true";
 }
 
 export function getResourcesFolder() {
-  if (isDev()) {
+  if (nodeEnvDevelopment()) {
     return path.resolve(__dirname, "../../resources");
   } else {
     return path.resolve(process.resourcesPath, "resources");
@@ -88,7 +88,7 @@ const createWindow = () => {
   mainWindow.on("ready-to-show", () => {
     mainWindow.show();
 
-    if (isDev()) {
+    if (nodeEnvDevelopment()) {
       mainWindow.webContents.openDevTools({ mode: "detach" });
     }
   });

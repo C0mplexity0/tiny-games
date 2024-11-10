@@ -4,7 +4,7 @@ import express from "express";
 import http from "http";
 import socketOut from "@/devices/connection/socketOut";
 import { io } from "@/web";
-import { getResourcesFolder, mainWindow, tryingToQuit } from "@/main";
+import { getResourcesFolder, mainWindow, nodeEnvDevelopment, tryingToQuit } from "@/main";
 import path from "path";
 import { app } from "electron";
 import { addGameHistoryEntry } from "./data";

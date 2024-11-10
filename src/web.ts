@@ -1,7 +1,7 @@
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
-import { isDev } from "./main";
+import { nodeEnvDevelopment } from "./main";
 import { setupIo } from "./devices/connection/socketIn";
 import { ip } from "address";
 import path from "path";
@@ -32,7 +32,7 @@ function getIp() {
 }
 
 async function getPorts() {
-  if (isDev()) {
+  if (nodeEnvDevelopment()) {
     return [8976, 9976];
   }
 
@@ -76,7 +76,7 @@ export async function startWebServer() {
   
   [currentProductionServerPort, currentIoServerPort] = await getPorts();
 
-  if (!isDev()) {
+  if (!nodeEnvDevelopment()) {
     startProductionServer();
   }
 

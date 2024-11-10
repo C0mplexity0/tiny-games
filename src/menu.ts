@@ -5,7 +5,7 @@ import {
   BrowserWindow,
   MenuItemConstructorOptions,
 } from "electron";
-import { isDev } from "./main";
+import { nodeEnvDevelopment } from "./main";
 
 interface DarwinMenuItemConstructorOptions extends MenuItemConstructorOptions {
   selector?: string;
@@ -20,7 +20,7 @@ export default class MenuBuilder {
   }
 
   buildMenu(): Menu {
-    if (isDev()) {
+    if (nodeEnvDevelopment()) {
       this.setupDevelopmentEnvironment();
     }
 
@@ -168,7 +168,7 @@ export default class MenuBuilder {
     };
 
     const subMenuView =
-      isDev()
+      nodeEnvDevelopment()
         ? subMenuViewDev
         : subMenuViewProd;
 
