@@ -4,7 +4,7 @@
 Introduction
 -------------
 
-Tiny Games is a simple piece of software which allows you to play games with friends without needing extra hardware such as controllers. People can connect their own devices (phones, tablets etc.) to a single computer and can play together that way (provided they are on the same WiFi network).
+Tiny Games is a simple piece of software which allows you to play games with friends without needing extra hardware such as controllers. People can connect their own devices (phones, tablets etc.) to a single computer and can play together that way (provided they are on the same network).
 
 These docs will guide you through how to make your own games for Tiny Games, if you were looking for something else, it probably won't be here!
 
