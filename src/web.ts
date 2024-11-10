@@ -7,9 +7,7 @@ import { ip } from "address";
 import path from "path";
 import ipcOut from "./ipc/ipcOut";
 import findFreePorts from "find-free-ports";
-
-const DEFAULT_PRODUCTION_SERVER_PORT = 8976;
-export const DEFAULT_IO_SERVER_PORT = 9976;
+import { config } from "./config";
 
 let currentIp: string | undefined;
 let currentProductionServerPort: number | undefined;
@@ -38,8 +36,8 @@ async function getPorts() {
     return [8976, 9976];
   }
 
-  const prodServerPort = await findFreePorts(1, {startPort: DEFAULT_PRODUCTION_SERVER_PORT});
-  const ioServerPort = await findFreePorts(1, {startPort: DEFAULT_IO_SERVER_PORT});
+  const prodServerPort = await findFreePorts(1, {startPort: config.defaultProductionServerPort});
+  const ioServerPort = await findFreePorts(1, {startPort: config.defaultIoServerPort});
 
   return [prodServerPort[0], ioServerPort[0]];
 }
@@ -89,5 +87,5 @@ export async function startWebServer() {
 
 export function getConnectLink() {
   // sp = socketPort
-  return `http://${currentIp}:${currentProductionServerPort}${currentIoServerPort !== DEFAULT_IO_SERVER_PORT ? `?sp=${currentIoServerPort}` : ""}`;
+  return `http://${currentIp}:${currentProductionServerPort}${currentIoServerPort !== config.defaultIoServerPort ? `?sp=${currentIoServerPort}` : ""}`;
 }
