@@ -184,6 +184,6 @@
  * Component: Sidebar
  * -------------------------------------------------------------------------- */
 
-.dark .VPSidebar {
-  border-right: solid 1px hsl(var(--border));
+.VPSidebar {
+  border-right: solid 1px var(--vp-c-gutter);
 }
