@@ -73,6 +73,7 @@
 
   --vp-c-bg: hsl(var(--background));
   --vp-c-bg-soft: hsl(var(--secondary-background));
+  --vp-c-bg-alt: hsl(var(--secondary-background));
 
   --vp-c-white: hsl(var(--foreground));
 
@@ -178,3 +179,11 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+
+/**
+ * Component: Sidebar
+ * -------------------------------------------------------------------------- */
+
+.dark .VPSidebar {
+  border-right: solid 1px hsl(var(--border));
+}
