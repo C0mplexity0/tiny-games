@@ -5,20 +5,21 @@ import typescript from "typescript-eslint";
 
 export default [
   {
-    ignores: ["node_modules/*", ".vite/*", "out/*"],
+    ignores: ["node_modules/*", ".vite/*", "out/*", "docs/.vitepress/cache/*"],
   },
   {
     files: ["**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}"],
-    ignores: ["**/*.d.ts"],
+    ignores: ["**/*.d.ts", "docs/cache/**/*"],
     plugins: {
       react,
     },
     languageOptions: {
       parserOptions: {
-        project: true,
+        project: false,
         ecmaFeatures: {
           jsx: true,
         },
+        tsconfigRootDir: "./",
       },
       globals: {
         ...globals.browser,
@@ -40,7 +41,7 @@ export default [
     }
   },
   {
-    files: ["**/*.{ts,tsx,mts,cts}"],
+    files: ["**/*.{ts,tsx,mts,cts,vue}"],
     ignores: ["**/*.d.ts"],
     plugins: {
       "@typescript-eslint": typescript.plugin,
@@ -53,7 +54,7 @@ export default [
     languageOptions: {
       parser: typescript.parser,
       parserOptions: {
-        project: true,
+        project: false,
         ecmaFeatures: {
           jsx: true,
         },

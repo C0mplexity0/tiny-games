@@ -14,7 +14,10 @@
     "make": "electron-forge make",
     "makeDebug": "DEBUG=electron-packager electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
@@ -28,7 +31,9 @@
     "eslint": "^9.13.0",
     "eslint-plugin-import": "^2.30.0",
     "typescript": "5.6.3",
-    "vite": "^5.4.9"
+    "vite": "^5.4.9",
+    "vitepress": "^1.5.0",
+    "vue": "^3.5.12"
   },
   "keywords": [],
   "author": {
