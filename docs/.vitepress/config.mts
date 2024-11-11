@@ -23,7 +23,8 @@ export default defineConfig({
       {
         text: "API Reference",
         items: [
-          { text: "Configuration", link: "/reference/game-json.md" }
+          { text: "Configuration", link: "/reference/game-json" },
+          { text: "App API", link: "/reference/app-api" }
         ]
       }
     ],
@@ -40,5 +41,6 @@ export default defineConfig({
     footer: {
       message: "Released under the GPL-3.0 License."
     }
-  }
+  },
+  lastUpdated: true
 });
