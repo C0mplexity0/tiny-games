@@ -1,6 +1,6 @@
 # game.json Config
 
-### name ``string``
+## name ``string``
 The name of your game.
 
 ```json
@@ -9,7 +9,7 @@ The name of your game.
 }
 ```
 
-### author ``string``
+## author ``string``
 The author of your game.
 
 ```json
@@ -18,7 +18,7 @@ The author of your game.
 }
 ```
 
-### description? ``string``
+## description? ``string``
   A description of your game.
 
 ```json
@@ -27,7 +27,7 @@ The author of your game.
 }
 ```
 
-### icon? ``string``
+## icon? ``string``
   A path to the icon for your game.
 
 ```json
@@ -36,7 +36,7 @@ The author of your game.
 }
 ```
 
-### thumbnail? ``string``
+## thumbnail? ``string``
   A path to the thumbnail for your game.
 
 ```json
@@ -45,7 +45,7 @@ The author of your game.
 }
 ```
 
-### socials? ``string[]``
+## socials? ``string[]``
   An array of social media links for the author(s) of your game.
 
 ```json
@@ -56,7 +56,7 @@ The author of your game.
 }
 ```
 
-### appRoot ``string``
+## appRoot ``string``
   The root directory of your app code.
 
 ```json
@@ -65,7 +65,7 @@ The author of your game.
 }
 ```
 
-### webRoot ``string``
+## webRoot ``string``
   The root directory of your web code.
 
 ```json
@@ -74,7 +74,7 @@ The author of your game.
 }
 ```
 
-### devAppRoot? ``string``
+## devAppRoot? ``string``
   The root directory of your app code to be used when developing your game.
 
 ```json
@@ -83,7 +83,7 @@ The author of your game.
 }
 ```
 
-### devWebRoot? ``string``
+## devWebRoot? ``string``
   The root directory of your web code to be used when developing your game.
 
 ```json
@@ -92,7 +92,7 @@ The author of your game.
 }
 ```
 
-### devAppUrl? ``string``
+## devAppUrl? ``string``
   A URL to your app page to be used when developing your game. You may want to use this when developing a game with vite, for example.
 
 ```json
@@ -101,7 +101,7 @@ The author of your game.
 }
 ```
 
-### devWebUrl? ``string``
+## devWebUrl? ``string``
   A URL to your web page to be used when developing your game. You may want to use this when developing a game with vite, for example.
 
 ```json
