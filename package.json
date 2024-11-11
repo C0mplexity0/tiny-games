@@ -69,7 +69,7 @@
     "eslint-plugin-react": "^7.37.1",
     "express": "^4.21.0",
     "find-free-ports": "^3.1.1",
-    "globals": "^15.9.0",
+    "globals": "^15.12.0",
     "lucide-react": "^0.454.0",
     "mime-types": "^2.1.35",
     "nosleep.js": "^0.12.0",
