@@ -76,7 +76,7 @@
     "open-file-explorer": "^1.0.2",
     "openurl": "^1.1.1",
     "original-fs": "^1.2.0",
-    "postcss": "^8.4.47",
+    "postcss": "^8.4.48",
     "postcss-import": "^16.1.0",
     "qrcode": "^1.5.4",
     "react": "^18.3.1",
