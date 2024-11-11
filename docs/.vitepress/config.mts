@@ -9,21 +9,30 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Download", link: "/download" },
-      { text: "Examples", link: "/markdown-examples" }
+      { text: "Quick Start", link: "/quick-start" }
     ],
 
     sidebar: [
       {
-        text: "Examples",
+        text: "Introduction",
         items: [
-          { text: "Markdown Examples", link: "/markdown-examples" },
-          { text: "Runtime API Examples", link: "/api-examples" }
+          { text: "Download", link: "/download" },
+          { text: "Quick Start", link: "/quick-start" },
         ]
-      }
+      },
     ],
 
     socialLinks: [
       { icon: "github", link: "https://github.com/C0mplexity0/tiny-games" }
-    ]
+    ],
+
+    editLink: {
+      pattern: "https://github.com/C0mplexity0/tiny-games/edit/main/docs/:path",
+      text: "Edit this page"
+    },
+
+    footer: {
+      message: "Released under the GPL-3.0 License."
+    }
   }
 });

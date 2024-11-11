@@ -11,8 +11,8 @@ hero:
       text: Download
       link: /download
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Quick Start
+      link: /quick-start
 
 features:
   - title: Feature A
