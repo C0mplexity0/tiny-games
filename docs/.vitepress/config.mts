@@ -20,6 +20,12 @@ export default defineConfig({
           { text: "Quick Start", link: "/quick-start" },
         ]
       },
+      {
+        text: "API Reference",
+        items: [
+          { text: "Configuration", link: "/reference/game-json.md" }
+        ]
+      }
     ],
 
     socialLinks: [

@@ -13,6 +13,9 @@ hero:
     - theme: alt
       text: Quick Start
       link: /quick-start
+    - theme: alt
+      text: API Reference
+      link: /reference/game-json
 
 features:
   - title: Feature A
