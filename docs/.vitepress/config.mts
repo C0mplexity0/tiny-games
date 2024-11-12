@@ -24,7 +24,8 @@ export default defineConfig({
         text: "API Reference",
         items: [
           { text: "Configuration", link: "/reference/game-json" },
-          { text: "App API", link: "/reference/app-api" }
+          { text: "App API", link: "/reference/app-api" },
+          { text: "Web API", link: "/reference/web-api" }
         ]
       }
     ],
