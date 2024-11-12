@@ -47,5 +47,6 @@ export default defineConfig({
       provider: "local"
     }
   },
-  lastUpdated: true
+  lastUpdated: true,
+  base: "/tiny-games/"
 });
