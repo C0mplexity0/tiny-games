@@ -1,45 +1,8 @@
+@import url("./colours.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer base {
-  :root {
-    --background: 214 9% 9%;
-    --secondary-background: 216 8% 13%;
-    --tertiary-background: 220 6% 20%;
-    --foreground: 0 0% 98%;
-    --foreground-secondary: 0 0% 82%;
-    --card: var(--background);
-    --card-foreground: var(--foreground);
-    --popover: var(--background);
-    --popover-foreground: var(--foreground);
-    --primary: var(--foreground);
-    --primary-foreground: var(--tertiary-background);
-    --secondary: var(--secondary-background);
-    --secondary-foreground: var(--foreground-secondary);
-    --muted: 210 18% 4%;
-    --muted-foreground: 0 0% 71;
-    --accent: 214 50% 50%;
-    --accent-foreground: var(--foreground);
-    --destructive: 3 40% 51%;
-    --destructive-foreground: var(--foreground);
-    --border: 0 0% 18%;
-    --input: var(--border);
-    --ring: var(--foreground-secondary);
-    --radius: 0.75rem;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --device-0: 3 35% 48%;
-    --device-1: 25 54% 41%;
-    --device-2: 108 33% 37%;
-    --device-3: 195 99% 32%;
-    --device-4: 254 29% 53%;
-    --device-5: 314 27% 46%;
-  }
-}
 
 @layer base {
   * {
