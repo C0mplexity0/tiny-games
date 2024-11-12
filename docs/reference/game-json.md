@@ -1,6 +1,6 @@
 # game.json Config
 
-## name ``string``
+## ``name`` <Badge type="info" text="string" />
 The name of your game.
 
 ```json
@@ -9,7 +9,7 @@ The name of your game.
 }
 ```
 
-## author ``string``
+## ``author`` <Badge type="info" text="string" />
 The author of your game.
 
 ```json
@@ -18,8 +18,8 @@ The author of your game.
 }
 ```
 
-## description? ``string``
-  A description of your game.
+## ``description?`` <Badge type="info" text="string" />
+A description of your game.
 
 ```json
 {
@@ -27,8 +27,8 @@ The author of your game.
 }
 ```
 
-## icon? ``string``
-  A path to the icon for your game.
+## ``icon?`` <Badge type="info" text="string" />
+A path to the icon for your game.
 
 ```json
 {
@@ -36,8 +36,8 @@ The author of your game.
 }
 ```
 
-## thumbnail? ``string``
-  A path to the thumbnail for your game.
+## ``thumbnail?`` <Badge type="info" text="string" />
+A path to the thumbnail for your game.
 
 ```json
 {
@@ -45,8 +45,8 @@ The author of your game.
 }
 ```
 
-## socials? ``string[]``
-  An array of social media links for the author(s) of your game.
+## ``socials?`` <Badge type="info" text="string[]" />
+An array of social media links for the author(s) of your game.
 
 ```json
 {
@@ -56,8 +56,8 @@ The author of your game.
 }
 ```
 
-## appRoot ``string``
-  The root directory of your app code.
+## ``appRoot`` <Badge type="info" text="string" />
+The root directory of your app code.
 
 ```json
 {
@@ -65,8 +65,8 @@ The author of your game.
 }
 ```
 
-## webRoot ``string``
-  The root directory of your web code.
+## ``webRoot`` <Badge type="info" text="string" />
+The root directory of your web code.
 
 ```json
 {
@@ -74,8 +74,8 @@ The author of your game.
 }
 ```
 
-## devAppRoot? ``string``
-  The root directory of your app code to be used when developing your game.
+## ``devAppRoot?`` <Badge type="info" text="string" />
+The root directory of your app code to be used when developing your game.
 
 ```json
 {
@@ -83,8 +83,8 @@ The author of your game.
 }
 ```
 
-## devWebRoot? ``string``
-  The root directory of your web code to be used when developing your game.
+## ``devWebRoot?`` <Badge type="info" text="string" />
+The root directory of your web code to be used when developing your game.
 
 ```json
 {
@@ -92,8 +92,8 @@ The author of your game.
 }
 ```
 
-## devAppUrl? ``string``
-  A URL to your app page to be used when developing your game. You may want to use this when developing a game with vite, for example.
+## ``devAppUrl?`` <Badge type="info" text="string" />
+A URL to your app page to be used when developing your game. You may want to use this when developing a game with vite, for example.
 
 ```json
 {
@@ -101,8 +101,8 @@ The author of your game.
 }
 ```
 
-## devWebUrl? ``string``
-  A URL to your web page to be used when developing your game. You may want to use this when developing a game with vite, for example.
+## ``devWebUrl?`` <Badge type="info" text="string" />
+A URL to your web page to be used when developing your game. You may want to use this when developing a game with vite, for example.
 
 ```json
 {
