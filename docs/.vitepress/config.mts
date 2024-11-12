@@ -41,6 +41,10 @@ export default defineConfig({
 
     footer: {
       message: "Released under the GPL-3.0 License."
+    },
+
+    search: {
+      provider: "local"
     }
   },
   lastUpdated: true
