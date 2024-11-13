@@ -76,11 +76,7 @@ export default function AddDevicesPage() {
             </div>
           </div>
           <div className="footer h-40px p-3">
-            {
-              devices.length == 0 ?
-              <Button disabled className="float-right">Continue</Button> :
-              <Button className="float-right" asChild><Link to="/">Continue</Link></Button>
-            }
+            <Button className="float-right" asChild><Link to="/">Continue</Link></Button>
           </div>
         </div>
       </Content>
