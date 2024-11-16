@@ -62,6 +62,7 @@ const createWindow = () => {
     minHeight: 480,
     autoHideMenuBar: true,
     backgroundColor: "#1E2023", // From globals.css
+    icon: "./resources/branding/icons/tiny-games.png",
     show: false,
     titleBarStyle: "hidden",
     titleBarOverlay: {
