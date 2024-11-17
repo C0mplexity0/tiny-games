@@ -8,7 +8,6 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
-      { text: "Download", link: "/download" },
       { text: "Quick Start", link: "/quick-start" }
     ],
 
@@ -16,7 +15,7 @@ export default defineConfig({
       {
         text: "Introduction",
         items: [
-          { text: "Download", link: "/download" },
+          { text: "Download", link: "/#getting-started" },
           { text: "Quick Start", link: "/quick-start" },
         ]
       },
