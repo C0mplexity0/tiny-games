@@ -19,6 +19,7 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
+  "icon": "resources/branding/icons/tiny-games.png",
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
     "@electron-forge/maker-squirrel": "^7.4.0",
