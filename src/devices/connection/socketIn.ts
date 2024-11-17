@@ -44,7 +44,7 @@ export function setupIo(io: Server) {
     }
 
     socket.on("join", (username: string) => {
-      if (username.length < 1) {
+      if (username.length < 1 || username.length > 20) {
         return;
       }
 

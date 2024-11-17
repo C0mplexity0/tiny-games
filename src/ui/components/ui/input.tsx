@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@lib/utils";
+import { useCharacterLimit } from "@hooks/use-character-limit";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -22,4 +23,50 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = "Input";
 
-export { Input };
+
+export interface CharacterLimitInputProps extends InputProps {
+  maxLength: number
+}
+
+const CharacterLimitInput = React.forwardRef<HTMLInputElement, CharacterLimitInputProps>(({ maxLength, onChange, ...props }: CharacterLimitInputProps, ref) => {
+  const {
+    value,
+    characterCount,
+    handleChange,
+    maxLength: limit,
+  } = useCharacterLimit({ maxLength });
+
+  return (
+    <div className="space-y-2">
+      <div className="relative">
+        <Input
+          className="peer pe-14"
+          type="text"
+          value={value}
+          maxLength={maxLength}
+          onChange={(event) => {
+            handleChange(event);
+
+            if (onChange) {
+              onChange(event);
+            }
+          }}
+          aria-describedby="character-count"
+          ref={ref}
+          {...props}
+        />
+        <div
+          id="character-count"
+          className="pointer-events-none absolute inset-y-0 end-0 flex items-center justify-center pe-3 text-xs tabular-nums text-muted-foreground peer-disabled:opacity-50"
+          aria-live="polite"
+          role="status"
+        >
+          {characterCount}/{limit}
+        </div>
+      </div>
+    </div>
+  );
+});
+CharacterLimitInput.displayName = "CharacterLimitInput";
+
+export { Input, CharacterLimitInput };

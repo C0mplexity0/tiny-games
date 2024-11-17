@@ -1,5 +1,5 @@
 import { Button } from "@components/ui/button";
-import { Input } from "@components/ui/input";
+import { CharacterLimitInput } from "@components/ui/input";
 import { hasConnected, socket } from "@web/device/connection/socketIn";
 import socketOut from "@web/device/connection/socketOut";
 import { activateWakeLock, device } from "@web/Web";
@@ -24,7 +24,7 @@ function JoinPrompt() {
   return (
     <div>
       <div className="flex flex-col w-60 max-w-sm items-center space-y-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <Input 
+        <CharacterLimitInput 
           type="text"
           ref={usernameInputRef} 
           placeholder="Username" 
@@ -42,6 +42,7 @@ function JoinPrompt() {
               }
             }
           }
+          maxLength={20}
         />
         <Button onClick={submitUsername} disabled={!inputHasText} >Connect</Button>
       </div>
