@@ -5,7 +5,6 @@ layout: home
 hero:
   name: "Tiny Games"
   text: "The portable games console."
-  tagline: You don't need a controller to play together.
   actions:
     - theme: brand
       text: Download
