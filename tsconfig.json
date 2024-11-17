@@ -22,6 +22,7 @@
       "@/*": ["./src/*"],
       "@docs/*": ["./docs/*"],
     },
+    "types": ["vite/client"]
   },
   "include": ["**/*"]
 }
