@@ -13,7 +13,7 @@ export function TitleBar({ children, className }: { children?: ReactNode, classN
       {
         children ?
         children :
-        <DraggableArea className="size-full">
+        <DraggableArea className="size-full flex flex-row pl-2 gap-1">
           <Title>{document.title}</Title>
         </DraggableArea>
       }

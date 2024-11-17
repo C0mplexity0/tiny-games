@@ -163,7 +163,7 @@ export default function PlayerPage() {
 
   return (
     <div className="size-full">
-      <TitleBar className="px-1 flex flex-row items-center">
+      <TitleBar className="px-1 flex flex-row pl-1 gap-2 items-center">
         <TooltipProvider>
           <Tooltip>
             <Dialog>
