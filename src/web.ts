@@ -60,7 +60,8 @@ function startIoServer() {
     },
     connectionStateRecovery: {
       maxDisconnectionDuration: 2 * 60 * 1000,
-    }
+    },
+    maxHttpBufferSize: 1e7 // 10 MB
   });
 
   io.listen(currentIoServerPort);

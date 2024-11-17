@@ -3,6 +3,7 @@ import { addDevice, Device, devices, getDeviceBySocket, removeDevice } from "../
 import socketOut from "./socketOut";
 import ipcOut from "@/ipc/ipcOut";
 import { currentGame, currentGameActive } from "@/games/player";
+import { fileTypeFromBuffer } from "file-type";
 
 const PING_INTERVAL = 5000;
 
@@ -43,9 +44,19 @@ export function setupIo(io: Server) {
       }
     }
 
-    socket.on("join", (username: string) => {
+    socket.on("join", async (username: string, profileImage?: Buffer) => {
       if (username.length < 1 || username.length > 20) {
         return;
+      }
+
+      let profileImageType: string;
+
+      if (profileImage) {
+        profileImageType = (await fileTypeFromBuffer(profileImage)).mime;
+
+        if (!profileImageType.startsWith("image/")) {
+          return; // Another file type has been uploaded
+        }
       }
 
       device = {
@@ -55,7 +66,8 @@ export function setupIo(io: Server) {
         connected: true,
         id: socket.id,
         latency: 0,
-        lastPong: Date.now()
+        lastPong: Date.now(),
+        profileImage: profileImage ? `data:${profileImageType};base64, ${profileImage.toString("base64")}` : null
       };
 
       if (addDevice(device)) {

@@ -7,6 +7,7 @@ export interface Device {
   colourId: number,
   socket?: Socket,
   id: string,
+  profileImage?: string,
 
   connected: Boolean,
   latency: number,
@@ -61,6 +62,7 @@ export function getIpcReadyDeviceInfo(device: Device) { // For filtering out soc
     username: device.username,
     colourId: device.colourId,
     id: device.id,
+    profileImage: device.profileImage,
   
     connected: device.connected,
     latency: device.latency,
