@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import { addDevice, Device, devices, getDeviceBySocket, removeDevice } from "../devices";
+import { addDevice, Device, devices, getDeviceById, getDeviceBySocket, removeDevice } from "../devices";
 import socketOut from "./socketOut";
 import ipcOut from "@/ipc/ipcOut";
 import { currentGame, currentGameActive } from "@/games/player";
@@ -16,10 +16,18 @@ function ping() {
 
     let start = Date.now();
 
+    const deviceId = devices[i].id;
+
     devices[i].socket.emit("ping", () => {
-      devices[i].latency = Date.now() - start;
-      devices[i].lastPong = Date.now();
-      devices[i].connected = true;
+      const device = getDeviceById(deviceId);
+
+      if (!device) { // Sometimes devices can get removed/added during a ping, so finding the correct device again is important
+        return;
+      }
+
+      device.latency = Date.now() - start;
+      device.lastPong = Date.now();
+      device.connected = true;
 
       ipcOut.emitSetDevices(devices);
     });
