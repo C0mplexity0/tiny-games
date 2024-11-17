@@ -27,7 +27,8 @@ export interface Game {
   gameDir: string,
 
 
-  inDeveloperMode?: boolean
+  inDeveloperMode?: boolean,
+  hostPort?: number
 }
 
 export interface GameConfig {

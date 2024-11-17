@@ -217,7 +217,7 @@ export default function PlayerPage() {
           <iframe 
             ref={iframeRef} 
             className="size-full bg-white"
-            src={currentGame.inDeveloperMode && currentGame.devAppUrl ? currentGame.devAppUrl : `http://localhost:9977/${currentGame.inDeveloperMode && currentGame.devAppRoot ? currentGame.devAppRoot : currentGame.appRoot}`}
+            src={currentGame.inDeveloperMode && currentGame.devAppUrl ? currentGame.devAppUrl : `http://localhost:${currentGame.hostPort}/${currentGame.inDeveloperMode && currentGame.devAppRoot ? currentGame.devAppRoot : currentGame.appRoot}`}
             onLoad={() => {
               const url = new URL(window.location.href);
               let urlStr;
