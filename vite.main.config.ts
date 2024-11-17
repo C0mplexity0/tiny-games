@@ -40,7 +40,8 @@ export default defineConfig((env) => {
       postcss: {
         plugins: [tailwindcss()],
       },
-    }
+    },
+    publicDir: "src/ui/assets"
   };
 
   return mergeConfig(getBuildConfig(forgeEnv), config);
