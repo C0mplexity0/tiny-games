@@ -45,7 +45,9 @@ export default defineConfig({
 
     search: {
       provider: "local"
-    }
+    },
+
+    externalLinkIcon: true
   },
   lastUpdated: true,
   base: "/tiny-games/"
