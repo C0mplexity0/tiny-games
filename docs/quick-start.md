@@ -1,5 +1,5 @@
 ::: warning
-These docs are for **developers**. They only apply to you if you're trying to make a game for Tiny Games. You can find the download page [here](/download).
+These docs are for **developers**. They only apply to you if you're trying to make a game for Tiny Games. You can find the download page [here](/#getting-started).
 :::
 
 ::: warning
