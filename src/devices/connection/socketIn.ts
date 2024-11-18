@@ -3,7 +3,7 @@ import { addDevice, Device, devices, getDeviceById, getDeviceBySocket, removeDev
 import socketOut from "./socketOut";
 import ipcOut from "@/ipc/ipcOut";
 import { currentGame, currentGameActive } from "@/games/player";
-import { fileTypeFromBuffer } from "file-type";
+import { parse } from "file-type-mime";
 
 const PING_INTERVAL = 5000;
 
@@ -60,7 +60,7 @@ export function setupIo(io: Server) {
       let profileImageType: string;
 
       if (profileImage) {
-        profileImageType = (await fileTypeFromBuffer(profileImage)).mime;
+        profileImageType = parse(profileImage).mime;
 
         if (!profileImageType.startsWith("image/")) {
           return; // Another file type has been uploaded
