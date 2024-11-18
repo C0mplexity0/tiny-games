@@ -1,6 +1,15 @@
 import communication from "./communication.mjs";
+import GameEvent from "./events.mjs";
 
 let devices;
+
+
+// Events
+
+const gameReadyEvent = new GameEvent();
+const devicesUpdatedEvent = new GameEvent();
+const appMessageReceiveEvent = new GameEvent();
+
 
 // Classes
 
@@ -67,6 +76,59 @@ function emitToApp(event, ...data) {
 }
 
 
+// Events
+
+/**
+ * Fires when the game has finished fetching all the required information.
+ * @param {() => void} listener - The callback for when the event fires.
+*/
+function onGameReady(listener) {
+  gameReadyEvent.addListener(listener);
+}
+
+/**
+ * Fires when the game has finished fetching all the required information.
+ * @param {() => void} listener - The callback to remove.
+*/
+function offGameReady(listener) {
+  gameReadyEvent.removeListener(listener);
+}
+
+
+/**
+ * Fires when a device is added or removed.
+ * @param {(devices: WebDevice[]) => void} listener - The callback for when the event fires.
+*/
+function onDevicesUpdated(listener) {
+  devicesUpdatedEvent.addListener(listener);
+}
+
+/**
+ * Fires when a device is added or removed.
+ * @param {(devices: WebDevice[]) => void} listener - The callback to remove.
+*/
+function offDevicesUpdated(listener) {
+  devicesUpdatedEvent.removeListener(listener);
+}
+
+
+/**
+ * Fires when a device sends a message to the app.
+ * @param {(event: string, device: WebDevice, ...data: any[]) => void} listener - The callback for when the event fires.
+*/
+function onAppMessageReceive(listener) {
+  appMessageReceiveEvent.addListener(listener);
+}
+
+/**
+ * Fires when a app sends a message to this device.
+ * @param {(event: string, device: WebDevice, ...data: any[]) => void} listener - The callback to remove.
+*/
+function offAppMessageReceive(listener) {
+  appMessageReceiveEvent.removeListener(listener);
+}
+
+
 // Handling communication between iframe and player page
 
 function handleMessage(event) {
@@ -86,7 +148,8 @@ function handleMessage(event) {
         devices.push(new WebDevice(info.data[i]));
       }
 
-      window.dispatchEvent(new CustomEvent("devicesUpdated", {
+      devicesUpdatedEvent.fire(devices);
+      window.dispatchEvent(new CustomEvent("devicesUpdated", { // For compatibility
         detail: {
           devices
         }
@@ -95,7 +158,9 @@ function handleMessage(event) {
       break;
     case "emitToDevice": {
       const messageInfo = info.data;
-      window.dispatchEvent(new CustomEvent("appMessageReceive", {
+
+      appMessageReceiveEvent.fire(messageInfo.event, getWebDeviceFromDevice(messageInfo.device), messageInfo.data);
+      window.dispatchEvent(new CustomEvent("appMessageReceive", { // For compatibility
         detail: {
           event: messageInfo.event,
           device: getWebDeviceFromDevice(messageInfo.device),
@@ -121,7 +186,9 @@ function init() {
 
     if (gameReady()) {
       clearInterval(checkReadyInterval);
-      window.dispatchEvent(new CustomEvent("gameReady"));
+
+      gameReadyEvent.fire();
+      window.dispatchEvent(new CustomEvent("gameReady")); // For compatibility
     }
   }, 0);
 }
@@ -130,9 +197,21 @@ init();
 
 
 export default {
-  gameReady,
-
+  // Variables
   getDevices,
 
-  emitToApp
+  // Functions
+  gameReady,
+
+  emitToApp,
+
+  // Events
+  onGameReady,
+  offGameReady,
+
+  onDevicesUpdated,
+  offDevicesUpdated,
+
+  onAppMessageReceive,
+  offAppMessageReceive
 };

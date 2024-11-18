@@ -10,10 +10,16 @@ import { FuseV1Options, FuseVersion } from "@electron/fuses";
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
-    extraResource: "./resources"
+    extraResource: "./resources",
+    icon: "./resources/branding/icons/tiny-games"
   },
   rebuildConfig: {},
-  makers: [new MakerSquirrel({}), new MakerZIP({}, ["darwin"]), new MakerRpm({}), new MakerDeb({})],
+  makers: [
+    new MakerSquirrel({}), 
+    new MakerZIP({}, ["darwin"]), 
+    new MakerRpm({}), 
+    new MakerDeb({ options: { icon: "./resources/branding/icons/tiny-games.png" } })
+  ],
   plugins: [
     new VitePlugin({
       // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.

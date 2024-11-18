@@ -17,6 +17,9 @@ let setDevices: (devices: Device[]) => void;
 export let games: Game[];
 let setGames: (games: Game[]) => void;
 
+export let gamesOrder: "lastPlayed" | "alphabetically";
+let setGamesOrder: (order: "lastPlayed" | "alphabetically") => void;
+
 export let currentGame: Game | null;
 let setCurrentGame: (game: Game) => void;
 
@@ -30,13 +33,14 @@ function Layout() {
     <>
       <Outlet />
     </>
-  )
+  );
 }
 
 export default function App() {
   let [initialisedIpcEvents, setInitialisedIpcEvents] = useState(false);
   [devices, setDevices] = useState([]);
   [games, setGames] = useState([]);
+  [gamesOrder, setGamesOrder] = useState<"lastPlayed" | "alphabetically">("lastPlayed");
   [currentGame, setCurrentGame] = useState(null);
   [connectLink, setConnectLink] = useState("");
 
@@ -58,16 +62,6 @@ export default function App() {
         if (window.location.hash == "#/game/player") {
           postMessage("setDevices", devices);
         }
-
-        if (devices.length != 0) {
-          return;
-        }
-
-        if (window.location.hash == "#/game/player") {
-          exitGame();
-        } else {
-          window.location.hash = "/devices/add-devices";
-        }
       });
 
       window.electron.ipcRenderer.on("deviceConnected", (device: Device) => {
@@ -80,8 +74,9 @@ export default function App() {
 
       window.electron.ipcRenderer.sendMessage("getGames");
 
-      window.electron.ipcRenderer.on("setGames", (games: Game[]) => {
+      window.electron.ipcRenderer.on("setGames", (games: Game[], order: "lastPlayed" | "alphabetically") => {
         setGames(games);
+        setGamesOrder(order);
       });
 
 
@@ -107,7 +102,7 @@ export default function App() {
       
       window.electron.ipcRenderer.on("gameEnd", () => {
         if (window.location.hash == "#/game/player")
-          window.location.hash = devices.length == 0 ? window.location.hash = "/devices/add-devices" : "";
+          window.location.hash = "";
         setCurrentGame(null);
       });
 
@@ -147,5 +142,5 @@ export default function App() {
         </Routes>
       </HashRouter>
     </div>
-  )
+  );
 }

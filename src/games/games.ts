@@ -18,10 +18,17 @@ export interface Game {
   appRoot: string,
   webRoot: string,
 
+  devAppRoot?: string,
+  devWebRoot?: string,
+
   devAppUrl?: string,
   devWebUrl?: string,
 
   gameDir: string,
+
+
+  inDeveloperMode?: boolean,
+  hostPort?: number
 }
 
 export interface GameConfig {
@@ -31,6 +38,7 @@ export interface GameConfig {
   icon?: string, // Icon/thumbnail should both be paths to images
   thumbnail?: string,
   socials?: string[],
+
 
   appRoot: string,
   webRoot: string,
@@ -57,12 +65,7 @@ export function createGamesDir() {
   });
 }
 
-export function addGame(game: Game) {
-  games.push(game);
-  ipcOut.emitSetGames(games);
-}
-
-export async function getGames() {
+export async function getGames(order?: "lastPlayed" | "alphabetically" | undefined) {
   gamesDir = path.resolve(getAppDataDir(), "games");
   await createGamesDir();
 
@@ -100,8 +103,10 @@ export async function getGames() {
   for (let i=0;i<orderedFiles.length;i++) {
     loadGame(orderedFiles[i]);
   }
+
+  ipcOut.emitSetGames(games, order);
 }
 
-export function playGame(game: Game) {
-  startGame(game);
+export function playGame(game: Game, developerMode: boolean) {
+  startGame(game, developerMode);
 }

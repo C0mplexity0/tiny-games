@@ -7,10 +7,8 @@ let iframeRef: React.MutableRefObject<any>;
 
 
 function postMessage(event: string, data?: any) {
-  const url = new URL(window.location.href);
-
   if (iframeRef.current)
-    iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, `http://${url.hostname}:9977`);
+    iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, iframeRef.current.src);
 }
 
 
@@ -65,7 +63,7 @@ export default function PlayerPage() {
       socket.off("setDevices", handleSetDevices);
       socket.off("gameEmitToDevice", handleEmitToDevice);
       removeMessageListener();
-    }
+    };
   });
 
   if (!currentGame) {
@@ -79,7 +77,7 @@ export default function PlayerPage() {
       <div className="size-full">
         <iframe 
           ref={iframeRef} 
-          src={currentGame.devWebUrl ? currentGame.devWebUrl : `http://localhost:9977/${currentGame.webRoot}`} 
+          src={currentGame.inDeveloperMode && currentGame.devWebUrl ? currentGame.devWebUrl : `http://${url.hostname}:${currentGame.hostPort}/${currentGame.inDeveloperMode && currentGame.devWebRoot ? currentGame.devWebRoot : currentGame.webRoot}`} 
           className="size-full bg-white"
           onLoad={() => {
             let urlStr;
@@ -95,5 +93,5 @@ export default function PlayerPage() {
         />
       </div>
     </div>
-  )
+  );
 }

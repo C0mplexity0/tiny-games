@@ -1,0 +1,26 @@
+.titleBar {
+  position: absolute;
+  width: env(titlebar-area-width);
+  height: env(titlebar-area-height);
+  left: env(titlebar-area-x);
+  top: env(titlebar-area-y);
+}
+
+.draggableArea {
+  -webkit-app-region: drag;
+}
+
+.title {
+  display: inline-block;
+  height: env(titlebar-area-height);
+  line-height: env(titlebar-area-height);
+  vertical-align: middle;
+  font-weight: 600;
+}
+
+.content {
+  position: absolute;
+  top: calc(env(titlebar-area-height) + env(titlebar-area-y));
+  width: 100%;
+  height: calc(100% - (env(titlebar-area-height) + env(titlebar-area-y)));
+}

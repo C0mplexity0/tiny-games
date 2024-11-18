@@ -9,6 +9,7 @@ import { getConnectLink } from "@/web";
 import openExplorer from "open-file-explorer";
 import socketOut from "@/devices/connection/socketOut";
 import { getGameData, saveGameData } from "@/games/data";
+import { mainWindow } from "@/main";
 
 export function initIpc() {
   ipcMain.on("getConnectQrCode", async (event) => {
@@ -26,7 +27,7 @@ export function initIpc() {
 
   ipcMain.on("removeDevice", (_event, deviceId) => {
     if (typeof deviceId != "string") {
-      return
+      return;
     }
 
     const device = getDeviceById(deviceId);
@@ -35,16 +36,16 @@ export function initIpc() {
     }
   });
 
-  ipcMain.on("getGames", () => {
-    ipcOut.emitSetGames(games);
+  ipcMain.on("getGames", (_event, order?: "lastPlayed" | "alphabetically" | undefined) => {
+    ipcOut.emitSetGames(games, order);
   });
 
   ipcMain.on("openLinkInBrowser", (_event, link) => {
     openUrl.open(link);
   });
 
-  ipcMain.on("playGame", (_event, gameId) => {
-    playGame(games[gameId]);
+  ipcMain.on("playGame", (_event, gameId, developerMode=false) => {
+    playGame(games[gameId], developerMode);
   });
 
   ipcMain.on("getCurrentGame", () => {
@@ -55,8 +56,8 @@ export function initIpc() {
     endGame();
   });
 
-  ipcMain.on("reloadGames", () => {
-    getGames();
+  ipcMain.on("reloadGames", (_event, order?: "lastPlayed" | "alphabetically" | undefined) => {
+    getGames(order);
   });
 
   ipcMain.on("openGamesDir", () => {
@@ -65,6 +66,16 @@ export function initIpc() {
         console.error(err);
       }
     });
+  });
+
+  ipcMain.on("toggleDevTools", () => {
+    const webContents = mainWindow.webContents;
+
+    if (webContents.isDevToolsOpened()) {
+      webContents.closeDevTools();
+    } else {
+      webContents.openDevTools({ mode: "detach" });
+    }
   });
 
 

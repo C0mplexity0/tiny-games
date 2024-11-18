@@ -20,7 +20,9 @@
       "@components/*": ["./src/ui/components/*"],
       "@hooks/*": ["./src/ui/hooks/*"],
       "@/*": ["./src/*"],
-    }
+      "@docs/*": ["./docs/*"],
+    },
+    "types": ["vite/client"]
   },
   "include": ["**/*"]
 }

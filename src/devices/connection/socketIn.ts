@@ -1,8 +1,9 @@
 import { Server } from "socket.io";
-import { addDevice, Device, devices, getDeviceBySocket, removeDevice } from "../devices";
+import { addDevice, Device, devices, getDeviceById, getDeviceBySocket, removeDevice } from "../devices";
 import socketOut from "./socketOut";
 import ipcOut from "@/ipc/ipcOut";
 import { currentGame, currentGameActive } from "@/games/player";
+import { parse } from "file-type-mime";
 
 const PING_INTERVAL = 5000;
 
@@ -15,10 +16,18 @@ function ping() {
 
     let start = Date.now();
 
+    const deviceId = devices[i].id;
+
     devices[i].socket.emit("ping", () => {
-      devices[i].latency = Date.now() - start;
-      devices[i].lastPong = Date.now();
-      devices[i].connected = true;
+      const device = getDeviceById(deviceId);
+
+      if (!device) { // Sometimes devices can get removed/added during a ping, so finding the correct device again is important
+        return;
+      }
+
+      device.latency = Date.now() - start;
+      device.lastPong = Date.now();
+      device.connected = true;
 
       ipcOut.emitSetDevices(devices);
     });
@@ -43,18 +52,30 @@ export function setupIo(io: Server) {
       }
     }
 
-    socket.on("join", (username: string) => {
-      if (username.length < 1) {
+    socket.on("join", async (username: string, profileImage?: Buffer) => {
+      if (username.length < 1 || username.length > 20) {
         return;
+      }
+
+      let profileImageType: string;
+
+      if (profileImage) {
+        profileImageType = parse(profileImage).mime;
+
+        if (!profileImageType.startsWith("image/")) {
+          return; // Another file type has been uploaded
+        }
       }
 
       device = {
         username,
+        colourId: Math.floor(Math.random() * 6),
         socket,
         connected: true,
         id: socket.id,
         latency: 0,
-        lastPong: Date.now()
+        lastPong: Date.now(),
+        profileImage: profileImage ? `data:${profileImageType};base64, ${profileImage.toString("base64")}` : null
       };
 
       if (addDevice(device)) {

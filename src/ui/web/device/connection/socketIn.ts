@@ -1,3 +1,4 @@
+import { config } from "@/config";
 import { Game } from "@/games/games";
 import { currentGame, device, setCurrentGame, setDevice } from "@web/Web";
 import io, { Socket } from "socket.io-client";
@@ -7,8 +8,14 @@ export let socket: Socket;
 export let hasConnected = false;
 
 export function initSocket() {
-  let url = new URL(window.location.href);
-  socket = io(`http://${url.hostname}:9976`, {path: "/socket.io/", withCredentials: true});
+  const url = new URL(window.location.href);
+  const socketPort = url.searchParams.get("sp") ?? config.defaultIoServerPort;
+
+  if (!socketPort) {
+    return;
+  }
+
+  socket = io(`http://${url.hostname}:${socketPort}`, {path: "/socket.io/", withCredentials: true});
 
   socket.on("connect", () => {
     hasConnected = true;

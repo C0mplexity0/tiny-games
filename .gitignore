@@ -92,4 +92,5 @@ typings/
 out/
 
 # Docs
-docs/out
+docs/.vitepress/dist
+docs/.vitepress/cache

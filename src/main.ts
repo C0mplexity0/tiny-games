@@ -11,13 +11,13 @@ import { gameHistorySaved, saveGameHistory } from "./games/data";
 
 export let tryingToQuit = false;
 
-export function isDev() {
+export function nodeEnvDevelopment() {
   return process.env.NODE_ENV === "development" ||
     process.env.DEBUG_PROD === "true";
 }
 
 export function getResourcesFolder() {
-  if (isDev()) {
+  if (nodeEnvDevelopment()) {
     return path.resolve(__dirname, "../../resources");
   } else {
     return path.resolve(process.resourcesPath, "resources");
@@ -45,7 +45,12 @@ async function quitting(event: { preventDefault: () => void; }) {
   event.preventDefault(); // Make sure everything saves and exits properly
   tryingToQuit = true;
   await saveGameHistory();
-  ipcOut.emitQuitting();
+
+  if (currentGameActive) {
+    ipcOut.emitQuitting();
+  } else {
+    app.quit();
+  }
 }
 
 
@@ -56,8 +61,15 @@ const createWindow = () => {
     minWidth: 700,
     minHeight: 480,
     autoHideMenuBar: true,
-    backgroundColor: "#0f0f10", // From globals.css
+    backgroundColor: "#1E2023", // From globals.css
+    icon: "./resources/branding/icons/tiny-games.png",
     show: false,
+    titleBarStyle: "hidden",
+    titleBarOverlay: {
+      color: "#1E2023",
+      symbolColor: "#D2D2D2",
+      height: 40
+    },
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -77,8 +89,8 @@ const createWindow = () => {
   mainWindow.on("ready-to-show", () => {
     mainWindow.show();
 
-    if (isDev()) {
-      mainWindow.webContents.openDevTools();
+    if (nodeEnvDevelopment()) {
+      mainWindow.webContents.openDevTools({ mode: "detach" });
     }
   });
 };
