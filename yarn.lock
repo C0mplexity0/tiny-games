@@ -521,13 +521,20 @@
   dependencies:
     "@electron-forge/shared-types" "7.4.0"
 
-"@electron-forge/plugin-fuses@7.4.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@electron-forge/plugin-fuses/-/plugin-fuses-7.4.0.tgz#3a3b78bf3c5d2b2d445825b05bce145d116df792"
-  integrity sha512-LKcyIaO0sUkzZdOB1PySjG1R9KAl5Vi453ZQcambBI7RpZtPKozluNd0zlXey1cf7ycTwhzvmrI6ss3LHQyjvw==
+"@electron-forge/plugin-base@7.5.0":
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/plugin-base/-/plugin-base-7.5.0.tgz#f98bbe2d3d52c197fa7bf5c3fea0714776de4b0c"
+  integrity sha512-44AbXSb5lDY8uHIo0mJ91atOSWgxv3iuECk07/gDBiuMPX62dwHnLteEjQF4GBXJZTpnV7SxhD+d2AUBQmoojw==
   dependencies:
-    "@electron-forge/plugin-base" "7.4.0"
-    "@electron-forge/shared-types" "7.4.0"
+    "@electron-forge/shared-types" "7.5.0"
+
+"@electron-forge/plugin-fuses@7.5.0":
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/plugin-fuses/-/plugin-fuses-7.5.0.tgz#bc4d53d9619bb84e2d48bd52dedad66cd2a0541a"
+  integrity sha512-nF5C4TN/rzN95F5HwAkyYTgy44Mu3EAys8O5zShzg7rye8d5BTnx2peAGtROZcChSaHRql09EeoOswNtuJNMcw==
+  dependencies:
+    "@electron-forge/plugin-base" "7.5.0"
+    "@electron-forge/shared-types" "7.5.0"
 
 "@electron-forge/plugin-vite@7.4.0":
   version "7.4.0"
