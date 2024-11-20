@@ -15,7 +15,9 @@ const config: ForgeConfig = {
   },
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({}), 
+    new MakerSquirrel({
+      exe: "Tiny-Games-Setup.exe",
+    }), 
     new MakerZIP({}, ["darwin"]), 
     new MakerRpm({}), 
     new MakerDeb({ options: { icon: "./resources/branding/icons/tiny-games.png" } })
