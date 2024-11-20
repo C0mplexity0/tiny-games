@@ -27,7 +27,7 @@ features:
 
 ## Getting Started
 
-You can download Tiny Games [here](https://github.com/C0mplexity0/tiny-games/releases/download/v0.1.0/Tiny.Games-0.1.0.Setup.exe).
+You can download Tiny Games [here](https://github.com/C0mplexity0/tiny-games/releases/latest/download/Tiny-Games-Setup.exe).
 
 Download the installer and run it, then download some games and have fun!
 
