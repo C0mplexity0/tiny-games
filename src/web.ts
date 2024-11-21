@@ -9,15 +9,15 @@ import ipcOut from "./ipc/ipcOut";
 import findFreePorts from "find-free-ports";
 import { config } from "./config";
 
-let currentIp: string | undefined;
-let currentProductionServerPort: number | undefined;
-let currentIoServerPort: number | undefined;
+export let currentIp: string | undefined;
+export let currentProductionServerPort: number | undefined;
+export let currentIoServerPort: number | undefined;
 
 let expressApp: express.Application;
 let httpServer: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
 export let io: Server;
 
-function getIp() {
+export function getIp() {
   if (currentIp) {
     return currentIp;
   }

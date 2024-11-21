@@ -46,8 +46,8 @@ export interface GameConfig {
   devAppRoot?: string,
   devWebRoot?: string,
 
-  devAppUrl?: string,
-  devWebUrl?: string
+  devAppUrl?: string | { host?: string, port: string | number, path?: string },
+  devWebUrl?: string | { host?: string, port: string | number, path?: string }
 }
 
 export let games: Game[] = [];
