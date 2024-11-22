@@ -5,7 +5,7 @@ import ipcOut from "@/ipc/ipcOut";
 import { currentGame, currentGameActive } from "@/games/player";
 import { parse } from "file-type-mime";
 
-const PING_INTERVAL = 5000;
+const PING_INTERVAL = 2000;
 
 function ping() {
   for (let i=0;i<devices.length;i++) {
