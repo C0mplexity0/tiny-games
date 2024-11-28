@@ -490,13 +490,13 @@
   optionalDependencies:
     electron-installer-debian "^3.2.0"
 
-"@electron-forge/maker-rpm@^7.5.0":
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/@electron-forge/maker-rpm/-/maker-rpm-7.5.0.tgz#5ed494281aad03b3b43bd46c4e76880ee2b4889c"
-  integrity sha512-NzrtEqa61D++GoaURpicj9oxwOA/z0wcZaeipsrzUEBXE53UAo47tdIZjh396MhC0z9Mr6bxgDwpPUZF9QgfDA==
+"@electron-forge/maker-rpm@^7.6.0":
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/maker-rpm/-/maker-rpm-7.6.0.tgz#e64720ebff765d5c2f69a483b5b1bce960964006"
+  integrity sha512-pZGpZ+Oum7uyykwi73e+s/LnWDsG+B0t1iU9jCaZObIR0lcISK5VemeIlgm1A4HlDHODdBZ5AEJfIJ5p9t7w/w==
   dependencies:
-    "@electron-forge/maker-base" "7.5.0"
-    "@electron-forge/shared-types" "7.5.0"
+    "@electron-forge/maker-base" "7.6.0"
+    "@electron-forge/shared-types" "7.6.0"
   optionalDependencies:
     electron-installer-redhat "^3.2.0"
 
