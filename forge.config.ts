@@ -16,7 +16,7 @@ const config: ForgeConfig = {
   rebuildConfig: {},
   makers: [
     new MakerSquirrel({
-      exe: "Tiny-Games-Setup.exe",
+      setupExe: "Tiny-Games-Setup.exe",
     }), 
     new MakerZIP({}, ["darwin"]), 
     new MakerRpm({}), 
