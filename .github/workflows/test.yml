@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ windows-latest, ubuntu-latest ]
 
     steps:
       - name: Check out Git repository
@@ -28,5 +28,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          yarn eslint .
           yarn package
           
