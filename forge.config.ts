@@ -11,7 +11,13 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     extraResource: "./resources",
-    icon: "./resources/branding/icons/tiny-games"
+    icon: "./resources/branding/icons/tiny-games",
+    ignore: path => {
+      if (path == "") return false;
+      const include = ["/.vite", "/node_modules", "/package.json", "/static"];
+      const isIgnored = !include.some(i => path.startsWith(i)) || path.includes(".bin");
+      return isIgnored;
+    }
   },
   rebuildConfig: {},
   makers: [

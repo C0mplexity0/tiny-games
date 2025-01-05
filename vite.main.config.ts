@@ -4,6 +4,7 @@ import { getBuildConfig, getBuildDefine, external, pluginHotRestart } from "./vi
 import react from "@vitejs/plugin-react";
 import tailwindcss from "tailwindcss";
 import path from "path";
+import commonjs from "@rollup/plugin-commonjs";
 
 // https://vitejs.dev/config
 export default defineConfig((env) => {
@@ -12,6 +13,7 @@ export default defineConfig((env) => {
   const define = getBuildDefine(forgeEnv);
   const config: UserConfig = {
     build: {
+      sourcemap: true,
       lib: {
         entry: forgeConfigSelf.entry!,
         fileName: () => "[name].js",
@@ -21,7 +23,7 @@ export default defineConfig((env) => {
         external,
       },
     },
-    plugins: [pluginHotRestart("restart"), react()],
+    plugins: [pluginHotRestart("restart"), react(), commonjs()],
     define,
     resolve: {
       // Load the Node.js entry.
