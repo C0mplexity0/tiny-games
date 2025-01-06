@@ -22,7 +22,7 @@ features:
     details: Just install the app and connect a device.
   - icon: ✅
     title: Cross platform
-    details: Supports Windows (exe) and Debian-based linux (deb). More support coming soon.
+    details: Supports Windows (exe) and Debian-based Linux (deb). More support coming soon.
 ---
 
 ## Getting Started
