@@ -1,15 +1,16 @@
 import React, { ReactNode } from "react";
 import styles from "./page-structure.module.css";
+import { cn } from "@lib/utils";
 
 export function Title({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
   return (
-    <span className={`${styles.title} ${className}`} {...props} />
+    <span className={cn(styles.title, className)} {...props} />
   );
 }
 
 export function TitleBar({ children, className }: { children?: ReactNode, className?: string }) {
   return (
-    <div className={`${styles.titleBar} bg-secondary-background ${className}`}>
+    <div className={`${styles.titleBar} ${className}`}>
       {
         children ?
         children :
@@ -27,9 +28,9 @@ export function DraggableArea({ className, ...props }: React.HTMLAttributes<HTML
   );
 }
 
-export function Content({ children }: { children?: ReactNode }) {
+export function Content({ children, className }: { children?: ReactNode, className?: string }) {
   return (
-    <div className={`${styles.content} border-t`}>
+    <div className={cn(`${styles.content} border-t`, className)}>
       {children}
     </div>
   );

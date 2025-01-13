@@ -3,7 +3,7 @@ import { Device } from "@/devices/devices";
 import styles from "./profile.module.css";
 import { CircleUserRound } from "lucide-react";
 
-function ReconnectingAnimation() {
+export function ReconnectingAnimation() {
   return (
     <div className={styles.reconnectingAnimation}></div>
   );

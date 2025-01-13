@@ -29,6 +29,25 @@ export function DeviceProfileOptions({ device }: { device: Device }) {
   );
 }
 
+export function DeviceButtonPopoverContent({ device, popoverSide }: { device?: Device, popoverSide?: "top" | "bottom" | "left" | "right" }) {
+  return (
+    <PopoverContent side={popoverSide ? popoverSide : "right"}>
+      <div className="flex flex-col gap-2">
+
+        <div className="w-full flex flex-row">
+          <span className="flex-1 overflow-hidden whitespace-nowrap text-xl leading-10 align-middle text-ellipsis">{device.username}</span>
+          <DeviceProfileOptions device={device} />
+        </div>
+
+        <div className="w-full flex flex-row gap-1 text-secondary-foreground">
+          <span>{device.connected ? `Connected, Ping: ${device.latency}ms` : "Reconnecting..."}</span>
+        </div>
+        
+      </div>
+    </PopoverContent>
+  );
+}
+
 export default function DeviceButton({ device, newButton, popoverSide }: { device?: Device, newButton?: Boolean, popoverSide?: "top" | "bottom" | "left" | "right" }) {
   return (
     <div className="size-12">
@@ -43,20 +62,7 @@ export default function DeviceButton({ device, newButton, popoverSide }: { devic
             </Button>
           </PopoverTrigger>
 
-          <PopoverContent side={popoverSide ? popoverSide : "right"}>
-            <div className="flex flex-col gap-2">
-
-              <div className="w-full flex flex-row">
-                <span className="flex-1 overflow-hidden whitespace-nowrap text-xl leading-10 align-middle text-ellipsis">{device.username}</span>
-                <DeviceProfileOptions device={device} />
-              </div>
-
-              <div className="w-full flex flex-row gap-1 text-secondary-foreground">
-                <span>{device.connected ? `Connected, Ping: ${device.latency}ms` : "Reconnecting..."}</span>
-              </div>
-              
-            </div>
-          </PopoverContent>
+          <DeviceButtonPopoverContent device={device} popoverSide={popoverSide} />
         </Popover>
       }
     </div>

@@ -14,6 +14,7 @@
     "jsx": "react",
     "paths": {
       "@app/*": ["./src/ui/app/*"],
+      "@assets/*": ["./src/ui/assets/*"],
       "@web/*": ["./src/ui/web/*"],
       "@lib/*": ["./src/ui/lib/*"],
       "@styles/*": ["./src/ui/styles/*"],
@@ -21,6 +22,7 @@
       "@hooks/*": ["./src/ui/hooks/*"],
       "@/*": ["./src/*"],
       "@docs/*": ["./docs/*"],
+      "@resources/*": ["./resources/*"]
     },
     "types": ["vite/client"]
   },

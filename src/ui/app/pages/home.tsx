@@ -1,16 +1,21 @@
 import { Game } from "@/games/games";
 import { devices, games, gamesOrder } from "@app/App";
 import { Button } from "@components/ui/button";
-import DeviceButton from "@components/ui/devices/device-button";
-import { Content, TitleBar } from "@components/ui/pages/page-structure";
+import DeviceButton, { DeviceButtonPopoverContent } from "@components/ui/devices/device-button";
+import { Content, DraggableArea, TitleBar } from "@components/ui/pages/page-structure";
 import { SiBuymeacoffee, SiFacebook, SiGithub, SiKofi, SiMastodon, SiPatreon, SiReddit, SiReplit, SiThreads, SiTumblr, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@components/ui/tooltip";
-import { ArrowDownWideNarrow, Folder, Gamepad2, Link, Play, RefreshCcw, Terminal } from "lucide-react";
+import { ArrowDownWideNarrow, CircleUserRound, Folder, Gamepad2, Link, Play, Plus, RefreshCcw, Terminal } from "lucide-react";
 import React, { ReactNode, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuTrigger } from "@components/ui/context-menu";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuRadioGroup, DropdownMenuLabel, DropdownMenuRadioItem } from "@components/ui/dropdown-menu";
 import { openLinkInBrowser } from "@app/utils";
+import { TinyGamesSymbol } from "@components/ui/branding/icons";
+import { ReconnectingAnimation } from "@components/ui/devices/profile";
+import { Device } from "@/devices/devices";
+import { Popover, PopoverTrigger } from "@components/ui/popover";
+import * as ReactRouterDom from "react-router-dom";
 
 
 let currentGame: Game;
@@ -368,6 +373,54 @@ function GamePage({ game }: { game: Game }) {
   );
 }
 
+function TitleBarDeviceNewButton() {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild className="p-0">
+          <Button variant="outline" size="icon" className="size-7 border-2 rounded-full overflow-hidden relative p-0">
+            <ReactRouterDom.Link to="/devices/add-devices">
+              <Plus className="size-4" />
+            </ReactRouterDom.Link>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Connect device</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}
+
+function TitleBarDeviceButton({ device }: { device: Device }) {
+  return (
+    <Popover>
+      <PopoverTrigger>
+        <div title={device.username} style={{borderColor: `hsl(var(--device-${device.colourId}))`}} className="size-7 bg-tertiary-background border-2 rounded-full overflow-hidden relative">
+          {
+            device.connected ?
+            device.profileImage ? <img src={device.profileImage} className="size-full object-cover" /> : <CircleUserRound className="text-foreground opacity-60 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-2/5" />
+            :
+            <ReconnectingAnimation />
+          }
+        </div>
+      </PopoverTrigger>
+
+      <DeviceButtonPopoverContent device={device} popoverSide={"bottom"} />
+    </Popover>
+  );
+}
+
+function DeviceList() {
+  return (
+    <div className="p-1 flex flex-row gap-1 bg-black/15 rounded-full">
+      <TitleBarDeviceNewButton />
+      {
+        devices.map((device, i) => <TitleBarDeviceButton key={i} device={device} />)
+      }
+    </div>
+  );
+}
 
 export default function AppHomePage() {
   [currentGame, setCurrentGame] = useState();
@@ -383,7 +436,14 @@ export default function AppHomePage() {
       <Helmet>
         <title>Games</title>
       </Helmet>
-      <TitleBar />
+      <TitleBar className="flex flex-row">
+        <DraggableArea className="size-full flex-1">
+          <TinyGamesSymbol className="text-primary m-[0.375rem]" width={38} height={38} />
+        </DraggableArea>
+        <div className="flex flex-col justify-center pl-2 pr-2">
+          <DeviceList />
+        </div>
+      </TitleBar>
       <Content>
         <div className="size-full flex flex-row">
           <Sidebar />
