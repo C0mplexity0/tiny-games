@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import styles from "./page-structure.module.css";
 import { cn } from "@lib/utils";
 
@@ -9,8 +9,16 @@ export function Title({ className, ...props }: React.HTMLAttributes<HTMLSpanElem
 }
 
 export function TitleBar({ children, className }: { children?: ReactNode, className?: string }) {
+  let [inFullscreen, setInFullscreen] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setInFullscreen(window.innerHeight == screen.height);
+    });
+  });
+  
   return (
-    <div className={`${styles.titleBar} ${className}`}>
+    <div className={`${styles.titleBar} ${inFullscreen ? "w-full" : ""} ${className}`}>
       {
         children ?
         children :
