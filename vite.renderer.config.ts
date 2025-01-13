@@ -32,7 +32,7 @@ export default defineConfig((env) => {
       },
     },
     optimizeDeps: {
-      exclude: ["js-big-decimal"],
+      exclude: ["js-big-decimal", "socket.io"],
       // Forces vite to ignore existing cache (in node_modules/.vite) and rebuild the project anyway. This seems to fix the 504 (Outdated Optimize Dep) error, which could be caused by the fact that there are two instances of vite running side-by-side (app & web in forge.config.ts). 
       force: true
     },
