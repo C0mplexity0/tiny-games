@@ -6,15 +6,13 @@
     --foreground: 0 0% 85%;
     --border: 240 6% 16%;
     --secondary-background: 219 4% 15%;
-    --element-background: 219 4% 12%;
+    --element: 219 4% 12%;
     --element-border: 220 4% 22%;
     --text: 0 0% 8%;
 
     --tertiary-background: 220 6% 20%;
     --card: var(--background);
     --card-foreground: var(--foreground);
-    --popover: var(--background);
-    --popover-foreground: var(--foreground);
     --primary: var(--foreground);
     --primary-foreground: var(--tertiary-background);
     --secondary: var(--secondary-background);
@@ -27,7 +25,7 @@
     --destructive-foreground: var(--foreground);
     --input: var(--border);
     --ring: 0 0% 82%;
-    --radius: 0.75rem;
+    --radius: 1rem;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;

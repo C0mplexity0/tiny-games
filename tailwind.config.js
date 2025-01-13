@@ -19,6 +19,10 @@ export const theme = {
       ring: "hsl(var(--ring))",
       background: "hsl(var(--background))",
       foreground: "hsl(var(--foreground))",
+      element: {
+        DEFAULT: "hsl(var(--element))",
+        border: "hsl(var(--element-border))"
+      },
       primary: {
         DEFAULT: "hsl(var(--primary))",
         foreground: "hsl(var(--primary-foreground))",
@@ -44,10 +48,6 @@ export const theme = {
       accent: {
         DEFAULT: "hsl(var(--accent))",
         foreground: "hsl(var(--accent-foreground))",
-      },
-      popover: {
-        DEFAULT: "hsl(var(--popover))",
-        foreground: "hsl(var(--popover-foreground))",
       },
       card: {
         DEFAULT: "hsl(var(--card))",
