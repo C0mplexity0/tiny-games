@@ -12,9 +12,17 @@ export function TitleBar({ children, className }: { children?: ReactNode, classN
   let [inFullscreen, setInFullscreen] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
+    const checkFullscreen = () => {
       setInFullscreen(window.innerHeight == screen.height);
-    });
+    };
+
+    window.addEventListener("resize", checkFullscreen);
+
+    checkFullscreen();
+
+    return () => {
+      window.removeEventListener("resize", checkFullscreen);
+    };
   });
   
   return (
