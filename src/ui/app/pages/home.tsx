@@ -1,7 +1,7 @@
 import { Game } from "@/games/games";
 import { devices, games, gamesOrder } from "@app/App";
 import { Button, ButtonWithDropdown, ButtonWithDropdownContainer, DropdownButton } from "@components/ui/button";
-import DeviceButton, { DeviceButtonPopoverContent } from "@components/ui/devices/device-button";
+import { DeviceButtonPopoverContent } from "@components/ui/devices/device-button";
 import { Content, DraggableArea, TitleBar } from "@components/ui/pages/page-structure";
 import { SiBuymeacoffee, SiFacebook, SiGithub, SiKofi, SiMastodon, SiPatreon, SiReddit, SiReplit, SiThreads, SiTumblr, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@components/ui/tooltip";
@@ -76,24 +76,6 @@ const SOCIAL_ICONS: { [social: string]: { icon: ReactNode, name: string } } = {
     name: "Ko-fi"
   },
 };
-
-
-function Sidebar() {
-  return (
-    <div className="w-16 h-full border-r p-2 bg-secondary-background">
-      <div className="flex flex-col gap-2">
-        {
-          devices.map((device, i) => <DeviceButton key={i} device={device} />)
-        }
-        <DeviceButton newButton={true} />
-      </div>
-      <div className="flex-1" />
-      <div className="flex flex-col">
-
-      </div>
-    </div>
-  );
-}
 
 function GameButton({ game }: { game: Game }) {
   return (
@@ -446,8 +428,6 @@ export default function AppHomePage() {
       </TitleBar>
       <Content>
         <div className="size-full flex flex-row">
-          <Sidebar />
-
           <div className="flex-1 flex flex-row">
             <GamesList />
             <div className="flex-1">
