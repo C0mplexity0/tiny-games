@@ -378,7 +378,7 @@ function TitleBarDeviceNewButton() {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild className="p-0">
-          <Button variant="ghost" size="icon" className="size-7 border-2 rounded-full overflow-hidden relative p-0">
+          <Button variant="ghost" size="icon" className="size-8 border-2 rounded-full overflow-hidden relative p-0">
             <ReactRouterDom.Link to="/devices/add-devices">
               <Plus className="size-4" />
             </ReactRouterDom.Link>
@@ -396,7 +396,7 @@ function TitleBarDeviceButton({ device }: { device: Device }) {
   return (
     <Popover>
       <PopoverTrigger>
-        <div title={device.username} style={{borderColor: `hsl(var(--device-${device.colourId}))`}} className="size-7 bg-tertiary-background border-2 rounded-full overflow-hidden relative">
+        <div title={device.username} style={{borderColor: `hsl(var(--device-${device.colourId}))`}} className="size-8 bg-tertiary-background border-2 rounded-full overflow-hidden relative">
           {
             device.connected ?
             device.profileImage ? <img src={device.profileImage} className="size-full object-cover" /> : <CircleUserRound className="text-foreground opacity-60 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-2/5" />
