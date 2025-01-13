@@ -1,6 +1,6 @@
 import { Game } from "@/games/games";
 import { devices, games, gamesOrder } from "@app/App";
-import { Button } from "@components/ui/button";
+import { Button, ButtonWithDropdown, ButtonWithDropdownContainer, DropdownButton } from "@components/ui/button";
 import DeviceButton, { DeviceButtonPopoverContent } from "@components/ui/devices/device-button";
 import { Content, DraggableArea, TitleBar } from "@components/ui/pages/page-structure";
 import { SiBuymeacoffee, SiFacebook, SiGithub, SiKofi, SiMastodon, SiPatreon, SiReddit, SiReplit, SiThreads, SiTumblr, SiX, SiYoutube } from "@icons-pack/react-simple-icons";
@@ -9,7 +9,7 @@ import { ArrowDownWideNarrow, CircleUserRound, Folder, Gamepad2, Link, Play, Plu
 import React, { ReactNode, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuTrigger } from "@components/ui/context-menu";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuRadioGroup, DropdownMenuLabel, DropdownMenuRadioItem } from "@components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuRadioGroup, DropdownMenuLabel, DropdownMenuRadioItem, DropdownMenuItem } from "@components/ui/dropdown-menu";
 import { openLinkInBrowser } from "@app/utils";
 import { TinyGamesSymbol } from "@components/ui/branding/icons";
 import { ReconnectingAnimation } from "@components/ui/devices/profile";
@@ -324,31 +324,31 @@ function GamePage({ game }: { game: Game }) {
               }
             </div>
             <div className="flex flex-row gap-2">
-              <Button 
-                className="w-44 h-10"
-                onClick={() => {
-                  window.electron.ipcRenderer.sendMessage("playGame", games.indexOf(game));
-                }}
-              ><Play className="mr-2 h-4 w-4" />Play</Button>
-              
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="icon"
+              <ButtonWithDropdownContainer>
+                <ButtonWithDropdown
+                  className="w-44 h-10"
+                  onClick={() => {
+                    window.electron.ipcRenderer.sendMessage("playGame", games.indexOf(game));
+                  }}
+                >
+                  <Play className="mr-2 h-4 w-4" />Play
+                </ButtonWithDropdown>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <DropdownButton />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem
                       onClick={() => {
                         window.electron.ipcRenderer.sendMessage("playGame", games.indexOf(game), true);
                       }}
+                      className="flex flex-row gap-2"
                     >
-                      <Terminal />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Develop</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+                      <Terminal size={20} /> Dev Mode
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </ButtonWithDropdownContainer>
             </div>
           </div>
         </div>
@@ -378,7 +378,7 @@ function TitleBarDeviceNewButton() {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild className="p-0">
-          <Button variant="outline" size="icon" className="size-7 border-2 rounded-full overflow-hidden relative p-0">
+          <Button variant="ghost" size="icon" className="size-7 border-2 rounded-full overflow-hidden relative p-0">
             <ReactRouterDom.Link to="/devices/add-devices">
               <Plus className="size-4" />
             </ReactRouterDom.Link>

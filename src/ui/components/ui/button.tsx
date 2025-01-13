@@ -3,19 +3,17 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@lib/utils";
+import { ChevronDown } from "lucide-react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary-background text-secondary-foreground hover:bg-secondary-background/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-secondary-background text-secondary-foreground hover:bg-secondary-background/90",
+        ghost: "hover:bg-secondary-background hover:text-secondary-foreground",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -56,4 +54,34 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+
+const ButtonWithDropdown = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <Button className={cn(className, "rounded-none rounded-l-[20px] rounded-r-[0.4rem]")} ref={ref} {...props} />
+    );
+  }
+);
+ButtonWithDropdown.displayName = "ButtonWithDropdown";
+
+const DropdownButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <Button className={cn(className, "rounded-none rounded-r-[20px] rounded-l-[0.4rem]")} ref={ref} size="icon" {...props} >
+        <ChevronDown />
+      </Button>
+    );
+  }
+);
+DropdownButton.displayName = "DropdownButton";
+
+const ButtonWithDropdownContainer = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div ref={ref} className={cn(className, "inline-flex flex-row gap-0.5")} {...props} />
+    );
+  }
+);
+ButtonWithDropdownContainer.displayName = "ButtonWithDropdown";
+
+export { Button, ButtonWithDropdownContainer, DropdownButton, ButtonWithDropdown, buttonVariants };

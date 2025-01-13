@@ -11,8 +11,8 @@ export function DeviceProfileOptions({ device }: { device: Device }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="icon" variant="outline">
-          <EllipsisVertical />
+        <Button size="icon" variant="ghost">
+          <EllipsisVertical size={22} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

@@ -132,7 +132,7 @@ function ExitGameButton() {
 function DevToolsToggle() {
   return (
     <Button
-      variant="outline"
+      variant="secondary"
       className="bg-transparent flex flex-row gap-2 p-2 h-8"
       onClick={() => {window.electron.ipcRenderer.sendMessage("toggleDevTools");}}
     >
@@ -172,7 +172,7 @@ export default function PlayerPage() {
                   <Button 
                     className="w-8 h-8 bg-transparent" 
                     size="icon" 
-                    variant="outline"
+                    variant="secondary"
                   ><Menu className="h-5 w-5" /></Button>
                 </TooltipTrigger>
               </DialogTrigger>

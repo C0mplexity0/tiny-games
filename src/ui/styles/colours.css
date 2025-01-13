@@ -6,15 +6,14 @@
     --foreground: 0 0% 85%;
     --border: 240 6% 16%;
     --secondary-background: 219 4% 15%;
-    --element: 219 4% 12%;
-    --element-border: 220 4% 22%;
-    --text: 0 0% 8%;
+    --element: 219 3% 10%;
+    --element-border: 220 3% 18%;
+    --primary: 0 0% 85%;
+    --primary-foreground: 0 0% 8%;
 
     --tertiary-background: 220 6% 20%;
     --card: var(--background);
     --card-foreground: var(--foreground);
-    --primary: var(--foreground);
-    --primary-foreground: var(--tertiary-background);
     --secondary: var(--secondary-background);
     --secondary-foreground: 0 0% 82%;
     --muted: 210 18% 4%;
