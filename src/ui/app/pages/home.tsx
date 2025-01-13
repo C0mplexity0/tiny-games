@@ -16,6 +16,7 @@ import { ReconnectingAnimation } from "@components/ui/devices/profile";
 import { Device } from "@/devices/devices";
 import { Popover, PopoverTrigger } from "@components/ui/popover";
 import * as ReactRouterDom from "react-router-dom";
+import { ScrollArea, ScrollBar } from "@components/ui/scroll-area";
 
 
 let currentGame: Game;
@@ -418,13 +419,14 @@ export default function AppHomePage() {
       <Helmet>
         <title>Games</title>
       </Helmet>
-      <TitleBar className="flex flex-row">
+      <TitleBar className="flex flex-row justify-center items-center">
         <DraggableArea className="size-full flex-1">
           <TinyGamesSymbol className="text-primary m-[0.375rem]" width={38} height={38} />
         </DraggableArea>
-        <div className="flex flex-col justify-center pl-2 pr-2">
-          <DeviceList />
-        </div>
+        <ScrollArea className="h-10 flex flex-col justify-center pl-2 pr-2">
+            <DeviceList />
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
       </TitleBar>
       <Content>
         <div className="size-full flex flex-row">
