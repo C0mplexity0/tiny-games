@@ -362,7 +362,7 @@ function TitleBarDeviceNewButton() {
       <Tooltip>
         <TooltipTrigger asChild className="p-0">
           <ReactRouterDom.Link to="/devices/add-devices">
-            <Button variant="ghost" size="icon" className="size-8 border-2 rounded-full overflow-hidden relative p-0 bg-element hover:bg-element/90 border-element-border">
+            <Button tabIndex={-1} variant="ghost" size="icon" className="size-8 border-2 rounded-full overflow-hidden relative p-0 bg-element hover:bg-element/90 border-element-border">
               <Plus className="size-4" />
             </Button>
           </ReactRouterDom.Link>
