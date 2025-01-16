@@ -419,7 +419,7 @@ export default function AppHomePage() {
       <Helmet>
         <title>Games</title>
       </Helmet>
-      <TitleBar className="flex flex-row justify-center items-center">
+      <TitleBar className="z-20 flex flex-row justify-center items-center bg-transparent">
         <DraggableArea className="size-full flex-1">
           <TinyGamesSymbol className="text-primary m-[0.375rem]" width={38} height={38} />
         </DraggableArea>
@@ -428,6 +428,18 @@ export default function AppHomePage() {
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
       </TitleBar>
+
+      <div 
+        className="top-0 left-0 absolute size-full z-0"
+        style={{
+          backgroundImage: `url(${currentGame ? currentGame.thumbnail : null})`
+        }}
+      >
+        <div
+          className="size-full z-10 bg-gradient-to-r from-[rgba(0,0,0,0.78)] to-[rgba(0,0,0,0.45)]"
+        />
+      </div>
+
       <Content>
         <div className="size-full flex flex-row">
           <div className="flex-1 flex flex-row">
