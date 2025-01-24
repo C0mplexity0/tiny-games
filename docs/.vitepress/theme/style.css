@@ -63,17 +63,49 @@
   --vp-c-danger-2: var(--vp-c-red-2);
   --vp-c-danger-3: var(--vp-c-red-3);
   --vp-c-danger-soft: var(--vp-c-red-soft);
+
+
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: var(--vp-c-white);
+  --vp-button-brand-bg: var(--vp-c-brand-3);
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: var(--vp-c-white);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: var(--vp-c-white);
+  --vp-button-brand-active-bg: var(--vp-c-brand-1);
+
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    #6342f7,
+    #41d1ff
+  );
+
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    #bd34fe 50%,
+    #47caff 50%
+  );
+  --vp-home-hero-image-filter: blur(44px);
+
+
+  --vp-custom-block-tip-border: transparent;
+  --vp-custom-block-tip-text: var(--vp-c-text-1);
+  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
+  --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
 }
 
 .dark {
-  --vp-c-default-1: hsl(var(--secondary-background));
-  --vp-c-default-2: hsl(var(--secondary-background));
-  --vp-c-default-3: hsl(var(--tertiary-background));
-  --vp-c-default-soft: hsl(var(--tertiary-background));
+  --vp-c-default-1: hsl(var(--element));
+  --vp-c-default-2: hsl(var(--element));
+  --vp-c-default-3: hsl(var(--element));
+  --vp-c-default-soft: hsl(var(--element));
 
   --vp-c-bg: hsl(var(--background));
-  --vp-c-bg-soft: hsl(var(--secondary-background));
-  --vp-c-bg-alt: hsl(var(--secondary-background));
+  --vp-c-bg-soft: hsl(var(--element));
+  --vp-c-bg-alt: hsl(var(--element));
 
   --vp-c-white: hsl(var(--foreground));
 
@@ -98,25 +130,8 @@
   --vp-c-danger-soft: var(--vp-c-red-soft);
 
   --vp-c-gutter: hsl(var(--border));
-}
 
-/**
- * Component: Button
- * -------------------------------------------------------------------------- */
 
- :root {
-  --vp-button-brand-border: transparent;
-  --vp-button-brand-text: var(--vp-c-white);
-  --vp-button-brand-bg: var(--vp-c-brand-3);
-  --vp-button-brand-hover-border: transparent;
-  --vp-button-brand-hover-text: var(--vp-c-white);
-  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
-  --vp-button-brand-active-border: transparent;
-  --vp-button-brand-active-text: var(--vp-c-white);
-  --vp-button-brand-active-bg: var(--vp-c-brand-1);
-}
-
-.dark {
   --vp-button-brand-border: transparent;
   --vp-button-brand-text: hsl(var(--foreground));
   --vp-button-brand-bg: var(--vp-c-brand-3);
@@ -126,26 +141,6 @@
   --vp-button-brand-active-border: transparent;
   --vp-button-brand-active-text: hsl(var(--foreground));
   --vp-button-brand-active-bg: var(--vp-c-brand-1);
-}
-
-/**
- * Component: Home
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #6342f7,
-    #41d1ff
-  );
-
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    #bd34fe 50%,
-    #47caff 50%
-  );
-  --vp-home-hero-image-filter: blur(44px);
 }
 
 @media (min-width: 640px) {
@@ -160,29 +155,9 @@
   }
 }
 
-/**
- * Component: Custom Block
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-custom-block-tip-border: transparent;
-  --vp-custom-block-tip-text: var(--vp-c-text-1);
-  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
-  --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
-}
-
-/**
- * Component: Algolia
- * -------------------------------------------------------------------------- */
-
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
-
-
-/**
- * Component: Sidebar
- * -------------------------------------------------------------------------- */
 
 .VPSidebar {
   border-right: solid 1px var(--vp-c-gutter);
