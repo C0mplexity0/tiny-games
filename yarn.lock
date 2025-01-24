@@ -1357,14 +1357,14 @@
   resolved "https://registry.yarnpkg.com/@radix-ui/react-compose-refs/-/react-compose-refs-1.1.1.tgz#6f766faa975f8738269ebb8a23bad4f5a8d2faec"
   integrity sha512-Y9VzoRDSJtgFMUCoiZBDVo084VQ5hfpXxVE+NgkdNsjiDBByiImMZKKhxMwCbdHvhlENG6a833CbFkOQvTricw==
 
-"@radix-ui/react-context-menu@^2.2.4":
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/@radix-ui/react-context-menu/-/react-context-menu-2.2.4.tgz#8fe70ffdfec25ada35a60d100496cace1b75a977"
-  integrity sha512-ap4wdGwK52rJxGkwukU1NrnEodsUFQIooANKu+ey7d6raQ2biTcEf8za1zr0mgFHieevRTB2nK4dJeN8pTAZGQ==
+"@radix-ui/react-context-menu@^2.2.5":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-context-menu/-/react-context-menu-2.2.5.tgz#56eec9d96c6b27fb37a5e08f62caf2e263e29d4b"
+  integrity sha512-MY5PFCwo/ICaaQtpQBQ0g19AyjzI0mhz+a2GUWA2pJf4XFkvglAdcgDV2Iqm+lLbXn8hb+6rbLgcmRtc6ImPvg==
   dependencies:
     "@radix-ui/primitive" "1.1.1"
     "@radix-ui/react-context" "1.1.1"
-    "@radix-ui/react-menu" "2.1.4"
+    "@radix-ui/react-menu" "2.1.5"
     "@radix-ui/react-primitive" "2.0.1"
     "@radix-ui/react-use-callback-ref" "1.1.0"
     "@radix-ui/react-use-controllable-state" "1.1.0"
@@ -1485,6 +1485,30 @@
     "@radix-ui/react-use-callback-ref" "1.1.0"
     aria-hidden "^1.1.1"
     react-remove-scroll "^2.6.1"
+
+"@radix-ui/react-menu@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-menu/-/react-menu-2.1.5.tgz#0c2e7a368771b6061e7f3692f18240917547ef7f"
+  integrity sha512-uH+3w5heoMJtqVCgYOtYVMECk1TOrkUn0OG0p5MqXC0W2ppcuVeESbou8PTHoqAjbdTEK19AGXBWcEtR5WpEQg==
+  dependencies:
+    "@radix-ui/primitive" "1.1.1"
+    "@radix-ui/react-collection" "1.1.1"
+    "@radix-ui/react-compose-refs" "1.1.1"
+    "@radix-ui/react-context" "1.1.1"
+    "@radix-ui/react-direction" "1.1.0"
+    "@radix-ui/react-dismissable-layer" "1.1.4"
+    "@radix-ui/react-focus-guards" "1.1.1"
+    "@radix-ui/react-focus-scope" "1.1.1"
+    "@radix-ui/react-id" "1.1.0"
+    "@radix-ui/react-popper" "1.2.1"
+    "@radix-ui/react-portal" "1.1.3"
+    "@radix-ui/react-presence" "1.1.2"
+    "@radix-ui/react-primitive" "2.0.1"
+    "@radix-ui/react-roving-focus" "1.1.1"
+    "@radix-ui/react-slot" "1.1.1"
+    "@radix-ui/react-use-callback-ref" "1.1.0"
+    aria-hidden "^1.2.4"
+    react-remove-scroll "^2.6.2"
 
 "@radix-ui/react-popover@^1.1.4":
   version "1.1.4"
@@ -2659,7 +2683,7 @@ argparse@^2.0.1:
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
   integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
 
-aria-hidden@^1.1.1:
+aria-hidden@^1.1.1, aria-hidden@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/aria-hidden/-/aria-hidden-1.2.4.tgz#b78e383fdbc04d05762c78b4a25a501e736c4522"
   integrity sha512-y+CcFFwelSXpLZk/7fMB2mUbGtX9lKycf1MWJ7CaTIERyitVlyQx6C+sxcROU2BAJ24OiZyK+8wj2i8AlBoS3A==
@@ -6746,6 +6770,17 @@ react-remove-scroll@^2.6.1:
     use-callback-ref "^1.3.3"
     use-sidecar "^1.1.2"
 
+react-remove-scroll@^2.6.2:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/react-remove-scroll/-/react-remove-scroll-2.6.3.tgz#df02cde56d5f2731e058531f8ffd7f9adec91ac2"
+  integrity sha512-pnAi91oOk8g8ABQKGF5/M9qxmmOPxaAnopyTHYfqYEwJhyFrbbBtHuSgtKEoH0jpcxx5o3hXqH1mNd9/Oi+8iQ==
+  dependencies:
+    react-remove-scroll-bar "^2.3.7"
+    react-style-singleton "^2.2.3"
+    tslib "^2.1.0"
+    use-callback-ref "^1.3.3"
+    use-sidecar "^1.1.3"
+
 react-router-dom@^7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-7.1.2.tgz#ff6ddeb6b119b1bbea69a7f3a309c414f69693ad"
@@ -6777,7 +6812,7 @@ react-style-singleton@^2.2.1:
     invariant "^2.2.4"
     tslib "^2.0.0"
 
-react-style-singleton@^2.2.2:
+react-style-singleton@^2.2.2, react-style-singleton@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/react-style-singleton/-/react-style-singleton-2.2.3.tgz#4265608be69a4d70cfe3047f2c6c88b2c3ace388"
   integrity sha512-b6jSvxvVnyptAiLjbkWLE/lOnR4lfTtDAl+eUC7RZy+QQWc6wRzIV2CE6xBuMmDxc2qIihtDCZD5NPOFl7fRBQ==
@@ -8101,6 +8136,14 @@ use-sidecar@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/use-sidecar/-/use-sidecar-1.1.2.tgz#2f43126ba2d7d7e117aa5855e5d8f0276dfe73c2"
   integrity sha512-epTbsLuzZ7lPClpz2TyryBfztm7m+28DlEv2ZCQ3MDr5ssiwyOwGH/e5F9CkfWjJ1t4clvI58yF822/GUkjjhw==
+  dependencies:
+    detect-node-es "^1.1.0"
+    tslib "^2.0.0"
+
+use-sidecar@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/use-sidecar/-/use-sidecar-1.1.3.tgz#10e7fd897d130b896e2c546c63a5e8233d00efdb"
+  integrity sha512-Fedw0aZvkhynoPYlA5WXrMCAMm+nSWdZt6lzJQ7Ok8S6Q+VsHmHpRWndVRJ8Be0ZbkfPc5LRYH+5XrzXcEeLRQ==
   dependencies:
     detect-node-es "^1.1.0"
     tslib "^2.0.0"
