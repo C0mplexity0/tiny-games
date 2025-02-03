@@ -4307,10 +4307,10 @@ file-entry-cache@^8.0.0:
   dependencies:
     flat-cache "^4.0.0"
 
-file-type-mime@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/file-type-mime/-/file-type-mime-0.4.5.tgz#acfbcfe088ed07eb8b6b3eefc16a419a80d57547"
-  integrity sha512-5ZMr442+PSquXeTqPO6bDkFhuMkmLe8GynI7ZY7uGZxZvILLvbkv9dgnl5JfrVI/4ILUU7jXlm6/eUVnHvruWw==
+file-type-mime@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/file-type-mime/-/file-type-mime-0.4.6.tgz#890c548c9c10320ee23c4b59d1feb9a0f415f19c"
+  integrity sha512-5jlSZixW0z7Avy9DsORN6U8bFs6l0G3jnLxp4CcDNo7Z3AlXAR9ArUVqkv/DlhTHQo8kBbRCWGtULdTejFEf1w==
 
 filename-reserved-regex@^2.0.0:
   version "2.0.0"
