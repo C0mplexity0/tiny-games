@@ -76,7 +76,7 @@
     "electron-squirrel-startup": "^1.0.1",
     "eslint-plugin-react": "^7.37.4",
     "express": "^4.21.2",
-    "file-type-mime": "^0.4.5",
+    "file-type-mime": "^0.4.6",
     "find-free-ports": "^3.1.1",
     "globals": "^15.14.0",
     "lucide-react": "^0.475.0",
