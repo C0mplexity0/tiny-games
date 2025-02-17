@@ -6,7 +6,13 @@ There are two ways you can import this script:
 import tinyGames from "/tiny-games/scripts/games/tiny-games.app.mjs";
 ```
 
-or, if you're using NPM:
+or, if you're using a package manager:
+
+```bash
+npm i tiny-games-app
+
+yarn add tiny-games-app
+```
 
 ```js
 import tinyGames from "tiny-games-app";
@@ -110,6 +116,48 @@ tinyGames.onGameExiting(callback);
 ### Parameters
 
 listener <Badge type="info" text="() => void" /> - The callback to be executed when the event is fired
+
+### Return Value
+
+None
+
+
+## ``onDeviceMessageReceive()``
+
+Calls the listener when a device has sent a message to the app.
+
+```js
+tinyGames.onDeviceMessageReceive((device, event, ...data) => {
+  // Respond to the message
+});
+```
+
+### Parameters
+
+listener <Badge type="info" text="(device: AppDevice, event: string, ...data: any) => void" /> - The callback to be executed when the event is fired.
+
+### Return Value
+
+None
+
+
+## ``offDeviceMessageReceive()``
+
+Removes a listener from the deiceMessageReceive event.
+
+```js
+const callback = (device, event, ...data) => {
+  // Respond to the message
+
+  tinyGames.offDeviceMessageReceive(callback);
+};
+
+tinyGames.onDeviceMessageReceive(callback);
+```
+
+### Parameters
+
+listener <Badge type="info" text="(device: AppDevice, event: string, ...data: any) => void" /> - The listener to be removed.
 
 ### Return Value
 
