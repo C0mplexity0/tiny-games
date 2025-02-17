@@ -1,7 +1,7 @@
 {
   "name": "tiny-games",
   "productName": "Tiny Games",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Play games with friends without needing extra controllers or hardware.",
   "repository": {
     "type": "git",
