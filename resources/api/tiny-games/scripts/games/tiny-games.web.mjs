@@ -24,23 +24,6 @@ class WebDevice {
   }
 }
 
-function getWebDeviceFromDevice(device) {
-
-  if (!devices) {
-    return;
-  }
-
-  const id = device.id;
-
-  for (let i=0;i<devices.length;i++) {
-    if (devices[i].id === id) {
-      return devices[i];
-    }
-  }
-
-  return;
-}
-
 
 // Exported Functions
 
@@ -159,11 +142,10 @@ function handleMessage(event) {
     case "emitToDevice": {
       const messageInfo = info.data;
 
-      appMessageReceiveEvent.fire(messageInfo.event, getWebDeviceFromDevice(messageInfo.device), messageInfo.data);
+      appMessageReceiveEvent.fire(messageInfo.event, messageInfo.data);
       window.dispatchEvent(new CustomEvent("appMessageReceive", { // For compatibility
         detail: {
           event: messageInfo.event,
-          device: getWebDeviceFromDevice(messageInfo.device),
           data: messageInfo.data
         }
       }));

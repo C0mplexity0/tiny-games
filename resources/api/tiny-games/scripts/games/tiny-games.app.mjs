@@ -128,11 +128,7 @@ function emitToAllDevices(event, ...data) {
   }
 
   for (let i=0;i<devices.length;i++) {
-    communication.postMessage("emitToDevice", {
-      event,
-      deviceId: devices[i].id,
-      data
-    });
+    emitToDevice(devices[i], event, ...data);
   }
 }
 
@@ -242,11 +238,13 @@ function handleMessage(event) {
     case "emitToApp": {
       const messageInfo = info.data;
 
-      deviceMessageReceiveEvent.fire(messageInfo.event, getAppDeviceFromDevice(messageInfo.device), messageInfo.data);
+      const appDevice = getAppDeviceFromDevice(messageInfo.device);
+
+      deviceMessageReceiveEvent.fire(appDevice, messageInfo.event, messageInfo.data);
       window.dispatchEvent(new CustomEvent("deviceMessageReceive", { // For compatibility
         detail: {
+          device: appDevice,
           event: messageInfo.event,
-          device: getAppDeviceFromDevice(messageInfo.device),
           data: messageInfo.data
         }
       }));
