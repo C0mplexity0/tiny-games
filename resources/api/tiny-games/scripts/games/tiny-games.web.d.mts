@@ -49,12 +49,12 @@ declare function offDevicesUpdated(listener: (devices: WebDevice[]) => void): vo
  * Fires when a device sends a message to the app.
  * @param {(event: string, device: WebDevice, ...data: any[]) => void} listener - The callback for when the event fires.
 */
-declare function onAppMessageReceive(listener: (event: string, device: WebDevice, ...data: any[]) => void): void;
+declare function onAppMessageReceive(listener: (event: string, ...data: any[]) => void): void;
 /**
  * Fires when a app sends a message to this device.
  * @param {(event: string, device: WebDevice, ...data: any[]) => void} listener - The callback to remove.
 */
-declare function offAppMessageReceive(listener: (event: string, device: WebDevice, ...data: any[]) => void): void;
+declare function offAppMessageReceive(listener: (event: string, ...data: any[]) => void): void;
 /**
  * A device which is connected.
 */

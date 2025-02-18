@@ -74,12 +74,12 @@ declare function offDevicesUpdated(listener: (devices: AppDevice[]) => void): vo
  * Fires when a device sends a message to the app.
  * @param {(event: string, device: AppDevice, ...data: any[]) => void} listener - The callback for when the event fires.
 */
-declare function onDeviceMessageReceive(listener: (event: string, device: AppDevice, ...data: any[]) => void): void;
+declare function onDeviceMessageReceive(listener: (device: AppDevice, event: string, ...data: any[]) => void): void;
 /**
  * Fires when a device sends a message to the app.
  * @param {(event: string, device?: AppDevice, ...data: any[]) => void} listener - The callback to remove.
 */
-declare function offDeviceMessageReceive(listener: (event: string, device?: AppDevice, ...data: any[]) => void): void;
+declare function offDeviceMessageReceive(listener: (device: AppDevice, event: string, ...data: any[]) => void): void;
 /**
  * Fires when the game is closing.
  * @param {() => void} listener - The callback for when the event fires.
