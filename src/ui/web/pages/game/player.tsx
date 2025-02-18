@@ -10,6 +10,13 @@ let webApiLoaded = false;
 let appMessageQueue: object[] = [];
 let postMessageQueue: any[][] = [];
 
+export function prepareNewSession() {
+  iframeLoaded = false;
+  webApiLoaded = false;
+  postMessageQueue = [];
+  appMessageQueue = [];
+}
+
 
 function postMessage(event: string, data?: any) {
   if (!iframeRef.current || !iframeLoaded) {
@@ -81,6 +88,8 @@ export default function PlayerPage() {
   useEffect(() => {
     iframeLoaded = false;
     webApiLoaded = false;
+    postMessageQueue = [];
+    appMessageQueue = [];
 
     socket.on("setDevices", handleSetDevices);
     socket.on("gameEmitToDevice", handleEmitToDevice);

@@ -21,6 +21,12 @@ let postMessageQueue: any[][] = [];
 let deviceMessageQueue: object[] = [];
 let appApiLoaded = false;
 
+export function prepareNewSession() {
+  iframeLoaded = false;
+  appApiLoaded = false;
+  postMessageQueue = [];
+  deviceMessageQueue = [];
+}
 
 export function postMessage(event: string, data?: any) {
   if ((!iframeRef.current) || !iframeLoaded) {
@@ -182,9 +188,6 @@ export default function PlayerPage() {
   iframeRef = useRef();
 
   useEffect(() => {
-    iframeLoaded = false;
-    appApiLoaded = false;
-
     setupMessageListener();
 
     let saveInterval = setInterval(saveData, 60000);

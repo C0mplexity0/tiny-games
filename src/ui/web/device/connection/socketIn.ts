@@ -1,5 +1,6 @@
 import { config } from "@/config";
 import { Game } from "@/games/games";
+import { prepareNewSession } from "@web/pages/game/player";
 import { currentGame, device, setCurrentGame, setDevice } from "@web/Web";
 import io, { Socket } from "socket.io-client";
 
@@ -44,6 +45,7 @@ export function initSocket() {
   });
 
   socket.on("launchGame", (game: Game) => {
+    prepareNewSession();
     setCurrentGame(game);
     window.location.hash = "/game/player";
   });
