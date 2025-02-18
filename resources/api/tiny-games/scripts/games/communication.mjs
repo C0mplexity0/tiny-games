@@ -11,7 +11,12 @@ function getParentUrl() {
 
 
 function postMessage(event, data) {
-  window.parent.postMessage({fromTinyGames: true, event, data}, parentUrl);
+  try {
+    window.parent.postMessage({fromTinyGames: true, event, data}, parentUrl);
+  } catch(err) {
+    console.warn("Failed to send message from iframe to main page");
+    console.error(err);
+  }
 }
 
 export default {

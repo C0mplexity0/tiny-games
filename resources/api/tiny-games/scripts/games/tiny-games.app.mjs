@@ -5,6 +5,8 @@ let devices;
 
 let data;
 
+let deviceMessageQueue = [];
+
 
 // Events
 
@@ -175,6 +177,23 @@ function offDevicesUpdated(listener) {
 */
 function onDeviceMessageReceive(listener) {
   deviceMessageReceiveEvent.addListener(listener);
+
+  for (let i=0;i<deviceMessageQueue.length;i++) {
+    const messageInfo = deviceMessageQueue[i];
+
+    const appDevice = getAppDeviceFromDevice(messageInfo.device);
+
+    deviceMessageReceiveEvent.fire(appDevice, messageInfo.event, messageInfo.data);
+    window.dispatchEvent(new CustomEvent("deviceMessageReceive", { // For compatibility
+      detail: {
+        device: appDevice,
+        event: messageInfo.event,
+        data: messageInfo.data
+      }
+    }));
+  }
+
+  deviceMessageQueue = [];
 }
 
 /**
@@ -240,6 +259,11 @@ function handleMessage(event) {
 
       const appDevice = getAppDeviceFromDevice(messageInfo.device);
 
+      if (deviceMessageReceiveEvent.getListeners().length == 0) {
+        deviceMessageQueue.push(messageInfo);
+        break;
+      }
+
       deviceMessageReceiveEvent.fire(appDevice, messageInfo.event, messageInfo.data);
       window.dispatchEvent(new CustomEvent("deviceMessageReceive", { // For compatibility
         detail: {
@@ -274,6 +298,8 @@ function init() {
 
       gameReadyEvent.fire();
       window.dispatchEvent(new CustomEvent("gameReady")); // For compatibility
+
+      communication.postMessage("loaded");
     }
   }, 0);
 }

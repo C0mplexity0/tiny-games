@@ -4,11 +4,18 @@ import { currentGame } from "@web/Web";
 import React, { useEffect, useRef } from "react";
 
 let iframeRef: React.MutableRefObject<any>;
+let webApiLoaded = false;
+let appMessageQueue: object[] = [];
 
 
 function postMessage(event: string, data?: any) {
-  if (iframeRef.current)
+
+  try {
     iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, iframeRef.current.src);
+  } catch(err) {
+    console.warn("Failed to send message to iframe");
+    console.error(err);
+  }
 }
 
 
@@ -20,9 +27,17 @@ function handleMessage(event: MessageEvent<any>) {
   const info = event.data;
 
   switch (info.event) {
+    case "loaded":
+      webApiLoaded = true;
+      for (let i=0;i<appMessageQueue.length;i++) {
+        postMessage("emitToDevice", appMessageQueue[i]);
+      }
+      break;
+
     case "getDevices":
       socket.emit("getDevices");
       break;
+
     case "emitToApp": {
       socket.emit("emitToApp", info.data.event, info.data.data);
       break;
@@ -44,10 +59,12 @@ function handleSetDevices(devices: Device[]) {
 }
 
 function handleEmitToDevice(event: string, data: any[]) {
-  postMessage("emitToDevice", {
-    event,
-    data
-  });
+  if (!webApiLoaded) {
+    appMessageQueue.push({event, data});
+    return;
+  }
+
+  postMessage("emitToDevice", {event, data});
 }
 
 
@@ -80,6 +97,8 @@ export default function PlayerPage() {
           src={currentGame.inDeveloperMode && currentGame.devWebUrl ? currentGame.devWebUrl : `http://${url.hostname}:${currentGame.hostPort}/${currentGame.inDeveloperMode && currentGame.devWebRoot ? currentGame.devWebRoot : currentGame.webRoot}`} 
           className="size-full bg-white"
           onLoad={() => {
+            webApiLoaded = false;
+
             let urlStr;
 
             if (window.location.href.startsWith("http://")) {

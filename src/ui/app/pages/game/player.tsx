@@ -16,6 +16,8 @@ let iframeRef: React.MutableRefObject<any>;
 
 let gameData: object;
 let gameExiting = false;
+let deviceMessageQueue: object[] = [];
+let appApiLoaded = false;
 
 
 export function postMessage(event: string, data?: any) {
@@ -45,13 +47,22 @@ function handleMessage(event: MessageEvent<any>) {
   const info = event.data;
 
   switch (info.event) {
+    case "loaded":
+      appApiLoaded = true;
+      for (let i=0;i<deviceMessageQueue.length;i++) {
+        postMessage("emitToApp", deviceMessageQueue[i]);
+      }
+      break;
+    
     case "getDevices":
       postMessage("setDevices", devices);
       break;
+    
     case "emitToDevice": {
       window.electron.ipcRenderer.sendMessage("games:emitToDevice", info.data.deviceId, info.data.event, info.data.data);
       break;
     }
+
     case "removeDevice":
       saveData(); // This is done in case the last device is removed and the game exits
       window.electron.ipcRenderer.sendMessage("removeDevice", info.data);
@@ -60,6 +71,7 @@ function handleMessage(event: MessageEvent<any>) {
     case "getData":
       window.electron.ipcRenderer.sendMessage("games:getData");
       break;
+    
     case "setData":
       gameData = info.data;
 
@@ -142,6 +154,19 @@ function DevToolsToggle() {
   );
 }
 
+function onSetData(data: object) {
+  postMessage("setData", data);
+}
+
+function onEmitToApp(event: string, device: Device, data: any[]) {
+  if (!appApiLoaded) {
+    deviceMessageQueue.push({event, device, data});
+    return;
+  }
+
+  postMessage("emitToApp", {event, device, data});
+}
+
 export default function PlayerPage() {
   iframeRef = useRef();
 
@@ -150,8 +175,13 @@ export default function PlayerPage() {
 
     let saveInterval = setInterval(saveData, 60000);
 
+    const removeDataListener = window.electron.ipcRenderer.on("games:setData", onSetData);
+    const removeEmitToAppListener = window.electron.ipcRenderer.on("games:emitToApp", onEmitToApp);
+
     return () => {
       removeMessageListener();
+      removeDataListener();
+      removeEmitToAppListener();
 
       clearInterval(saveInterval);
     };
@@ -219,6 +249,8 @@ export default function PlayerPage() {
             className="size-full bg-white"
             src={currentGame.inDeveloperMode && currentGame.devAppUrl ? currentGame.devAppUrl : `http://localhost:${currentGame.hostPort}/${currentGame.inDeveloperMode && currentGame.devAppRoot ? currentGame.devAppRoot : currentGame.appRoot}`}
             onLoad={() => {
+              appApiLoaded = false;
+
               const url = new URL(window.location.href);
               let urlStr;
 

@@ -3,6 +3,7 @@ import GameEvent from "./events.mjs";
 
 let devices;
 
+let appMessageQueue = [];
 
 // Events
 
@@ -97,15 +98,29 @@ function offDevicesUpdated(listener) {
 
 /**
  * Fires when a device sends a message to the app.
- * @param {(event: string, device: WebDevice, ...data: any[]) => void} listener - The callback for when the event fires.
+ * @param {(event: string, ...data: any[]) => void} listener - The callback for when the event fires.
 */
 function onAppMessageReceive(listener) {
   appMessageReceiveEvent.addListener(listener);
+
+  for (let i=0;i<appMessageQueue.length;i++) {
+    const messageInfo = appMessageQueue[i];
+
+    appMessageReceiveEvent.fire(messageInfo.event, messageInfo.data);
+    window.dispatchEvent(new CustomEvent("deviceMessageReceive", { // For compatibility
+      detail: {
+        event: messageInfo.event,
+        data: messageInfo.data
+      }
+    }));
+  }
+
+  appMessageQueue = [];
 }
 
 /**
  * Fires when a app sends a message to this device.
- * @param {(event: string, device: WebDevice, ...data: any[]) => void} listener - The callback to remove.
+ * @param {(event: string, ...data: any[]) => void} listener - The callback to remove.
 */
 function offAppMessageReceive(listener) {
   appMessageReceiveEvent.removeListener(listener);
@@ -125,6 +140,7 @@ function handleMessage(event) {
     case "setParentUrl":
       communication.setParentUrl(info.data);
       break;
+
     case "setDevices":
       devices = [];
       for (let i=0;i<info.data.length;i++) {
@@ -137,10 +153,15 @@ function handleMessage(event) {
           devices
         }
       }));
-
       break;
+
     case "emitToDevice": {
       const messageInfo = info.data;
+
+      if (appMessageReceiveEvent.getListeners().length == 0) {
+        appMessageQueue.push(messageInfo);
+        break;
+      }
 
       appMessageReceiveEvent.fire(messageInfo.event, messageInfo.data);
       window.dispatchEvent(new CustomEvent("appMessageReceive", { // For compatibility
@@ -171,6 +192,8 @@ function init() {
 
       gameReadyEvent.fire();
       window.dispatchEvent(new CustomEvent("gameReady")); // For compatibility
+
+      communication.postMessage("loaded");
     }
   }, 0);
 }

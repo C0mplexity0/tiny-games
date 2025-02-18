@@ -107,19 +107,6 @@ export default function App() {
       });
 
 
-      window.electron.ipcRenderer.on("games:setData", (data: object) => {
-        if (window.location.hash == "#/game/player") {
-          postMessage("setData", data);
-        }
-      });
-
-      window.electron.ipcRenderer.on("games:emitToApp", (event: string, device: Device, data: any[]) => {
-        if (window.location.hash == "#/game/player") {
-          postMessage("emitToApp", {event, device, data});
-        }
-      });
-
-
       setInitialisedIpcEvents(true);
     }
   }, [devices, games]);

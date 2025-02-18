@@ -18,7 +18,6 @@ function submitDetails() {
   const usernameElem = usernameInputRef.current;
   if (usernameElem && inputHasText) {
     activateWakeLock();
-    console.log(currentFile);
     socketOut.emitJoin(usernameElem.value, currentFile);
   }
 }

@@ -3,4 +3,5 @@ export default class GameEvent {
     addListener(listener: any): void;
     removeListener(listener: any): void;
     fire(...detail: any[]): void;
+    getListeners(): any[];
 }

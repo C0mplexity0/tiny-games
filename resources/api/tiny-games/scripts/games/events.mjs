@@ -20,4 +20,8 @@ export default class GameEvent {
       this.listeners[i](...detail);
     }
   }
+
+  getListeners() {
+    return this.listeners;
+  }
 }
