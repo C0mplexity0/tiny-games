@@ -4,11 +4,18 @@ import { currentGame } from "@web/Web";
 import React, { useEffect, useRef } from "react";
 
 let iframeRef: React.MutableRefObject<any>;
+let iframeLoaded = false;
+
 let webApiLoaded = false;
 let appMessageQueue: object[] = [];
+let postMessageQueue: any[][] = [];
 
 
 function postMessage(event: string, data?: any) {
+  if (!iframeRef.current || !iframeLoaded) {
+    postMessageQueue.push([event, data]);
+    return;
+  }
 
   try {
     iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, iframeRef.current.src);
@@ -72,6 +79,9 @@ export default function PlayerPage() {
   iframeRef = useRef();
 
   useEffect(() => {
+    iframeLoaded = false;
+    webApiLoaded = false;
+
     socket.on("setDevices", handleSetDevices);
     socket.on("gameEmitToDevice", handleEmitToDevice);
     setupMessageListener();
@@ -97,7 +107,7 @@ export default function PlayerPage() {
           src={currentGame.inDeveloperMode && currentGame.devWebUrl ? currentGame.devWebUrl : `http://${url.hostname}:${currentGame.hostPort}/${currentGame.inDeveloperMode && currentGame.devWebRoot ? currentGame.devWebRoot : currentGame.webRoot}`} 
           className="size-full bg-white"
           onLoad={() => {
-            webApiLoaded = false;
+            iframeLoaded = true;
 
             let urlStr;
 
@@ -106,6 +116,12 @@ export default function PlayerPage() {
             } else {
               urlStr = "*";
             }
+
+            for (let i=0;i<postMessageQueue.length;i++) {
+              postMessage(postMessageQueue[i][0], postMessageQueue[i][1]);
+            }
+
+            postMessageQueue = [];
 
             postMessage("setParentUrl", urlStr);
           }}

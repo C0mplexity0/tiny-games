@@ -13,16 +13,27 @@ import { Menu, SignalHigh, SignalLow, SignalMedium, Terminal, X } from "lucide-r
 import React, { useEffect, useRef } from "react";
 
 let iframeRef: React.MutableRefObject<any>;
+let iframeLoaded = false;
 
 let gameData: object;
 let gameExiting = false;
+let postMessageQueue: any[][] = [];
 let deviceMessageQueue: object[] = [];
 let appApiLoaded = false;
 
 
 export function postMessage(event: string, data?: any) {
-  if (iframeRef.current)
+  if ((!iframeRef.current) || !iframeLoaded) {
+    postMessageQueue.push([event, data]);
+    return;
+  }
+
+  try {
     iframeRef.current.contentWindow.postMessage({fromTinyGames: true, event, data}, iframeRef.current.src);
+  } catch(err) {
+    console.warn("Failed to send message to iframe");
+    console.error(err);
+  }
 }
 
 export function exitGame() {
@@ -171,6 +182,9 @@ export default function PlayerPage() {
   iframeRef = useRef();
 
   useEffect(() => {
+    iframeLoaded = false;
+    appApiLoaded = false;
+
     setupMessageListener();
 
     let saveInterval = setInterval(saveData, 60000);
@@ -249,7 +263,7 @@ export default function PlayerPage() {
             className="size-full bg-white"
             src={currentGame.inDeveloperMode && currentGame.devAppUrl ? currentGame.devAppUrl : `http://localhost:${currentGame.hostPort}/${currentGame.inDeveloperMode && currentGame.devAppRoot ? currentGame.devAppRoot : currentGame.appRoot}`}
             onLoad={() => {
-              appApiLoaded = false;
+              iframeLoaded = true;
 
               const url = new URL(window.location.href);
               let urlStr;
@@ -259,6 +273,12 @@ export default function PlayerPage() {
               } else {
                 urlStr = "*";
               }
+
+              for (let i=0;i<postMessageQueue.length;i++) {
+                postMessage(postMessageQueue[i][0], postMessageQueue[i][1]);
+              }
+  
+              postMessageQueue = [];
 
               postMessage("setParentUrl", urlStr);
             }}
