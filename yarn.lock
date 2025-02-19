@@ -469,6 +469,15 @@
     fs-extra "^10.0.0"
     which "^2.0.2"
 
+"@electron-forge/maker-base@7.7.0":
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/maker-base/-/maker-base-7.7.0.tgz#11882c4a3638a3031103a339459184430f6daa89"
+  integrity sha512-9u+mmBLBAUHuH0+IGw94EGVTDD4CPKX05h5pp5/PIaijy16ss5dymK4vEp3s2XJMFlza2PsCgLLYBgDcAE2Dqg==
+  dependencies:
+    "@electron-forge/shared-types" "7.7.0"
+    fs-extra "^10.0.0"
+    which "^2.0.2"
+
 "@electron-forge/maker-deb@^7.6.1":
   version "7.6.1"
   resolved "https://registry.yarnpkg.com/@electron-forge/maker-deb/-/maker-deb-7.6.1.tgz#73d4d2056ba1a50095b2727b17f669643fc32bb4"
@@ -489,13 +498,13 @@
   optionalDependencies:
     electron-installer-redhat "^3.2.0"
 
-"@electron-forge/maker-squirrel@^7.6.1":
-  version "7.6.1"
-  resolved "https://registry.yarnpkg.com/@electron-forge/maker-squirrel/-/maker-squirrel-7.6.1.tgz#1516c71722a311a81dfcb302cbe11cbcde5e8192"
-  integrity sha512-7EMLcl0QM5GfdY+enfauEqV6ZW14A1S6Eqoev812FXGTm88G8Ik0tPRw6SsIaI8R++YqxsbdCGTQjzdJWY0bJA==
+"@electron-forge/maker-squirrel@^7.7.0":
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/maker-squirrel/-/maker-squirrel-7.7.0.tgz#8b65feabad376c9e7b06295581ecac1efaa0e6e9"
+  integrity sha512-9Gcq8e6+1MuXGeE7bEpk7VTd86c0riXTsDFKW8OqwVozeBYhoCd6GU59RmI3b7mcAIKOY1cBY97B+/5bnZ8ZYg==
   dependencies:
-    "@electron-forge/maker-base" "7.6.1"
-    "@electron-forge/shared-types" "7.6.1"
+    "@electron-forge/maker-base" "7.7.0"
+    "@electron-forge/shared-types" "7.7.0"
     fs-extra "^10.0.0"
   optionalDependencies:
     electron-winstaller "^5.3.0"
