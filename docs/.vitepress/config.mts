@@ -49,5 +49,5 @@ export default defineConfig({
     externalLinkIcon: true
   },
   lastUpdated: true,
-  base: "/tiny-games/"
+  base: "/"
 });
