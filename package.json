@@ -46,7 +46,7 @@
   "license": "MIT",
   "dependencies": {
     "@electron-forge/plugin-fuses": "^7.6.1",
-    "@electron-forge/plugin-vite": "^7.7.0",
+    "@electron-forge/plugin-vite": "^7.8.0",
     "@icons-pack/react-simple-icons": "^11.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.6",
     "@radix-ui/react-context-menu": "^2.2.6",
