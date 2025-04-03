@@ -34,7 +34,7 @@
     "eslint": "^9.20.1",
     "eslint-plugin-import": "^2.31.0",
     "typescript": "5.7.3",
-    "vite": "5.4.14",
+    "vite": "6.2.5",
     "vitepress": "^1.6.3",
     "vue": "^3.5.13"
   },
