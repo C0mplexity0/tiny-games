@@ -1105,10 +1105,10 @@
   resolved "https://registry.yarnpkg.com/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"
   integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
 
-"@icons-pack/react-simple-icons@^11.2.0":
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/@icons-pack/react-simple-icons/-/react-simple-icons-11.2.0.tgz#09570e17a553bf46815fcec94231eb5e562fca5c"
-  integrity sha512-jCJ+1Fe0yiBQGYSfhx8QGU/9o27t8J4Hw3mxHEI9vohRltLSi5CaPzO2fCQcMNeTrAUAm4j+yaDuAutskiKRjA==
+"@icons-pack/react-simple-icons@^12.5.0":
+  version "12.5.0"
+  resolved "https://registry.yarnpkg.com/@icons-pack/react-simple-icons/-/react-simple-icons-12.5.0.tgz#61f1820e4482edc37c718e3d7101bfa2346960c7"
+  integrity sha512-pjaK1q07KYMJ9haymuyNJneJkBO5HqZlLdKNdOJp3ArqowV5dS3nMwaOEsyOYbzdQ4t7ql4++zHtkBhfw2xSVw==
 
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
